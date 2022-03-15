@@ -1,1 +1,33 @@
-{}
+{
+    "name": "BasicPlayerInput",
+    "maps": [
+        {
+            "name": "CharacterControls",
+            "id": "08e9cb7c-342b-4556-b1c5-fd74f1388dbe",
+            "actions": [
+                {
+                    "name": "Forwards",
+                    "type": "Button",
+                    "id": "1e44d95d-5506-4e7b-886b-7244a7d0a46e",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "8b4a8815-2730-4574-8993-72c2981d9e4c",
+                    "path": "<Keyboard>/w",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Forwards",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}

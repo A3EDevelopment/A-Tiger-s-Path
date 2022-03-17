@@ -143,13 +143,64 @@ MonoBehaviour:
   input_Movement: {x: 0, y: 0}
   input_View: {x: 0, y: 0}
   cameraTarget: {fileID: 2098723574}
-  isTargetMode: 1
+  isTargetMode: 0
   flt_JumpingTimer: 0
+  settings:
+    ForwardSpeed: 1
 --- !u!4 &202425128 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: ea5f6647f62c34d4185336e55fdbbb36, type: 3}
   m_PrefabInstance: {fileID: 971015365}
   m_PrefabAsset: {fileID: 0}
+--- !u!143 &202425129
+CharacterController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 202425125}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Height: 2
+  m_Radius: 0.3
+  m_SlopeLimit: 45
+  m_StepOffset: 0.3
+  m_SkinWidth: 0.08
+  m_MinMoveDistance: 0.001
+  m_Center: {x: 0, y: 1, z: 0}
+--- !u!1 &269973748
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 269973749}
+  m_Layer: 0
+  m_Name: YGimbal
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &269973749
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 269973748}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 963194228}
+  m_Father: {fileID: 957026709}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &705507993
 GameObject:
   m_ObjectHideFlags: 0
@@ -271,7 +322,7 @@ Transform:
   m_LocalPosition: {x: -1.5175241, y: 1.7935416, z: 0.31979072}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 963194228}
+  - {fileID: 269973749}
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 3.89, y: 0, z: 0}
@@ -296,6 +347,7 @@ MonoBehaviour:
     YClampMin: -40
     YClampMax: 20
     CharacterRotationSpeedSmoothdamp: 0.05
+  yGimbal: {fileID: 269973748}
 --- !u!1 &963194225
 GameObject:
   m_ObjectHideFlags: 0
@@ -372,11 +424,11 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
-  m_LocalRotation: {x: 0.06758733, y: -0, z: -0, w: 0.9977134}
-  m_LocalPosition: {x: 0.018325867, y: 0.31200016, z: -1.4304509}
+  m_LocalRotation: {x: 0.06758736, y: -0, z: -0, w: 0.9977134}
+  m_LocalPosition: {x: 0.018325806, y: 0.31200027, z: -1.4304504}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 957026709}
+  m_Father: {fileID: 269973749}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 7.751, y: 0, z: 0}
 --- !u!1001 &971015365

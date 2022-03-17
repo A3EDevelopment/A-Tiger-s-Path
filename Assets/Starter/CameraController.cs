@@ -6,11 +6,11 @@ using UnityEngine;
 public class CameraController : MonoBehaviour
 {
     public Basic playerController;
-    public  PlayerSettingsModel settings;
-
+    public CameraSettingsModel settings;
     private Vector3 targetRotation;
 
-
+    public GameObject yGimbal;
+    private Vector3 yGibalRotation;
 
     private void Update()
     {
@@ -24,18 +24,21 @@ public class CameraController : MonoBehaviour
     {
         var viewInput = playerController.input_View;
 
-        targetRotation.x += (settings.InvertedY ? (viewInput.y * settings.SensitivityY) : -(viewInput.y * settings.SensitivityY)) * Time.deltaTime;
         targetRotation.y += (settings.InvertedX ? -(viewInput.x * settings.SensitivityX) : (viewInput.x * settings.SensitivityX)) * Time.deltaTime;
+        transform.rotation = Quaternion.Euler(targetRotation);
 
-        targetRotation.x = Mathf.Clamp(targetRotation.x, settings.YClampMin, settings.YClampMax);
+        //Turns Vector into Quaternion for Rotation
+
+        yGibalRotation.x += (settings.InvertedY ? (viewInput.y * settings.SensitivityY) : -(viewInput.y * settings.SensitivityY)) * Time.deltaTime;
+        yGibalRotation.x = Mathf.Clamp(yGibalRotation.x, settings.YClampMin, settings.YClampMax);
 
         //Looking Up and Down. 
         //Looking Left and Right.
         //Question mark is used like an if statement, first value is true
 
-        transform.rotation = Quaternion.Euler(targetRotation);
-
-        //Turns Vector into Quaternion for Rotation
+        yGimbal.transform.localRotation = Quaternion.Euler(yGibalRotation);  
+        
+        //Only changes y axis, not x
 
         if (playerController.isTargetMode)
         {

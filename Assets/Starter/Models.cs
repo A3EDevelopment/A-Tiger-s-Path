@@ -8,7 +8,7 @@ public static class Models
 
     [Serializable]
 
-    public class PlayerSettingsModel
+    public class CameraSettingsModel
     {
         [Header("Camera Settings")]
         public float SensitivityX;
@@ -22,6 +22,14 @@ public static class Models
 
         [Header("Character")]
         public float CharacterRotationSpeedSmoothdamp = 1f;
+
+    }
+
+    [Serializable]
+    public class PlayerSettingsModel
+    {
+        public float ForwardSpeed = 1;
+
 
     }
 

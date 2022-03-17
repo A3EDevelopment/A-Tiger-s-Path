@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using static Models;
 using UnityEngine;
 
 public class Basic : MonoBehaviour
@@ -12,8 +13,9 @@ public class Basic : MonoBehaviour
 	public Transform cameraTarget;
 
 	public bool isTargetMode;
-
 	public float flt_JumpingTimer;
+
+	public PlayerSettingsModel settings;
 
 	private void Awake()
 	{

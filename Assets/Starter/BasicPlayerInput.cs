@@ -114,6 +114,14 @@ public class @BasicPlayerInput : IInputActionCollection, IDisposable
                     ""id"": ""fce9f11b-f098-4175-ae9a-79366719dd1e"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
+                    ""interactions"": ""Press(behavior=2)""
+                },
+                {
+                    ""name"": ""SuperJump"",
+                    ""type"": ""Button"",
+                    ""id"": ""7e9dea17-e489-447e-b5d3-d03719d8e5bd"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
                     ""interactions"": """"
                 }
             ],
@@ -126,6 +134,17 @@ public class @BasicPlayerInput : IInputActionCollection, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Jump"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""6392779e-999e-4aa9-85c0-983d96a6bda1"",
+                    ""path"": ""<Keyboard>/space"",
+                    ""interactions"": ""Hold"",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""SuperJump"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -141,6 +160,7 @@ public class @BasicPlayerInput : IInputActionCollection, IDisposable
         // Actions
         m_Actions = asset.FindActionMap("Actions", throwIfNotFound: true);
         m_Actions_Jump = m_Actions.FindAction("Jump", throwIfNotFound: true);
+        m_Actions_SuperJump = m_Actions.FindAction("SuperJump", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -232,11 +252,13 @@ public class @BasicPlayerInput : IInputActionCollection, IDisposable
     private readonly InputActionMap m_Actions;
     private IActionsActions m_ActionsActionsCallbackInterface;
     private readonly InputAction m_Actions_Jump;
+    private readonly InputAction m_Actions_SuperJump;
     public struct ActionsActions
     {
         private @BasicPlayerInput m_Wrapper;
         public ActionsActions(@BasicPlayerInput wrapper) { m_Wrapper = wrapper; }
         public InputAction @Jump => m_Wrapper.m_Actions_Jump;
+        public InputAction @SuperJump => m_Wrapper.m_Actions_SuperJump;
         public InputActionMap Get() { return m_Wrapper.m_Actions; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -249,6 +271,9 @@ public class @BasicPlayerInput : IInputActionCollection, IDisposable
                 @Jump.started -= m_Wrapper.m_ActionsActionsCallbackInterface.OnJump;
                 @Jump.performed -= m_Wrapper.m_ActionsActionsCallbackInterface.OnJump;
                 @Jump.canceled -= m_Wrapper.m_ActionsActionsCallbackInterface.OnJump;
+                @SuperJump.started -= m_Wrapper.m_ActionsActionsCallbackInterface.OnSuperJump;
+                @SuperJump.performed -= m_Wrapper.m_ActionsActionsCallbackInterface.OnSuperJump;
+                @SuperJump.canceled -= m_Wrapper.m_ActionsActionsCallbackInterface.OnSuperJump;
             }
             m_Wrapper.m_ActionsActionsCallbackInterface = instance;
             if (instance != null)
@@ -256,6 +281,9 @@ public class @BasicPlayerInput : IInputActionCollection, IDisposable
                 @Jump.started += instance.OnJump;
                 @Jump.performed += instance.OnJump;
                 @Jump.canceled += instance.OnJump;
+                @SuperJump.started += instance.OnSuperJump;
+                @SuperJump.performed += instance.OnSuperJump;
+                @SuperJump.canceled += instance.OnSuperJump;
             }
         }
     }
@@ -268,5 +296,6 @@ public class @BasicPlayerInput : IInputActionCollection, IDisposable
     public interface IActionsActions
     {
         void OnJump(InputAction.CallbackContext context);
+        void OnSuperJump(InputAction.CallbackContext context);
     }
 }

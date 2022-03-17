@@ -6,8 +6,12 @@ public class Basic : MonoBehaviour
 {
 
 	BasicPlayerInput obj_BasicPlayerInput;
-	Vector2 input_Movement;
-	Vector2 input_View;
+	public Vector2 input_Movement;
+	public Vector2 input_View;
+
+	public Transform cameraTarget;
+
+	public float flt_JumpingTimer;
 
 	private void Awake()
 	{
@@ -15,23 +19,44 @@ public class Basic : MonoBehaviour
 
 		obj_BasicPlayerInput.Movement.Movement.performed += x => input_Movement = x.ReadValue<Vector2>();
 		obj_BasicPlayerInput.Movement.View.performed += x => input_View = x.ReadValue<Vector2>();
+
 		obj_BasicPlayerInput.Actions.Jump.performed += x => Jump();
+		obj_BasicPlayerInput.Actions.SuperJump.performed += x => SuperJump();
 
 		// Move
 
 	}
 
+	private void JumpingTimer()
+	{
+		if (flt_JumpingTimer >= 0)
+		{
+			flt_JumpingTimer -= Time.deltaTime;
+		}
+	}
+
 	private void Jump()
 	{
+		if (flt_JumpingTimer <= 0)
+		{
+			flt_JumpingTimer = 0.4f;
+			return;
+		}
+
 		Debug.Log("I'm Jumping");
+	}
+
+		private void SuperJump()
+	{
+		Debug.Log("I'm Super Jumping");
 	}
 
 	private void Update()
 	{
-		Debug.Log(input_View);
+		JumpingTimer();
 	}
 
-#region Enable/Disable
+	#region Enable/Disable
 
 
 	private void OnEnable()
@@ -43,6 +68,6 @@ public class Basic : MonoBehaviour
 	{
 		obj_BasicPlayerInput.Disable();
 	}
-#endregion
+	#endregion
 
 }

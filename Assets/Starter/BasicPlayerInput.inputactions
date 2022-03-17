@@ -101,6 +101,14 @@
                     "id": "fce9f11b-f098-4175-ae9a-79366719dd1e",
                     "expectedControlType": "Button",
                     "processors": "",
+                    "interactions": "Press(behavior=2)"
+                },
+                {
+                    "name": "SuperJump",
+                    "type": "Button",
+                    "id": "7e9dea17-e489-447e-b5d3-d03719d8e5bd",
+                    "expectedControlType": "Button",
+                    "processors": "",
                     "interactions": ""
                 }
             ],
@@ -113,6 +121,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "Jump",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "6392779e-999e-4aa9-85c0-983d96a6bda1",
+                    "path": "<Keyboard>/space",
+                    "interactions": "Hold",
+                    "processors": "",
+                    "groups": "",
+                    "action": "SuperJump",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

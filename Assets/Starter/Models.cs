@@ -29,7 +29,7 @@ public static class Models
     public class PlayerSettingsModel
     {
         public float ForwardSpeed = 1;
-
+        public float CharacterRotationSmoothdamp = 0.6f;
 
     }
 

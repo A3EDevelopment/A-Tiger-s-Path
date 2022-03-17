@@ -143,6 +143,7 @@ MonoBehaviour:
   input_Movement: {x: 0, y: 0}
   input_View: {x: 0, y: 0}
   cameraTarget: {fileID: 2098723574}
+  isTargetMode: 1
   flt_JumpingTimer: 0
 --- !u!4 &202425128 stripped
 Transform:
@@ -288,12 +289,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerController: {fileID: 202425126}
   settings:
-    SensitivityX: 12
+    SensitivityX: 25
     InvertedX: 0
-    SensitivityY: 12
+    SensitivityY: 25
     InvertedY: 0
     YClampMin: -40
     YClampMax: 20
+    CharacterRotationSpeedSmoothdamp: 0.05
 --- !u!1 &963194225
 GameObject:
   m_ObjectHideFlags: 0

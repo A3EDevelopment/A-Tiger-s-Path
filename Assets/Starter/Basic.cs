@@ -11,6 +11,8 @@ public class Basic : MonoBehaviour
 
 	public Transform cameraTarget;
 
+	public bool isTargetMode;
+
 	public float flt_JumpingTimer;
 
 	private void Awake()
@@ -54,6 +56,8 @@ public class Basic : MonoBehaviour
 	private void Update()
 	{
 		JumpingTimer();
+
+		Cursor.lockState = CursorLockMode.Locked;
 	}
 
 	#region Enable/Disable

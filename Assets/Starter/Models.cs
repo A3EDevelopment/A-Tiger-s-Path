@@ -19,6 +19,10 @@ public static class Models
 
         public float YClampMin = -40f;
         public float YClampMax = 20f;
+
+        [Header("Character")]
+        public float CharacterRotationSpeedSmoothdamp = 1f;
+
     }
 
     #endregion

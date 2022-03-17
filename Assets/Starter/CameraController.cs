@@ -10,6 +10,8 @@ public class CameraController : MonoBehaviour
 
     private Vector3 targetRotation;
 
+
+
     private void Update()
     {
 
@@ -34,6 +36,18 @@ public class CameraController : MonoBehaviour
         transform.rotation = Quaternion.Euler(targetRotation);
 
         //Turns Vector into Quaternion for Rotation
+
+        if (playerController.isTargetMode)
+        {
+            var currentRotation = playerController.transform.rotation;
+
+            var newRotation = currentRotation.eulerAngles;
+            newRotation.y = targetRotation.y;
+
+            currentRotation = Quaternion.Lerp(currentRotation, Quaternion.Euler(newRotation), settings.CharacterRotationSpeedSmoothdamp);
+
+            playerController.transform.rotation = currentRotation;
+        }
     }
 
     private void FollowPlayerCameraTarget()

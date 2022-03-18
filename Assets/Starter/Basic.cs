@@ -20,6 +20,17 @@ public class Basic : MonoBehaviour
 	public Transform cameraTarget;
 	public CameraController cameraController;
 
+	public float movementSmoothdamp;
+	public bool isWalking;
+
+	public float verticalSpeed;
+	private float targetVerticalSpeed;
+	private float verticalSpeedVelocity;
+
+	public float horizontalSpeed;
+	private float targetHorizontalSpeed;
+	private float horizontalSpeedVelocity;
+
 	private void Awake()
 	{
 		characterController = GetComponent<CharacterController>();
@@ -70,17 +81,39 @@ public class Basic : MonoBehaviour
 
 	private void Movement()
     {
-		playerMovement = cameraController.transform.forward * (settings.ForwardSpeed * input_Movement.y) * Time.deltaTime;
-		playerMovement += cameraController.transform.right * (settings.ForwardSpeed * input_Movement.x) * Time.deltaTime;
 
-		if (!isTargetMode)
+		if (isTargetMode)
+		{
+			if (input_Movement.y > 0)
+			{
+				targetVerticalSpeed = (isWalking ? settings.WalkingSpeed : settings.RunningSpeed);
+			}
+			else
+			{
+				targetVerticalSpeed = (isWalking ? settings.WalkingBackwardSpeed : settings.RunningBackwardSpeed);
+			}
+
+			targetVerticalSpeed = targetVerticalSpeed * input_Movement.y * Time.deltaTime;
+			targetHorizontalSpeed = (isWalking ? settings.WalkingStrafindSpeed : settings.RunningStrafingSpeed)  * input_Movement.x * Time.deltaTime;
+
+		}
+        else
         {
 			var originalRotation = transform.rotation;  //Save original Rotation
 			transform.LookAt(playerMovement + transform.position, Vector3.up);  //Transforms rotation
 			var newRotation = transform.rotation;  //Transformed rotation is saved 
 			transform.rotation = Quaternion.Lerp(originalRotation, newRotation, settings.CharacterRotationSmoothdamp);  //Transforms original rotation to new based on settings value found in Models script
 
-        }
+			targetVerticalSpeed = (isWalking ? settings.WalkingSpeed : settings.RunningSpeed) * input_Movement.y * Time.deltaTime;
+			targetHorizontalSpeed = (isWalking ? settings.WalkingSpeed : settings.RunningSpeed) * input_Movement.x * Time.deltaTime;
+		}
+
+
+		verticalSpeed = Mathf.SmoothDamp(verticalSpeed, targetVerticalSpeed, ref verticalSpeedVelocity, movementSmoothdamp);
+		horizontalSpeed = Mathf.SmoothDamp(horizontalSpeed, targetHorizontalSpeed, ref horizontalSpeedVelocity, movementSmoothdamp);
+
+		playerMovement = cameraController.transform.forward * verticalSpeed;
+		playerMovement += cameraController.transform.right * horizontalSpeed;
 
 		characterController.Move(playerMovement);
     }

@@ -33,18 +33,29 @@ public class RaycastingThing : MonoBehaviour
         {
             if (hit.collider.CompareTag("NPC"))
             {
+                Debug.Log ("yooo");
+
                 if (Input.GetKeyDown("e"))
                 {
                     
                 }
-                Image.SetActive(true);
+                //Image.SetActive(true);
                 isHovering = true;
             }   
         }
         else
         {
-            Image.SetActive(false);
+            //Image.SetActive(false);
             isHovering = false;
+        }
+
+        if (isHovering == true)
+        {
+            Image.SetActive(true);
+        }
+        else
+        {
+            Image.SetActive(false);
         }
     }
 }

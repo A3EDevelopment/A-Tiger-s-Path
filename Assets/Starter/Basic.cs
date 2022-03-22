@@ -22,6 +22,7 @@ public class Basic : MonoBehaviour
 
 	public float movementSmoothdamp;
 	public bool isWalking;
+	public bool isSprinting;
 
 	public float verticalSpeed;
 	private float targetVerticalSpeed;
@@ -30,6 +31,10 @@ public class Basic : MonoBehaviour
 	public float horizontalSpeed;
 	private float targetHorizontalSpeed;
 	private float horizontalSpeedVelocity;
+	float playerSpeed;
+
+	[Header("Stats")]
+	public PlayerStatsModel playerStats;
 
 	private void Awake()
 	{
@@ -42,7 +47,10 @@ public class Basic : MonoBehaviour
 		obj_BasicPlayerInput.Actions.Jump.performed += x => Jump();
 		obj_BasicPlayerInput.Actions.SuperJump.performed += x => SuperJump();
 
-		// Move
+		obj_BasicPlayerInput.Actions.WalkingToggle.performed += x => ToggleWalking();
+		obj_BasicPlayerInput.Actions.Sprint.performed += x => Sprint();
+
+		// Movements
 
 	}
 
@@ -70,6 +78,19 @@ public class Basic : MonoBehaviour
 		Debug.Log("I'm Super Jumping");
 	}
 
+	private void ToggleWalking()
+    {
+		isWalking = !isWalking;
+    }
+
+	private void Sprint()
+    {
+		if (playerStats.Stamina > (playerStats.MaxStamina / 4))
+        {
+			isSprinting = true;
+        }
+    }
+
 	private void Update()
 	{
 		JumpingTimer();
@@ -77,7 +98,34 @@ public class Basic : MonoBehaviour
 		Cursor.lockState = CursorLockMode.Locked;
 
 		Movement();
+		CalculateSprint();
 	}
+
+	private void CalculateSprint()
+    {
+		if (isSprinting)
+        {
+			if (playerStats.Stamina > 0)
+			{
+				playerStats.Stamina -= playerStats.StaminaDrain * Time.deltaTime;
+            }
+            else
+            {
+				isSprinting = false;
+            }
+        }
+		else
+        {
+			if (playerStats.Stamina < playerStats.MaxStamina)
+			{
+				playerStats.Stamina += playerStats.StaminaRecovery * Time.deltaTime;
+			}
+            else
+            {
+				playerStats.Stamina = playerStats.MaxStamina;
+            }
+        }
+    }
 
 	private void Movement()
     {
@@ -93,8 +141,7 @@ public class Basic : MonoBehaviour
 				targetVerticalSpeed = (isWalking ? settings.WalkingBackwardSpeed : settings.RunningBackwardSpeed);
 			}
 
-			targetVerticalSpeed = targetVerticalSpeed * input_Movement.y * Time.deltaTime;
-			targetHorizontalSpeed = (isWalking ? settings.WalkingStrafindSpeed : settings.RunningStrafingSpeed)  * input_Movement.x * Time.deltaTime;
+			targetHorizontalSpeed = (isWalking ? settings.WalkingStrafindSpeed : settings.RunningStrafingSpeed);
 
 		}
         else
@@ -104,10 +151,21 @@ public class Basic : MonoBehaviour
 			var newRotation = transform.rotation;  //Transformed rotation is saved 
 			transform.rotation = Quaternion.Lerp(originalRotation, newRotation, settings.CharacterRotationSmoothdamp);  //Transforms original rotation to new based on settings value found in Models script
 
-			targetVerticalSpeed = (isWalking ? settings.WalkingSpeed : settings.RunningSpeed) * input_Movement.y * Time.deltaTime;
-			targetHorizontalSpeed = (isWalking ? settings.WalkingSpeed : settings.RunningSpeed) * input_Movement.x * Time.deltaTime;
+			if (isSprinting)
+			{
+				playerSpeed = settings.RunningSpeed;
+			}
+			else
+			{
+				playerSpeed = (isWalking ? settings.WalkingSpeed : settings.RunningSpeed);
+			}
+
+			targetVerticalSpeed = playerSpeed;
+			targetHorizontalSpeed = playerSpeed;
 		}
 
+		targetVerticalSpeed = targetVerticalSpeed * input_Movement.y * Time.deltaTime;
+		targetHorizontalSpeed = targetHorizontalSpeed * input_Movement.x * Time.deltaTime;
 
 		verticalSpeed = Mathf.SmoothDamp(verticalSpeed, targetVerticalSpeed, ref verticalSpeedVelocity, movementSmoothdamp);
 		horizontalSpeed = Mathf.SmoothDamp(horizontalSpeed, targetHorizontalSpeed, ref horizontalSpeedVelocity, movementSmoothdamp);

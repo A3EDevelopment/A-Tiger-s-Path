@@ -136,6 +136,24 @@ public partial class @BasicPlayerInput : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""WalkingToggle"",
+                    ""type"": ""Button"",
+                    ""id"": ""1872022a-8540-4a84-befb-68b289e2b623"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Sprint"",
+                    ""type"": ""Button"",
+                    ""id"": ""7d22c5bf-3b6e-4e94-93b4-52056c5804fe"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -160,6 +178,28 @@ public partial class @BasicPlayerInput : IInputActionCollection2, IDisposable
                     ""action"": ""SuperJump"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""5ec03241-5622-43f2-acf8-55e5c254a561"",
+                    ""path"": ""<Keyboard>/leftCtrl"",
+                    ""interactions"": ""Press"",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""WalkingToggle"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""9af41094-0b3f-4ed0-9b63-87f6d7f88eec"",
+                    ""path"": ""<Keyboard>/leftShift"",
+                    ""interactions"": ""Press"",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Sprint"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -174,6 +214,8 @@ public partial class @BasicPlayerInput : IInputActionCollection2, IDisposable
         m_Actions = asset.FindActionMap("Actions", throwIfNotFound: true);
         m_Actions_Jump = m_Actions.FindAction("Jump", throwIfNotFound: true);
         m_Actions_SuperJump = m_Actions.FindAction("SuperJump", throwIfNotFound: true);
+        m_Actions_WalkingToggle = m_Actions.FindAction("WalkingToggle", throwIfNotFound: true);
+        m_Actions_Sprint = m_Actions.FindAction("Sprint", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -276,12 +318,16 @@ public partial class @BasicPlayerInput : IInputActionCollection2, IDisposable
     private IActionsActions m_ActionsActionsCallbackInterface;
     private readonly InputAction m_Actions_Jump;
     private readonly InputAction m_Actions_SuperJump;
+    private readonly InputAction m_Actions_WalkingToggle;
+    private readonly InputAction m_Actions_Sprint;
     public struct ActionsActions
     {
         private @BasicPlayerInput m_Wrapper;
         public ActionsActions(@BasicPlayerInput wrapper) { m_Wrapper = wrapper; }
         public InputAction @Jump => m_Wrapper.m_Actions_Jump;
         public InputAction @SuperJump => m_Wrapper.m_Actions_SuperJump;
+        public InputAction @WalkingToggle => m_Wrapper.m_Actions_WalkingToggle;
+        public InputAction @Sprint => m_Wrapper.m_Actions_Sprint;
         public InputActionMap Get() { return m_Wrapper.m_Actions; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -297,6 +343,12 @@ public partial class @BasicPlayerInput : IInputActionCollection2, IDisposable
                 @SuperJump.started -= m_Wrapper.m_ActionsActionsCallbackInterface.OnSuperJump;
                 @SuperJump.performed -= m_Wrapper.m_ActionsActionsCallbackInterface.OnSuperJump;
                 @SuperJump.canceled -= m_Wrapper.m_ActionsActionsCallbackInterface.OnSuperJump;
+                @WalkingToggle.started -= m_Wrapper.m_ActionsActionsCallbackInterface.OnWalkingToggle;
+                @WalkingToggle.performed -= m_Wrapper.m_ActionsActionsCallbackInterface.OnWalkingToggle;
+                @WalkingToggle.canceled -= m_Wrapper.m_ActionsActionsCallbackInterface.OnWalkingToggle;
+                @Sprint.started -= m_Wrapper.m_ActionsActionsCallbackInterface.OnSprint;
+                @Sprint.performed -= m_Wrapper.m_ActionsActionsCallbackInterface.OnSprint;
+                @Sprint.canceled -= m_Wrapper.m_ActionsActionsCallbackInterface.OnSprint;
             }
             m_Wrapper.m_ActionsActionsCallbackInterface = instance;
             if (instance != null)
@@ -307,6 +359,12 @@ public partial class @BasicPlayerInput : IInputActionCollection2, IDisposable
                 @SuperJump.started += instance.OnSuperJump;
                 @SuperJump.performed += instance.OnSuperJump;
                 @SuperJump.canceled += instance.OnSuperJump;
+                @WalkingToggle.started += instance.OnWalkingToggle;
+                @WalkingToggle.performed += instance.OnWalkingToggle;
+                @WalkingToggle.canceled += instance.OnWalkingToggle;
+                @Sprint.started += instance.OnSprint;
+                @Sprint.performed += instance.OnSprint;
+                @Sprint.canceled += instance.OnSprint;
             }
         }
     }
@@ -320,5 +378,7 @@ public partial class @BasicPlayerInput : IInputActionCollection2, IDisposable
     {
         void OnJump(InputAction.CallbackContext context);
         void OnSuperJump(InputAction.CallbackContext context);
+        void OnWalkingToggle(InputAction.CallbackContext context);
+        void OnSprint(InputAction.CallbackContext context);
     }
 }

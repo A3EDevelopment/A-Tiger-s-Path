@@ -250,14 +250,21 @@ MonoBehaviour:
     RunningBackwardSpeed: 3
     WalkingStrafindSpeed: 2
     RunningStrafingSpeed: 4
+    SprintingSpeed: 0
   isTargetMode: 0
   flt_JumpingTimer: 0
   cameraTarget: {fileID: 2098723574}
   cameraController: {fileID: 957026710}
   movementSmoothdamp: 0.1
   isWalking: 1
-  verticalSpeed: 0
-  horizontalSpeed: 0
+  isSprinting: 0
+  verticalSpeed: 10
+  horizontalSpeed: 10
+  playerStats:
+    Stamina: 100
+    MaxStamina: 100
+    StaminaDrain: 4
+    StaminaRecovery: 8
 --- !u!4 &202425128 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: ea5f6647f62c34d4185336e55fdbbb36, type: 3}

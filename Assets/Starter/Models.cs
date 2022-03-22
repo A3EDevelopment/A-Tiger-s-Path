@@ -39,8 +39,21 @@ public static class Models
 
         public float WalkingStrafindSpeed;
         public float RunningStrafingSpeed;
-        
+
+
+        public float SprintingSpeed;
     }
+
+    [Serializable]
+    
+    public class PlayerStatsModel
+    {
+        public float Stamina;
+        public float MaxStamina;
+        public float StaminaDrain;
+        public float StaminaRecovery;
+    }
+
 
     #endregion
 

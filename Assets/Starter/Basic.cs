@@ -48,7 +48,6 @@ public class Basic : MonoBehaviour
     #region Character Stats
     [Header("Character Stats")]
 	public PlayerStatsModel playerStats;
-	float playerSpeed;
 	#endregion
 
 	private void Awake()
@@ -74,7 +73,7 @@ public class Basic : MonoBehaviour
 		JumpingTimer();
 
 		Cursor.lockState = CursorLockMode.Locked;
-
+		 
 		Movement();
 		CalculateSprint();
 	}
@@ -105,9 +104,11 @@ public class Basic : MonoBehaviour
 			var newRotation = transform.rotation;  //Transformed rotation is saved 
 			transform.rotation = Quaternion.Lerp(originalRotation, newRotation, settings.CharacterRotationSmoothdamp);  //Transforms original rotation to new based on settings value found in Models script
 
+			float playerSpeed;
+
 			if (isSprinting)
 			{
-				playerSpeed = settings.RunningSpeed;
+				playerSpeed = settings.SprintingSpeed;
 			}
 			else
 			{
@@ -161,6 +162,11 @@ public class Basic : MonoBehaviour
 
 	private void Sprint()
     {
+		if (isTargetMode)
+        {
+			return;
+        }
+
 		if (playerStats.Stamina > (playerStats.MaxStamina / 4))
         {
 			isSprinting = true;

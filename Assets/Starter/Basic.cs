@@ -5,36 +5,51 @@ using UnityEngine;
 
 public class Basic : MonoBehaviour
 {
+
 	CharacterController characterController;
 	BasicPlayerInput obj_BasicPlayerInput;
-	public Vector2 input_Movement;
-	public Vector2 input_View;
-
-	Vector3 playerMovement;
-
 	public PlayerSettingsModel settings;
-	public bool isTargetMode;
+	[Space]
 	public float flt_JumpingTimer;
 
-	[Header("Camera")]
-	public Transform cameraTarget;
-	public CameraController cameraController;
+    #region Inputs
+    [Header("Player Inputs")]
+	public Vector2 input_Movement;
+	public Vector2 input_View;
+	Vector3 playerMovement;
+    #endregion
 
-	public float movementSmoothdamp;
+    #region Modes
+    [Header("Modes")]
 	public bool isWalking;
 	public bool isSprinting;
+	public bool isTargetMode;
+	#endregion
 
+	#region Speed Values
+	[Header("Speed Values")]
+	[Range(1,15)]
 	public float verticalSpeed;
 	private float targetVerticalSpeed;
 	private float verticalSpeedVelocity;
-
+	[Range(1, 15)]
 	public float horizontalSpeed;
 	private float targetHorizontalSpeed;
 	private float horizontalSpeedVelocity;
-	float playerSpeed;
+	#endregion
 
-	[Header("Stats")]
+	#region Camera
+	[Header("Camera")]
+	public Transform cameraTarget;
+	public CameraController cameraController;
+	public float movementSmoothdamp;
+    #endregion
+
+    #region Character Stats
+    [Header("Character Stats")]
 	public PlayerStatsModel playerStats;
+	float playerSpeed;
+	#endregion
 
 	private void Awake()
 	{
@@ -54,43 +69,6 @@ public class Basic : MonoBehaviour
 
 	}
 
-	private void JumpingTimer()
-	{
-		if (flt_JumpingTimer >= 0)
-		{
-			flt_JumpingTimer -= Time.deltaTime;
-		}
-	}
-
-	private void Jump()
-	{
-		if (flt_JumpingTimer <= 0)
-		{
-			flt_JumpingTimer = 0.4f;
-			return;
-		}
-
-		Debug.Log("I'm Jumping");
-	}
-
-		private void SuperJump()
-	{
-		Debug.Log("I'm Super Jumping");
-	}
-
-	private void ToggleWalking()
-    {
-		isWalking = !isWalking;
-    }
-
-	private void Sprint()
-    {
-		if (playerStats.Stamina > (playerStats.MaxStamina / 4))
-        {
-			isSprinting = true;
-        }
-    }
-
 	private void Update()
 	{
 		JumpingTimer();
@@ -101,34 +79,10 @@ public class Basic : MonoBehaviour
 		CalculateSprint();
 	}
 
-	private void CalculateSprint()
-    {
-		if (isSprinting)
-        {
-			if (playerStats.Stamina > 0)
-			{
-				playerStats.Stamina -= playerStats.StaminaDrain * Time.deltaTime;
-            }
-            else
-            {
-				isSprinting = false;
-            }
-        }
-		else
-        {
-			if (playerStats.Stamina < playerStats.MaxStamina)
-			{
-				playerStats.Stamina += playerStats.StaminaRecovery * Time.deltaTime;
-			}
-            else
-            {
-				playerStats.Stamina = playerStats.MaxStamina;
-            }
-        }
-    }
+	#region Character Movement
 
 	private void Movement()
-    {
+	{
 
 		if (isTargetMode)
 		{
@@ -144,8 +98,8 @@ public class Basic : MonoBehaviour
 			targetHorizontalSpeed = (isWalking ? settings.WalkingStrafindSpeed : settings.RunningStrafingSpeed);
 
 		}
-        else
-        {
+		else
+		{
 			var originalRotation = transform.rotation;  //Save original Rotation
 			transform.LookAt(playerMovement + transform.position, Vector3.up);  //Transforms rotation
 			var newRotation = transform.rotation;  //Transformed rotation is saved 
@@ -174,7 +128,72 @@ public class Basic : MonoBehaviour
 		playerMovement += cameraController.transform.right * horizontalSpeed;
 
 		characterController.Move(playerMovement);
+	}
+
+	private void JumpingTimer()
+	{
+		if (flt_JumpingTimer >= 0)
+		{
+			flt_JumpingTimer -= Time.deltaTime;
+		}
+	}
+
+	private void Jump()
+	{
+		if (flt_JumpingTimer <= 0)
+		{
+			flt_JumpingTimer = 0.4f;
+			return;
+		}
+
+		Debug.Log("I'm Jumping");
+	}
+
+	private void SuperJump()
+	{
+		Debug.Log("I'm Super Jumping");
+	}
+
+	private void ToggleWalking()
+    {
+		isWalking = !isWalking;
     }
+
+	private void Sprint()
+    {
+		if (playerStats.Stamina > (playerStats.MaxStamina / 4))
+        {
+			isSprinting = true;
+        }
+    }
+
+	private void CalculateSprint()
+	{
+		if (isSprinting)
+		{
+			if (playerStats.Stamina > 0)
+			{
+				playerStats.Stamina -= playerStats.StaminaDrain * Time.deltaTime;
+			}
+			else
+			{
+				isSprinting = false;
+			}
+		}
+		else
+		{
+			if (playerStats.Stamina < playerStats.MaxStamina)
+			{
+				playerStats.Stamina += playerStats.StaminaRecovery * Time.deltaTime;
+			}
+			else
+			{
+				playerStats.Stamina = playerStats.MaxStamina;
+			}
+		}
+	}
+
+	#endregion
 
 	#region Enable/Disable
 

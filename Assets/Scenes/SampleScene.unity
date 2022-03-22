@@ -240,8 +240,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ce5bbac00a8c01458135b21710e75c9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  input_Movement: {x: 0, y: 0}
-  input_View: {x: 0, y: 0}
   settings:
     CharacterRotationSmoothdamp: 0.6
     WalkingSpeed: 3
@@ -251,15 +249,17 @@ MonoBehaviour:
     WalkingStrafindSpeed: 2
     RunningStrafingSpeed: 4
     SprintingSpeed: 0
-  isTargetMode: 0
   flt_JumpingTimer: 0
+  input_Movement: {x: 0, y: 0}
+  input_View: {x: 0, y: 0}
+  isWalking: 1
+  isSprinting: 0
+  isTargetMode: 0
+  verticalSpeed: 10
+  horizontalSpeed: 10
   cameraTarget: {fileID: 2098723574}
   cameraController: {fileID: 957026710}
   movementSmoothdamp: 0.1
-  isWalking: 1
-  isSprinting: 0
-  verticalSpeed: 10
-  horizontalSpeed: 10
   playerStats:
     Stamina: 100
     MaxStamina: 100

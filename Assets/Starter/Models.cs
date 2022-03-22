@@ -31,13 +31,19 @@ public static class Models
         public float CharacterRotationSmoothdamp = 0.6f;
 
         [Header("Movement Speeds")]
+        [Range(1, 10)]
         public float WalkingSpeed;
+        [Range(1, 10)]
         public float RunningSpeed;
 
+        [Range(1, 10)]
         public float WalkingBackwardSpeed;
+        [Range(1, 10)]
         public float RunningBackwardSpeed;
 
+        [Range(1, 10)]
         public float WalkingStrafindSpeed;
+        [Range(1, 10)]
         public float RunningStrafingSpeed;
 
 

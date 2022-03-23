@@ -74,6 +74,7 @@ public class Basic : MonoBehaviour
 		 
 		Movement();
 		CalculateSprint();
+		CanSprint();
 	}
 
 	#region Character Movement
@@ -160,7 +161,7 @@ public class Basic : MonoBehaviour
 
 	private void Sprint()
     {
-		if (isTargetMode)
+		if (!CanSprint())
         {
 			return;
         }
@@ -171,8 +172,32 @@ public class Basic : MonoBehaviour
         }
     }
 
+	private bool CanSprint()
+	{
+		if (isTargetMode)
+		{
+			return false;
+		}
+
+		var sprintFalloff = 0.8f;
+
+		if ((input_Movement.y < 0 ? input_Movement.y * -1 : input_Movement.y) < sprintFalloff && (input_Movement.x < 0 ? input_Movement.x * -1 : input_Movement.x) < sprintFalloff)  //Ensures input_Movement.y and x is always positive 
+		{
+			return false;
+		}
+
+
+
+		return true;
+	}
+
 	private void CalculateSprint()
 	{
+		if (!CanSprint())
+		{
+			isSprinting = false;
+		}
+
 		if (isSprinting)
 		{
 			if (playerStats.Stamina > 0)
@@ -183,16 +208,25 @@ public class Basic : MonoBehaviour
 			{
 				isSprinting = false;
 			}
+
+			playerStats.StaminaCurrentDelay = playerStats.StaminaDelay;
 		}
 		else
 		{
-			if (playerStats.Stamina < playerStats.MaxStamina)
+			if (playerStats.StaminaCurrentDelay <= 0)
 			{
-				playerStats.Stamina += playerStats.StaminaRecovery * Time.deltaTime;
+				if (playerStats.Stamina < playerStats.MaxStamina)
+				{
+					playerStats.Stamina += playerStats.StaminaRecovery * Time.deltaTime;
+				}
+				else
+				{
+					playerStats.Stamina = playerStats.MaxStamina;
+				}
 			}
 			else
 			{
-				playerStats.Stamina = playerStats.MaxStamina;
+				playerStats.StaminaCurrentDelay -= Time.deltaTime;
 			}
 		}
 	}

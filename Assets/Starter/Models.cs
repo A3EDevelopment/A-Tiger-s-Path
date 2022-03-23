@@ -58,6 +58,8 @@ public static class Models
         public float MaxStamina;
         public float StaminaDrain;
         public float StaminaRecovery;
+        public float StaminaDelay; 
+        public float StaminaCurrentDelay;
     }
 
 

@@ -263,8 +263,10 @@ MonoBehaviour:
   playerStats:
     Stamina: 100
     MaxStamina: 100
-    StaminaDrain: 4
-    StaminaRecovery: 8
+    StaminaDrain: 20
+    StaminaRecovery: 20
+    StaminaDelay: 2
+    StaminaCurrentDelay: 0
 --- !u!4 &202425128 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: ea5f6647f62c34d4185336e55fdbbb36, type: 3}

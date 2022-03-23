@@ -248,15 +248,15 @@ MonoBehaviour:
     RunningBackwardSpeed: 3
     WalkingStrafindSpeed: 2
     RunningStrafingSpeed: 4
-    SprintingSpeed: 0
+    SprintingSpeed: 10
   flt_JumpingTimer: 0
   input_Movement: {x: 0, y: 0}
   input_View: {x: 0, y: 0}
   isWalking: 1
   isSprinting: 0
   isTargetMode: 0
-  verticalSpeed: 10
-  horizontalSpeed: 10
+  verticalSpeed: 0
+  horizontalSpeed: 0
   cameraTarget: {fileID: 2098723574}
   cameraController: {fileID: 957026710}
   movementSmoothdamp: 0.1

@@ -28,11 +28,11 @@ public class Basic : MonoBehaviour
 
 	#region Speed Values
 	[Header("Speed Values")]
-	[Range(1,15)]
+
 	public float verticalSpeed;
 	private float targetVerticalSpeed;
 	private float verticalSpeedVelocity;
-	[Range(1, 15)]
+
 	public float horizontalSpeed;
 	private float targetHorizontalSpeed;
 	private float horizontalSpeedVelocity;
@@ -65,14 +65,12 @@ public class Basic : MonoBehaviour
 		obj_BasicPlayerInput.Actions.Sprint.performed += x => Sprint();
 
 		// Movements
-
+		Cursor.lockState = CursorLockMode.Locked;
 	}
 
 	private void Update()
 	{
 		JumpingTimer();
-
-		Cursor.lockState = CursorLockMode.Locked;
 		 
 		Movement();
 		CalculateSprint();

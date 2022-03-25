@@ -810,13 +810,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   settings:
     CharacterRotationSmoothdamp: 0.6
-    WalkingSpeed: 1.604329
-    RunningSpeed: 3.5
+    WalkingSpeed: 0.5
+    RunningSpeed: 1
     WalkingBackwardSpeed: 1
     RunningBackwardSpeed: 3
     WalkingStrafindSpeed: 2
     RunningStrafingSpeed: 4
-    SprintingSpeed: 5.437296
+    SprintingSpeed: 1.2
   flt_JumpingTimer: 0
   input_Movement: {x: 0, y: 0}
   input_View: {x: 0, y: 0}
@@ -3673,9 +3673,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerController: {fileID: 202425126}
   settings:
-    SensitivityX: 50
+    SensitivityX: 20
     InvertedX: 0
-    SensitivityY: 50
+    SensitivityY: 20
     InvertedY: 0
     YClampMin: -40
     YClampMax: 20

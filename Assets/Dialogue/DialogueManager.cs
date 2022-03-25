@@ -81,14 +81,16 @@ public class DialogueManager : MonoBehaviour
         }
 
 
-        if (distance <= 2.5f)
+        if (distance <= 4)
         {
             Prompt.SetActive(true);
             if(Input.GetKeyDown(KeyCode.E) && isTalking == false)
             {
                 StartConversation();
+                
             }
-            else if(Input.GetKeyDown(KeyCode.E) && isTalking == true){
+            else if(Input.GetKeyDown(KeyCode.E) && isTalking == true)
+            {
                 EndDialogue();
             }
         }
@@ -103,6 +105,7 @@ public class DialogueManager : MonoBehaviour
         isTalking = true;
         curResponseTracker = 0;
         dialogueUI.SetActive(true);
+        Prompt.SetActive(false);
         npcName.text = npc.name;
         npcDialogueBox.text = npc.dialogue[0];
     }

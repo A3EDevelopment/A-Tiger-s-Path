@@ -14,11 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: Neighbour
   dialogue:
-  - Hello
-  - Test
+  - Hello miss! What brings you here.
+  - The elder walks around Qingshan so you have to look around!
   - Testing
   - Testing again
   playerDialogue:
-  - Yes
+  - Where is the Elder?
   - Ok
   - Cool

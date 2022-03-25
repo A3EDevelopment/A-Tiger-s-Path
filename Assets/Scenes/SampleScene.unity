@@ -3507,9 +3507,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerController: {fileID: 202425126}
   settings:
-    SensitivityX: 50
+    SensitivityX: 20
     InvertedX: 0
-    SensitivityY: 50
+    SensitivityY: 20
     InvertedY: 0
     YClampMin: -40
     YClampMax: 20

@@ -7,6 +7,7 @@ public class Basic : MonoBehaviour
 {
 
 	CharacterController characterController;
+	Animator characterAnimator;
 	BasicPlayerInput obj_BasicPlayerInput;
 	public PlayerSettingsModel settings;
 	[Space]
@@ -53,6 +54,8 @@ public class Basic : MonoBehaviour
 	private void Awake()
 	{
 		characterController = GetComponent<CharacterController>();
+		characterAnimator = GetComponent<Animator>();
+
 		obj_BasicPlayerInput = new BasicPlayerInput();
 
 		obj_BasicPlayerInput.Movement.Movement.performed += x => input_Movement = x.ReadValue<Vector2>();
@@ -78,57 +81,6 @@ public class Basic : MonoBehaviour
 	}
 
 	#region Character Movement
-
-	private void Movement()
-	{
-
-		if (isTargetMode)
-		{
-			if (input_Movement.y > 0)
-			{
-				targetVerticalSpeed = (isWalking ? settings.WalkingSpeed : settings.RunningSpeed);
-			}
-			else
-			{
-				targetVerticalSpeed = (isWalking ? settings.WalkingBackwardSpeed : settings.RunningBackwardSpeed);
-			}
-
-			targetHorizontalSpeed = (isWalking ? settings.WalkingStrafindSpeed : settings.RunningStrafingSpeed);
-
-		}
-		else
-		{
-			var originalRotation = transform.rotation;  //Save original Rotation
-			transform.LookAt(playerMovement + transform.position, Vector3.up);  //Transforms rotation
-			var newRotation = transform.rotation;  //Transformed rotation is saved 
-			transform.rotation = Quaternion.Lerp(originalRotation, newRotation, settings.CharacterRotationSmoothdamp);  //Transforms original rotation to new based on settings value found in Models script
-
-			float playerSpeed;
-
-			if (isSprinting)
-			{
-				playerSpeed = settings.SprintingSpeed;
-			}
-			else
-			{
-				playerSpeed = (isWalking ? settings.WalkingSpeed : settings.RunningSpeed);
-			}
-
-			targetVerticalSpeed = playerSpeed;
-			targetHorizontalSpeed = playerSpeed;
-		}
-
-		targetVerticalSpeed = targetVerticalSpeed * input_Movement.y * Time.deltaTime;
-		targetHorizontalSpeed = targetHorizontalSpeed * input_Movement.x * Time.deltaTime;
-
-		verticalSpeed = Mathf.SmoothDamp(verticalSpeed, targetVerticalSpeed, ref verticalSpeedVelocity, movementSmoothdamp);
-		horizontalSpeed = Mathf.SmoothDamp(horizontalSpeed, targetHorizontalSpeed, ref horizontalSpeedVelocity, movementSmoothdamp);
-
-		playerMovement = cameraController.transform.forward * verticalSpeed;
-		playerMovement += cameraController.transform.right * horizontalSpeed;
-
-		characterController.Move(playerMovement);
-	}
 
 	private void JumpingTimer()
 	{
@@ -229,6 +181,78 @@ public class Basic : MonoBehaviour
 				playerStats.StaminaCurrentDelay -= Time.deltaTime;
 			}
 		}
+	}
+
+	private void Movement()
+	{
+
+		if (isTargetMode)
+		{
+			if (input_Movement.y > 0)
+			{
+				targetVerticalSpeed = (isWalking ? settings.WalkingSpeed : settings.RunningSpeed);
+			}
+			else
+			{
+				targetVerticalSpeed = (isWalking ? settings.WalkingBackwardSpeed : settings.RunningBackwardSpeed);
+			}
+
+			targetHorizontalSpeed = (isWalking ? settings.WalkingStrafindSpeed : settings.RunningStrafingSpeed);
+
+		}
+		else
+		{
+			var originalRotation = transform.rotation;  //Save original Rotation
+			transform.LookAt(playerMovement + transform.position, Vector3.up);  //Transforms rotation
+			var newRotation = transform.rotation;  //Transformed rotation is saved 
+			transform.rotation = Quaternion.Lerp(originalRotation, newRotation, settings.CharacterRotationSmoothdamp);  //Transforms original rotation to new based on settings value found in Models script
+
+			float playerSpeed; //To change player speed, value must be changed in inspector.
+
+			if (isSprinting)
+			{
+				playerSpeed = settings.SprintingSpeed;
+			}
+			else
+			{
+				playerSpeed = (isWalking ? settings.WalkingSpeed : settings.RunningSpeed);
+			}
+
+			targetVerticalSpeed = playerSpeed;
+			targetHorizontalSpeed = playerSpeed;
+		}
+
+		targetVerticalSpeed = targetVerticalSpeed * input_Movement.y;  //Calcualtes speed by getting player input from WASD by speed and time. Forwards and Backwards
+		targetHorizontalSpeed = targetHorizontalSpeed * input_Movement.x;  //Calcualtes speed by getting player input from WASD by speed and time. Left and Right
+
+		verticalSpeed = Mathf.SmoothDamp(verticalSpeed, targetVerticalSpeed, ref verticalSpeedVelocity, movementSmoothdamp);
+		horizontalSpeed = Mathf.SmoothDamp(horizontalSpeed, targetHorizontalSpeed, ref horizontalSpeedVelocity, movementSmoothdamp);
+
+		if (isTargetMode)
+		{
+
+		}
+		else
+		{
+			//Checks if this the input is negative and turns into positive.
+			float verticalActualSpeed = verticalSpeed < 0 ? verticalSpeed * -1 : verticalSpeed;
+			float horizontalActualSpeed = horizontalSpeed < 0 ? horizontalSpeed * -1 : horizontalSpeed;
+			// Both camera modes affect the player speed differently. We need the actual speed.
+
+			float animatorVertical = verticalActualSpeed > horizontalActualSpeed ? verticalActualSpeed : horizontalActualSpeed;
+
+			characterAnimator.SetFloat("Vertical", animatorVertical);
+		}
+
+
+
+
+
+
+		playerMovement = cameraController.transform.forward * verticalSpeed * Time.deltaTime;
+		playerMovement += cameraController.transform.right * horizontalSpeed * Time.deltaTime;
+
+		characterController.Move(playerMovement);
 	}
 
 	#endregion

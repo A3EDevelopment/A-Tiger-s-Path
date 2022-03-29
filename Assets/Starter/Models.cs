@@ -36,14 +36,14 @@ public static class Models
         [Range(0, 10)]
         public float RunningSpeed;
 
-        [Range(1, 10)]
+        [Range(0, 10)]
         public float WalkingBackwardSpeed;
-        [Range(1, 10)]
+        [Range(0, 10)]
         public float RunningBackwardSpeed;
 
-        [Range(1, 10)]
+        [Range(0, 10)]
         public float WalkingStrafindSpeed;
-        [Range(1, 10)]
+        [Range(0, 10)]
         public float RunningStrafingSpeed;
 
 

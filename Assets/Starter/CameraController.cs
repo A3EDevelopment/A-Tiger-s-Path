@@ -5,12 +5,16 @@ using UnityEngine;
 
 public class CameraController : MonoBehaviour
 {
+    [Header("Settings")]
     public Basic playerController;
     public CameraSettingsModel settings;
     private Vector3 targetRotation;
-
     public GameObject yGimbal;
     private Vector3 yGibalRotation;
+
+    [Header("Position Settings")]
+    public float movementSmoothTime = 1f;
+    private Vector3 movementVelocity;
 
     private void Update()
     {
@@ -55,7 +59,7 @@ public class CameraController : MonoBehaviour
 
     private void FollowPlayerCameraTarget()
     {
-        transform.position = playerController.cameraTarget.position;
+        transform.position = Vector3.SmoothDamp(transform.position, playerController.cameraTarget.position, ref movementVelocity, movementSmoothTime);
 
     }
 

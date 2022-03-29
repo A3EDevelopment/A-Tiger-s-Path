@@ -3681,6 +3681,7 @@ MonoBehaviour:
     YClampMax: 20
     CharacterRotationSpeedSmoothdamp: 0.05
   yGimbal: {fileID: 269973748}
+  movementSmoothTime: 0.2
 --- !u!1 &963194225
 GameObject:
   m_ObjectHideFlags: 0

@@ -185,6 +185,7 @@ public class Basic : MonoBehaviour
 
 	private void Movement()
 	{
+		characterAnimator.SetBool("isTargetMode", isTargetMode);
 
 		if (isTargetMode)
 		{
@@ -230,7 +231,8 @@ public class Basic : MonoBehaviour
 
 		if (isTargetMode)
 		{
-
+			characterAnimator.SetFloat("Vertical", verticalSpeed);
+			characterAnimator.SetFloat("Horizontal", horizontalSpeed);
 		}
 		else
 		{

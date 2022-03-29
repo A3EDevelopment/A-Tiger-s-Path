@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.44657826, g: 0.49641263, b: 0.57481676, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -810,12 +810,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   settings:
     CharacterRotationSmoothdamp: 0.6
-    WalkingSpeed: 0.5
+    WalkingSpeed: 0.7
     RunningSpeed: 1
-    WalkingBackwardSpeed: 1
-    RunningBackwardSpeed: 3
-    WalkingStrafindSpeed: 2
-    RunningStrafingSpeed: 4
+    WalkingBackwardSpeed: 0.4
+    RunningBackwardSpeed: 0.8
+    WalkingStrafindSpeed: 0.5
+    RunningStrafingSpeed: 0.9
     SprintingSpeed: 1.2
   flt_JumpingTimer: 0
   input_Movement: {x: 0, y: 0}

@@ -381,4 +381,6 @@ public partial class @BasicPlayerInput : IInputActionCollection2, IDisposable
         void OnWalkingToggle(InputAction.CallbackContext context);
         void OnSprint(InputAction.CallbackContext context);
     }
+
+    
 }

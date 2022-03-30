@@ -908,10 +908,13 @@ MonoBehaviour:
     StaminaRecovery: 20
     StaminaDelay: 2
     StaminaCurrentDelay: 0
-  gravity: 10
+  gravity: 1
   currentGravity: 0
   constantGravity: -0.6
   maxGravity: -15
+  fallingSpeed: 0
+  fallingThreshold: 0
+  jumpingTriggered: 0
 --- !u!4 &202425128 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: ea5f6647f62c34d4185336e55fdbbb36, type: 3}

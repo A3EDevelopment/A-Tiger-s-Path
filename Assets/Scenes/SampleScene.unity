@@ -892,11 +892,10 @@ MonoBehaviour:
   isWalking: 1
   isSprinting: 0
   isTargetMode: 0
-  verticalSpeed: 0
-  horizontalSpeed: 0
+  movementSpeedOffset: 1
   cameraTarget: {fileID: 2098723574}
   cameraController: {fileID: 957026710}
-  movementSmoothdamp: 0.1
+  movementSmoothdamp: 0.005
   playerStats:
     Stamina: 100
     MaxStamina: 100
@@ -904,6 +903,10 @@ MonoBehaviour:
     StaminaRecovery: 20
     StaminaDelay: 2
     StaminaCurrentDelay: 0
+  gravity: 10
+  currentGravity: 0
+  constantGravity: -0.6
+  maxGravity: -15
 --- !u!4 &202425128 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: ea5f6647f62c34d4185336e55fdbbb36, type: 3}
@@ -3741,6 +3744,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerController: {fileID: 202425126}
+  yGimbal: {fileID: 269973748}
   settings:
     SensitivityX: 20
     InvertedX: 0
@@ -3749,7 +3753,6 @@ MonoBehaviour:
     YClampMin: -40
     YClampMax: 20
     CharacterRotationSpeedSmoothdamp: 0.05
-  yGimbal: {fileID: 269973748}
   movementSmoothTime: 0.2
 --- !u!1 &963194225
 GameObject:
@@ -3875,15 +3878,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: ea5f6647f62c34d4185336e55fdbbb36, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -1.453
+      value: 2.54
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: ea5f6647f62c34d4185336e55fdbbb36, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.48
+      value: 1.048
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: ea5f6647f62c34d4185336e55fdbbb36, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 4.407
+      value: 35.88
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: ea5f6647f62c34d4185336e55fdbbb36, type: 3}
       propertyPath: m_LocalRotation.w
@@ -5980,7 +5983,7 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
     randomizeRotationDirection: 0
-    maxNumParticles: 20
+    maxNumParticles: 200
     size3D: 0
     rotation3D: 0
     gravityModifier:

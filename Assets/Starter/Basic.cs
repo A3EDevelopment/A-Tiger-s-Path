@@ -30,25 +30,38 @@ public class Basic : MonoBehaviour
 	#region Speed Values
 	[Header("Speed Values")]
 
-	public float verticalSpeed;
+	private float verticalSpeed;
 	private float targetVerticalSpeed;
 	private float verticalSpeedVelocity;
 
-	public float horizontalSpeed;
+	private float horizontalSpeed;
 	private float targetHorizontalSpeed;
 	private float horizontalSpeedVelocity;
+
+	public float movementSpeedOffset = 1f;
 	#endregion
 
 	#region Camera
 	[Header("Camera")]
 	public Transform cameraTarget;
 	public CameraController cameraController;
-	public float movementSmoothdamp;
+	public float movementSmoothdamp = 0.3f;
     #endregion
 
     #region Character Stats
     [Header("Character Stats")]
 	public PlayerStatsModel playerStats;
+	#endregion
+
+	#region - Gravity -
+	[Header("Gravity")]
+	public float gravity;
+	public float currentGravity;
+	public float constantGravity;
+	public float maxGravity;
+
+	private Vector3 gravityDirection;
+	private Vector3 gravityMovement;
 	#endregion
 
 	private void Awake()
@@ -67,6 +80,8 @@ public class Basic : MonoBehaviour
 		obj_BasicPlayerInput.Actions.WalkingToggle.performed += x => ToggleWalking();
 		obj_BasicPlayerInput.Actions.Sprint.performed += x => Sprint();
 
+		gravityDirection = Vector3.down;
+
 		// Movements
 		Cursor.lockState = CursorLockMode.Locked;
 	}
@@ -76,9 +91,35 @@ public class Basic : MonoBehaviour
 		JumpingTimer();
 		 
 		Movement();
+		CalculateGravity();
 		CalculateSprint();
 		CanSprint();
 	}
+
+	#region Gravity
+
+	private bool IsGrounded()
+	{
+		return characterController.isGrounded;
+	}
+
+	private void CalculateGravity()
+	{
+		if (IsGrounded())
+		{
+			currentGravity = constantGravity;
+		}
+		else
+		{
+			if (currentGravity > maxGravity)
+			{
+				currentGravity -= gravity * Time.deltaTime;
+			}
+		}
+
+		gravityMovement = gravityDirection * -currentGravity;
+	}
+	#endregion
 
 	#region Character Movement
 
@@ -223,8 +264,8 @@ public class Basic : MonoBehaviour
 			targetHorizontalSpeed = playerSpeed;
 		}
 
-		targetVerticalSpeed = targetVerticalSpeed * input_Movement.y;  //Calcualtes speed by getting player input from WASD by speed and time. Forwards and Backwards
-		targetHorizontalSpeed = targetHorizontalSpeed * input_Movement.x;  //Calcualtes speed by getting player input from WASD by speed and time. Left and Right
+		targetVerticalSpeed = (targetVerticalSpeed * movementSpeedOffset) * input_Movement.y;  //Calcualtes speed by getting player input from WASD by speed and time. Forwards and Backwards
+		targetHorizontalSpeed = (targetHorizontalSpeed * movementSpeedOffset) * input_Movement.x;  //Calcualtes speed by getting player input from WASD by speed and time. Left and Right
 
 		verticalSpeed = Mathf.SmoothDamp(verticalSpeed, targetVerticalSpeed, ref verticalSpeedVelocity, movementSmoothdamp);
 		horizontalSpeed = Mathf.SmoothDamp(horizontalSpeed, targetHorizontalSpeed, ref horizontalSpeedVelocity, movementSmoothdamp);
@@ -254,7 +295,7 @@ public class Basic : MonoBehaviour
 		playerMovement = cameraController.transform.forward * verticalSpeed * Time.deltaTime;
 		playerMovement += cameraController.transform.right * horizontalSpeed * Time.deltaTime;
 
-		characterController.Move(playerMovement);
+		characterController.Move(playerMovement + gravityMovement);
 	}
 
 	#endregion

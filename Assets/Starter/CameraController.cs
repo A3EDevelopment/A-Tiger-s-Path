@@ -5,17 +5,18 @@ using UnityEngine;
 
 public class CameraController : MonoBehaviour
 {
-    [Header("Settings")]
+    [Header("References")]
     public Basic playerController;
-    public CameraSettingsModel settings;
     private Vector3 targetRotation;
     public GameObject yGimbal;
     private Vector3 yGibalRotation;
 
-    [Header("Position Settings")]
-    public float movementSmoothTime = 1f;
+    [Header("Settings")]
+    public CameraSettingsModel settings;
+    public float movementSmoothTime;
     private Vector3 movementVelocity;
 
+    #region - Update -
     private void Update()
     {
 
@@ -23,7 +24,9 @@ public class CameraController : MonoBehaviour
         CameraRotation();
 
     }
+    #endregion
 
+    #region - Position / Rotation -
     private void CameraRotation()
     {
         var viewInput = playerController.input_View;
@@ -62,6 +65,6 @@ public class CameraController : MonoBehaviour
         transform.position = Vector3.SmoothDamp(transform.position, playerController.cameraTarget.position, ref movementVelocity, movementSmoothTime);
 
     }
-
+    #endregion
 
 }

@@ -13,21 +13,21 @@ public class Basic : MonoBehaviour
 	[Space]
 	public float flt_JumpingTimer;
 
-    #region Inputs
+    #region - Inputs -
     [Header("Player Inputs")]
 	public Vector2 input_Movement;
 	public Vector2 input_View;
 	Vector3 playerMovement;
     #endregion
 
-    #region Modes
+    #region - Modes -
     [Header("Modes")]
 	public bool isWalking;
 	public bool isSprinting;
 	public bool isTargetMode;
 	#endregion
 
-	#region Speed Values
+	#region - Speed Values -
 	[Header("Speed Values")]
 
 	private float verticalSpeed;
@@ -41,19 +41,19 @@ public class Basic : MonoBehaviour
 	public float movementSpeedOffset = 1f;
 	#endregion
 
-	#region Camera
+	#region - Camera -
 	[Header("Camera")]
 	public Transform cameraTarget;
 	public CameraController cameraController;
 	public float movementSmoothdamp = 0.3f;
     #endregion
 
-    #region Character Stats
+    #region - Character Stats -
     [Header("Character Stats")]
 	public PlayerStatsModel playerStats;
 	#endregion
 
-	#region - Gravity -
+	#region - Gravity Values -
 	[Header("Gravity")]
 	public float gravity;
 	public float currentGravity;
@@ -62,6 +62,14 @@ public class Basic : MonoBehaviour
 
 	private Vector3 gravityDirection;
 	private Vector3 gravityMovement;
+    #endregion
+
+    #region - Jumping / Falling -
+    [Header("Jumping / Falling")]
+	public float fallingSpeed;
+	public float fallingThreshold;
+
+	public bool jumpingTriggered;
 	#endregion
 
 	private void Awake()
@@ -75,7 +83,7 @@ public class Basic : MonoBehaviour
 		obj_BasicPlayerInput.Movement.View.performed += x => input_View = x.ReadValue<Vector2>();
 
 		obj_BasicPlayerInput.Actions.Jump.performed += x => Jump();
-		obj_BasicPlayerInput.Actions.SuperJump.performed += x => SuperJump();
+		//obj_BasicPlayerInput.Actions.SuperJump.performed += x => SuperJump();
 
 		obj_BasicPlayerInput.Actions.WalkingToggle.performed += x => ToggleWalking();
 		obj_BasicPlayerInput.Actions.Sprint.performed += x => Sprint();
@@ -96,9 +104,14 @@ public class Basic : MonoBehaviour
 		CanSprint();
 	}
 
-	#region Gravity
+	#region - Gravity -
 
 	private bool IsGrounded()
+	{
+		return characterController.isGrounded;
+	}
+
+	private bool IsFalling()
 	{
 		return characterController.isGrounded;
 	}
@@ -119,33 +132,15 @@ public class Basic : MonoBehaviour
 
 		gravityMovement = gravityDirection * -currentGravity;
 	}
+
+	private void CalculateFalling()
+    {
+
+    }
+
 	#endregion
 
-	#region Character Movement
-
-	private void JumpingTimer()
-	{
-		if (flt_JumpingTimer >= 0)
-		{
-			flt_JumpingTimer -= Time.deltaTime;
-		}
-	}
-
-	private void Jump()
-	{
-		if (flt_JumpingTimer <= 0)
-		{
-			flt_JumpingTimer = 0.4f;
-			return;
-		}
-
-		Debug.Log("I'm Jumping");
-	}
-
-	private void SuperJump()
-	{
-		Debug.Log("I'm Super Jumping");
-	}
+	#region - Character Movement -
 
 	private void ToggleWalking()
     {
@@ -300,7 +295,37 @@ public class Basic : MonoBehaviour
 
 	#endregion
 
-	#region Enable/Disable
+	#region - Jumping -
+
+	private void JumpingTimer()
+	{
+		/* if (flt_JumpingTimer >= 0)
+		{
+			flt_JumpingTimer -= Time.deltaTime;
+		} */
+	}
+
+	private void Jump()
+	{
+		characterAnimator.SetTrigger("Jump");
+		jumpingTriggered = true;
+
+		/*if (flt_JumpingTimer <= 0)
+		{
+			flt_JumpingTimer = 0.4f;
+			return;
+		}
+		*/
+		Debug.Log("I'm Jumping"); 
+	}
+
+	/*private void SuperJump()
+	{
+		Debug.Log("I'm Super Jumping");
+	} */
+	#endregion
+
+	#region - Enable/Disable -
 
 
 	private void OnEnable()

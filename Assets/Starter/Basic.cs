@@ -70,6 +70,7 @@ public class Basic : MonoBehaviour
 	public float fallingThreshold;
 
 	public bool jumpingTriggered;
+	public bool fallingTriggered;
 	#endregion
 
 	private void Awake()
@@ -102,6 +103,7 @@ public class Basic : MonoBehaviour
 		CalculateGravity();
 		CalculateSprint();
 		CanSprint();
+		CalculateFalling();
 	}
 
 	#region - Character Movement -
@@ -278,6 +280,7 @@ public class Basic : MonoBehaviour
 
 		characterAnimator.SetTrigger("Jump");
 		jumpingTriggered = true;
+		fallingTriggered = true;
 
 		/*if (flt_JumpingTimer <= 0)
 		{
@@ -307,7 +310,12 @@ public class Basic : MonoBehaviour
 
 	private bool IsFalling()
 	{
-		return characterController.isGrounded;
+		if (fallingSpeed < fallingThreshold)
+        {
+			return true;
+        }
+
+		return false;
 	}
 
 	private void CalculateGravity()
@@ -329,7 +337,20 @@ public class Basic : MonoBehaviour
 
 	private void CalculateFalling()
 	{
+		fallingSpeed = transform.InverseTransformDirection(characterController.velocity).y;
 
+		if (IsFalling() && !IsGrounded() && !jumpingTriggered && !fallingTriggered)
+        {
+			fallingTriggered = true;
+			characterAnimator.SetTrigger("Falling");
+        }
+
+		if (fallingTriggered && IsGrounded())
+        {
+			fallingTriggered = false;
+			jumpingTriggered = false;
+			characterAnimator.SetTrigger("Land");
+        }
 	}
 
 	#endregion

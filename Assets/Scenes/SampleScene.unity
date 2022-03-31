@@ -891,6 +891,7 @@ MonoBehaviour:
     WalkingStrafindSpeed: 0.5
     RunningStrafingSpeed: 0.9
     SprintingSpeed: 1.2
+    JumpingForce: 0.025
   flt_JumpingTimer: 0
   input_Movement: {x: 0, y: 0}
   input_View: {x: 0, y: 0}
@@ -908,7 +909,7 @@ MonoBehaviour:
     StaminaRecovery: 20
     StaminaDelay: 2
     StaminaCurrentDelay: 0
-  gravity: 1
+  gravity: 0.05
   currentGravity: 0
   constantGravity: -0.6
   maxGravity: -15
@@ -4274,6 +4275,10 @@ PrefabInstance:
       propertyPath: m_Controller
       value: 
       objectReference: {fileID: 9100000, guid: 0f36f725917cfba4ba67884c51dcadec, type: 2}
+    - target: {fileID: 5866666021909216657, guid: ea5f6647f62c34d4185336e55fdbbb36, type: 3}
+      propertyPath: m_WarningMessage
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 5866666021909216657, guid: ea5f6647f62c34d4185336e55fdbbb36, type: 3}
       propertyPath: m_ApplyRootMotion
       value: 1

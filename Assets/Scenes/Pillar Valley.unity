@@ -335,15 +335,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: ea5f6647f62c34d4185336e55fdbbb36, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.002833128
+      value: -0.015
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: ea5f6647f62c34d4185336e55fdbbb36, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1.1378158
+      value: -0.42
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: ea5f6647f62c34d4185336e55fdbbb36, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.021130562
+      value: -0.198
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: ea5f6647f62c34d4185336e55fdbbb36, type: 3}
       propertyPath: m_LocalRotation.w
@@ -569,6 +569,10 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 7
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: ea5f6647f62c34d4185336e55fdbbb36, type: 3}
+      propertyPath: m_TagString
+      value: Player
+      objectReference: {fileID: 0}
     - target: {fileID: 1052969676160240803, guid: ea5f6647f62c34d4185336e55fdbbb36, type: 3}
       propertyPath: m_Layer
       value: 7
@@ -783,7 +787,26 @@ MonoBehaviour:
   playerTransform: {fileID: 255702388}
   isOnGround: 0
   glidemass: 10
-  speed: 0.01
+  speed: 0.02
+  Anim: {fileID: 255702391}
+--- !u!95 &255702391 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 5866666021909216657, guid: ea5f6647f62c34d4185336e55fdbbb36, type: 3}
+  m_PrefabInstance: {fileID: 229603575}
+  m_PrefabAsset: {fileID: 0}
+--- !u!65 &255702392
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 255702386}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 2.6258645, z: 1}
+  m_Center: {x: 0, y: 0.812932, z: 0}
 --- !u!1 &339923429
 GameObject:
   m_ObjectHideFlags: 0
@@ -1137,6 +1160,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 928118451}
+  - component: {fileID: 928118452}
   m_Layer: 0
   m_Name: GameObject
   m_TagString: Untagged
@@ -1152,7 +1176,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 928118450}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.4501668, y: 0.6578159, z: 4.4281306}
+  m_LocalPosition: {x: -1.385, y: 0.6578159, z: 4.4281306}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 255702388}
@@ -1160,6 +1184,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &928118452
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 928118450}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 0
+  serializedVersion: 2
+  m_Size: {x: 1, y: 2.7454107, z: 1}
+  m_Center: {x: 0, y: 0.081543565, z: 0}
 --- !u!1 &939931077
 GameObject:
   m_ObjectHideFlags: 0
@@ -1539,7 +1576,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1582173307}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.005995035, y: 8.322184, z: -0.0038132668}
+  m_LocalPosition: {x: -0.005995035, y: 8.322184, z: 3.26}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 928118451}
@@ -2074,6 +2111,7 @@ GameObject:
   - component: {fileID: 2108750501}
   - component: {fileID: 2108750500}
   - component: {fileID: 2108750504}
+  - component: {fileID: 2108750505}
   m_Layer: 3
   m_Name: Cube (1)
   m_TagString: Untagged
@@ -2173,3 +2211,15 @@ MonoBehaviour:
   myStartPoint: {fileID: 617784467}
   myEndPoint: {fileID: 856795899}
   speed: 0.01
+--- !u!114 &2108750505
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2108750499}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 51276ddf42fca214b9b0656e4b06656a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

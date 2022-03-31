@@ -46,8 +46,10 @@ public static class Models
         [Range(0, 10)]
         public float RunningStrafingSpeed;
 
-
         public float SprintingSpeed;
+
+        [Header("Jumping")]
+        public float JumpingForce;
     }
 
     [Serializable]

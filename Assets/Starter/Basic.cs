@@ -104,42 +104,6 @@ public class Basic : MonoBehaviour
 		CanSprint();
 	}
 
-	#region - Gravity -
-
-	private bool IsGrounded()
-	{
-		return characterController.isGrounded;
-	}
-
-	private bool IsFalling()
-	{
-		return characterController.isGrounded;
-	}
-
-	private void CalculateGravity()
-	{
-		if (IsGrounded())
-		{
-			currentGravity = constantGravity;
-		}
-		else
-		{
-			if (currentGravity > maxGravity)
-			{
-				currentGravity -= gravity * Time.deltaTime;
-			}
-		}
-
-		gravityMovement = gravityDirection * -currentGravity;
-	}
-
-	private void CalculateFalling()
-    {
-
-    }
-
-	#endregion
-
 	#region - Character Movement -
 
 	private void ToggleWalking()
@@ -307,6 +271,11 @@ public class Basic : MonoBehaviour
 
 	private void Jump()
 	{
+		if (jumpingTriggered)
+        {
+			return;
+        }
+
 		characterAnimator.SetTrigger("Jump");
 		jumpingTriggered = true;
 
@@ -316,13 +285,53 @@ public class Basic : MonoBehaviour
 			return;
 		}
 		*/
-		Debug.Log("I'm Jumping"); 
 	}
+
+	public void ApplyJumpForce()
+    {
+		currentGravity = settings.JumpingForce;
+    }
 
 	/*private void SuperJump()
 	{
 		Debug.Log("I'm Super Jumping");
 	} */
+	#endregion
+
+	#region - Gravity -
+
+	private bool IsGrounded()
+	{
+		return characterController.isGrounded;
+	}
+
+	private bool IsFalling()
+	{
+		return characterController.isGrounded;
+	}
+
+	private void CalculateGravity()
+	{
+		if (IsGrounded() && !jumpingTriggered)
+		{
+			currentGravity = constantGravity;
+		}
+		else
+		{
+			if (currentGravity > maxGravity)
+			{
+				currentGravity -= gravity * Time.deltaTime;
+			}
+		}
+
+		gravityMovement = gravityDirection * -currentGravity;
+	}
+
+	private void CalculateFalling()
+	{
+
+	}
+
 	#endregion
 
 	#region - Enable/Disable -

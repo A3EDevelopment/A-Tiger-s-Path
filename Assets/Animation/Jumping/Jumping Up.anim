@@ -44352,7 +44352,7 @@ AnimationClip:
   - time: 0.53333336
     functionName: ApplyJumpForce
     data: 
-    objectReferenceParameter: {fileID: 0}
+    objectReferenceParameter: {fileID: 11500000, guid: 3ce5bbac00a8c01458135b21710e75c9, type: 3}
     floatParameter: 0
     intParameter: 0
     messageOptions: 0

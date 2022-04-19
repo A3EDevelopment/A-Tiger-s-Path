@@ -102,7 +102,6 @@ public class DialogueManager : MonoBehaviour
 
     void StartConversation()
     {
-        Time.timeScale = 0;
         isTalking = true;
         curResponseTracker = 0;
         dialogueUI.SetActive(true);
@@ -115,7 +114,6 @@ public class DialogueManager : MonoBehaviour
     {
         isTalking = false;
         dialogueUI.SetActive(false);
-        Time.timeScale = 1;
     }
 
 }

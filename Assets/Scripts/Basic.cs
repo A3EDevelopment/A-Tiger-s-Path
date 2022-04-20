@@ -39,6 +39,8 @@ public class Basic : MonoBehaviour
 	private float horizontalSpeedVelocity;
 
 	public float movementSpeedOffset = 1f;
+
+	public Vector3 relativePlayerVelocity;
 	#endregion
 
 	#region - Camera -
@@ -68,9 +70,11 @@ public class Basic : MonoBehaviour
     [Header("Jumping / Falling")]
 	public float fallingSpeed;
 	public float fallingThreshold;
+	public float fallingSpeedPeak;
 
 	public bool jumpingTriggered;
 	public bool fallingTriggered;
+
 	#endregion
 
 	private void Awake()
@@ -112,7 +116,15 @@ public class Basic : MonoBehaviour
 			return;
         }
 
-		characterAnimator.SetTrigger("Jump");
+		if (IsMoving() && !isWalking)
+        {
+			characterAnimator.SetTrigger("RunningJump");
+		}
+        else
+        {
+			characterAnimator.SetTrigger("Jump");
+		}
+
 		jumpingTriggered = true;
 		fallingTriggered = true;
 
@@ -171,7 +183,12 @@ public class Basic : MonoBehaviour
 
 	private void CalculateFalling()
 	{
-		fallingSpeed = transform.InverseTransformDirection(characterController.velocity).y;
+		fallingSpeed = relativePlayerVelocity.y;
+
+		if (IsFalling() && fallingSpeed < fallingSpeedPeak)
+        {
+			fallingSpeedPeak = fallingSpeed;
+        }
 
 		if (IsFalling() && !IsGrounded() && !jumpingTriggered && !fallingTriggered)
         {
@@ -184,8 +201,18 @@ public class Basic : MonoBehaviour
         {
 			fallingTriggered = false;
 			jumpingTriggered = false;
-			characterAnimator.SetTrigger("Land");
-			Debug.Log("LANDING");
+
+			if (fallingSpeedPeak < -20)
+            {
+				characterAnimator.SetTrigger("HardLand");
+				Debug.Log("Hard Land");
+			}
+            else
+            {
+				characterAnimator.SetTrigger("Land");
+				Debug.Log("Land");
+            }
+			fallingSpeedPeak = 0;
         }
 	}
 
@@ -197,6 +224,21 @@ public class Basic : MonoBehaviour
 	{
 		isWalking = !isWalking;
 	}
+
+	public bool IsMoving()
+    {
+		if (relativePlayerVelocity.x > 0.4f || relativePlayerVelocity.x < -0.4f)
+        {
+			return true;
+        }
+
+		if (relativePlayerVelocity.z > 0.4f || relativePlayerVelocity.z < -0.4f)
+		{
+			return true;
+		}
+
+		return false;
+    }
 
 	private void Sprint()
 	{
@@ -273,6 +315,8 @@ public class Basic : MonoBehaviour
 	private void Movement()
 	{
 		characterAnimator.SetBool("isTargetMode", isTargetMode);
+
+		relativePlayerVelocity = transform.InverseTransformDirection(characterController.velocity);
 
 		if (isTargetMode)
 		{

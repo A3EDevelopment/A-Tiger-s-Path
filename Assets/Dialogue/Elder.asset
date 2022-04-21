@@ -12,6 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: be3485505a5d4d24294cacfdd4909937, type: 3}
   m_Name: Elder
   m_EditorClassIdentifier: 
-  name: 
-  dialogue: []
-  playerDialogue: []
+  name: Elder
+  dialogue:
+  - Hello little one, I am the village elder here at Qingshan, how can I help you.
+  - Sadly I  cannot allow this. you know that a dangerous storm is fast approaching,
+    I would be responsible for you goping missing .
+  playerDialogue:
+  - I need to leave the village to see my mothers grave, would I be allowed outside?

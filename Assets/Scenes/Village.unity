@@ -666,7 +666,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: ea5f6647f62c34d4185336e55fdbbb36, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 148.07
+      value: 147.12
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: ea5f6647f62c34d4185336e55fdbbb36, type: 3}
       propertyPath: m_LocalPosition.z
@@ -1772,7 +1772,7 @@ MonoBehaviour:
     WalkingStrafindSpeed: 0.5
     RunningStrafingSpeed: 0.9
     SprintingSpeed: 5.437296
-    JumpingForce: 6
+    JumpingForce: 7
   flt_JumpingTimer: 0
   input_Movement: {x: 0, y: 0}
   input_View: {x: 0, y: 0}
@@ -1796,7 +1796,7 @@ MonoBehaviour:
   constantGravity: -0.6
   maxGravity: -15
   fallingSpeed: 0
-  fallingThreshold: -5
+  fallingThreshold: -4
   fallingSpeedPeak: 0
   jumpingTriggered: 0
   fallingTriggered: 0

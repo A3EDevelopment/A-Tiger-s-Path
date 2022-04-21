@@ -55,6 +55,17 @@ public class Basic : MonoBehaviour
 	public PlayerStatsModel playerStats;
 	#endregion
 
+	private void Update()
+	{
+		JumpingTimer();
+
+		Movement();
+		CalculateGravity();
+		CalculateSprint();
+		CanSprint();
+		CalculateFalling();
+	}
+
 	#region - Gravity Values -
 	[Header("Gravity")]
 	public float gravity;
@@ -194,23 +205,20 @@ public class Basic : MonoBehaviour
         {
 			fallingTriggered = true;
 			characterAnimator.SetTrigger("Falling");
-			Debug.Log("FALLING");
         }
 
-		if (fallingTriggered && IsGrounded() && fallingSpeed < -0.1f)
+		if (fallingTriggered && IsGrounded() && fallingSpeed < -0.5f)
         {
 			fallingTriggered = false;
 			jumpingTriggered = false;
 
-			if (fallingSpeedPeak < -20)
+			if (fallingSpeedPeak < -7)
             {
 				characterAnimator.SetTrigger("HardLand");
-				Debug.Log("Hard Land");
 			}
             else
             {
 				characterAnimator.SetTrigger("Land");
-				Debug.Log("Land");
             }
 			fallingSpeedPeak = 0;
         }
@@ -227,12 +235,12 @@ public class Basic : MonoBehaviour
 
 	public bool IsMoving()
     {
-		if (relativePlayerVelocity.x > 0.4f || relativePlayerVelocity.x < -0.4f)
+		if (relativePlayerVelocity.x > 0.01f || relativePlayerVelocity.x < -0.01f)
         {
 			return true;
         }
 
-		if (relativePlayerVelocity.z > 0.4f || relativePlayerVelocity.z < -0.4f)
+		if (relativePlayerVelocity.z > 0.01f || relativePlayerVelocity.z < -0.01f)
 		{
 			return true;
 		}
@@ -389,17 +397,6 @@ public class Basic : MonoBehaviour
 	}
 
 	#endregion
-
-	private void Update()
-	{
-		JumpingTimer();
-
-		Movement();
-		CalculateGravity();
-		CalculateSprint();
-		CanSprint();
-		CalculateFalling();
-	}
 
 	#region - Enable/Disable -
 

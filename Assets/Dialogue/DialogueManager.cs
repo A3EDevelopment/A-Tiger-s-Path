@@ -29,7 +29,7 @@ public class DialogueManager : MonoBehaviour
         Prompt.SetActive(false);
     }
 
-    void OnMouseOver()
+    void Update()
     {
         distance = Vector3.Distance(player.transform.position, this.transform.position);
         
@@ -84,6 +84,7 @@ public class DialogueManager : MonoBehaviour
         if (distance <= 4)
         {
             Prompt.SetActive(true);
+
             if(Input.GetKeyDown(KeyCode.E) && isTalking == false)
             {
                 StartConversation();
@@ -96,7 +97,15 @@ public class DialogueManager : MonoBehaviour
         }
         else
         {
+            isTalking = true;
+        }
+
+        if (isTalking == true)
+        {
             Prompt.SetActive(false);
+        }
+        else{
+            Prompt.SetActive(true);
         }
     }
 

@@ -9,6 +9,7 @@ public class DialogueManager : MonoBehaviour
     public NPC npc;
 
     bool isTalking = false;
+    bool isConversationFinished = false;
 
     float distance;
     float curResponseTracker = 0;
@@ -55,7 +56,7 @@ public class DialogueManager : MonoBehaviour
         {
             playerResponse.text = npc.playerDialogue[0];
 
-            if(Input.GetKeyDown(KeyCode.G))
+            if (Input.GetKeyDown(KeyCode.E) && isConversationFinished == false)
             {
                 npcDialogueBox.text = npc.dialogue[1];
             }
@@ -65,7 +66,7 @@ public class DialogueManager : MonoBehaviour
         {
             playerResponse.text = npc.playerDialogue[1];
 
-            if(Input.GetKeyDown(KeyCode.G))
+            if(Input.GetKeyDown(KeyCode.E) && isConversationFinished == false)
             {
                 npcDialogueBox.text = npc.dialogue[2];
             }
@@ -74,9 +75,10 @@ public class DialogueManager : MonoBehaviour
         {
             playerResponse.text = npc.playerDialogue[2];
 
-            if(Input.GetKeyDown(KeyCode.G))
+            if(Input.GetKeyDown(KeyCode.E) && isConversationFinished == false)
             {
                 npcDialogueBox.text = npc.dialogue[3];
+                isConversationFinished = true;
             }
         }
 
@@ -90,22 +92,20 @@ public class DialogueManager : MonoBehaviour
                 StartConversation();
                 
             }
-            else if(Input.GetKeyDown(KeyCode.E) && isTalking == true)
+            else if (Input.GetKeyDown(KeyCode.E) && isTalking == true && isConversationFinished == true)
             {
                 EndDialogue();
             }
-        }
-        else
-        {
-            isTalking = true;
         }
 
         if (isTalking == true)
         {
             Prompt.SetActive(false);
+            isConversationFinished = false;
         }
         else{
             Prompt.SetActive(true);
+            isConversationFinished = true;
         }
     }
 

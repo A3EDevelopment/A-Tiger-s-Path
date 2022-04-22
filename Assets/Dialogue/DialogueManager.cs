@@ -33,7 +33,7 @@ public class DialogueManager : MonoBehaviour
     {
         distance = Vector3.Distance(player.transform.position, this.transform.position);
         
-        if(Input.GetAxis("Mouse ScrollWheel") < 0f)
+        if(Input.GetKeyDown(KeyCode.DownArrow))
         {
             curResponseTracker++;
             if (curResponseTracker >= npc.playerDialogue.Length -1)
@@ -41,7 +41,7 @@ public class DialogueManager : MonoBehaviour
                 curResponseTracker = npc.playerDialogue.Length - 1;
             }
         }
-        else if (Input.GetAxis("Mouse ScrollWheel") > 0f)
+        else if (Input.GetKeyDown(KeyCode.UpArrow))
         {
             curResponseTracker--;
             if (curResponseTracker < 0 )
@@ -55,7 +55,7 @@ public class DialogueManager : MonoBehaviour
         {
             playerResponse.text = npc.playerDialogue[0];
 
-            if(Input.GetKeyDown(KeyCode.Return))
+            if(Input.GetKeyDown(KeyCode.G))
             {
                 npcDialogueBox.text = npc.dialogue[1];
             }
@@ -65,7 +65,7 @@ public class DialogueManager : MonoBehaviour
         {
             playerResponse.text = npc.playerDialogue[1];
 
-            if(Input.GetKeyDown(KeyCode.Return))
+            if(Input.GetKeyDown(KeyCode.G))
             {
                 npcDialogueBox.text = npc.dialogue[2];
             }
@@ -74,7 +74,7 @@ public class DialogueManager : MonoBehaviour
         {
             playerResponse.text = npc.playerDialogue[2];
 
-            if(Input.GetKeyDown(KeyCode.Return))
+            if(Input.GetKeyDown(KeyCode.G))
             {
                 npcDialogueBox.text = npc.dialogue[3];
             }

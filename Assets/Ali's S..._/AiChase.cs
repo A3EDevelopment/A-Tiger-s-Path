@@ -33,6 +33,10 @@ public class AiChase : MonoBehaviour
         //move towards the player
         enemyTransform.position += enemyTransform.forward * speed * Time.deltaTime;
 
+        
+    
+    
+    
     }
 
 }

@@ -13,8 +13,8 @@ public class Basic : MonoBehaviour
 	[Space]
 	public float flt_JumpingTimer;
 
-    #region - Inputs -
-    [Header("Player Inputs")]
+	#region - Inputs -
+	[Header("Player Inputs")]
 	public Vector2 input_Movement;
 	public Vector2 input_View;
 	Vector3 playerMovement;
@@ -55,17 +55,6 @@ public class Basic : MonoBehaviour
 	public PlayerStatsModel playerStats;
 	#endregion
 
-	private void Update()
-	{
-		JumpingTimer();
-
-		Movement();
-		CalculateGravity();
-		CalculateSprint();
-		CanSprint();
-		CalculateFalling();
-	}
-
 	#region - Gravity Values -
 	[Header("Gravity")]
 	public float gravity;
@@ -87,6 +76,22 @@ public class Basic : MonoBehaviour
 	public bool fallingTriggered;
 
 	#endregion
+
+	private void Update()
+	{
+		JumpingTimer();
+
+		Movement();
+		CalculateGravity();
+		CalculateSprint();
+		CanSprint();
+		CalculateFalling();
+
+		if (climbing == true )
+        {
+			transform.Translate(Vector3.up * 0.1f);
+		}
+	}
 
 	private void Awake()
 	{
@@ -228,7 +233,7 @@ public class Basic : MonoBehaviour
 
 	#region - Character Movement -
 
-	private void ToggleWalking()
+	private void ToggleWalking() 
 	{
 		isWalking = !isWalking;
 	}
@@ -362,8 +367,8 @@ public class Basic : MonoBehaviour
 			targetHorizontalSpeed = playerSpeed;
 		}
 
-		targetVerticalSpeed = (targetVerticalSpeed * movementSpeedOffset) * input_Movement.y;  //Calcualtes speed by getting player input from WASD by speed and time. Forwards and Backwards
-		targetHorizontalSpeed = (targetHorizontalSpeed * movementSpeedOffset) * input_Movement.x;  //Calcualtes speed by getting player input from WASD by speed and time. Left and Right
+		targetVerticalSpeed = (targetVerticalSpeed * movementSpeedOffset) * input_Movement.y;  //Calculates speed by getting player input from WASD by speed and time. Forwards and Backwards
+		targetHorizontalSpeed = (targetHorizontalSpeed * movementSpeedOffset) * input_Movement.x;  //Calculates speed by getting player input from WASD by speed and time. Left and Right
 
 		verticalSpeed = Mathf.SmoothDamp(verticalSpeed, targetVerticalSpeed, ref verticalSpeedVelocity, movementSmoothdamp);
 		horizontalSpeed = Mathf.SmoothDamp(horizontalSpeed, targetHorizontalSpeed, ref horizontalSpeedVelocity, movementSmoothdamp);
@@ -411,5 +416,22 @@ public class Basic : MonoBehaviour
 		obj_BasicPlayerInput.Disable();
 	}
 	#endregion
+
+	#region - Climbing Trigger -
+
+	bool climbing = false;
+
+    private void OnTriggerEnter()
+    {
+		climbing = true;
+    }
+
+    private void OnTriggerExit()
+    {
+		climbing = false;
+    }
+
+
+    #endregion
 
 }

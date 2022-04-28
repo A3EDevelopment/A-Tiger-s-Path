@@ -78,10 +78,19 @@ public class DialogueManager : MonoBehaviour
             if(Input.GetKeyDown(KeyCode.E) && isConversationFinished == false)
             {
                 npcDialogueBox.text = npc.dialogue[3];
+            }
+        }
+        else if (curResponseTracker == 3 && npc.playerDialogue.Length >= 3)
+        {
+            playerResponse.text = npc.playerDialogue[3];
+
+            if (Input.GetKeyDown(KeyCode.E) && isConversationFinished == false)
+            {
+                npcDialogueBox.text = npc.dialogue[4];
+                Debug.Log("Conversation finished");
                 isConversationFinished = true;
             }
         }
-
 
         if (distance <= 4)
         {

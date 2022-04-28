@@ -75,6 +75,8 @@ public class Basic : MonoBehaviour
 	public bool jumpingTriggered;
 	public bool fallingTriggered;
 
+	public bool canClimb;
+
 	#endregion
 
 	private void Update()
@@ -424,12 +426,29 @@ public class Basic : MonoBehaviour
 
     private void OnTriggerEnter()
     {
-		climbing = true;
-    }
+		IsClimbing();
+	}
 
     private void OnTriggerExit()
     {
 		climbing = false;
+    }
+
+	public bool IsClimbing()
+    {
+		climbing = true;
+		if (climbing == true)
+        {
+			characterAnimator.SetTrigger("CanClimb");
+			canClimb = true;
+			Debug.Log("This is terrible");
+			return true;
+        }
+
+		else
+        {
+			return false;
+        }
     }
 
 

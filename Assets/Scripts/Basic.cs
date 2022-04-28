@@ -87,9 +87,10 @@ public class Basic : MonoBehaviour
 		CanSprint();
 		CalculateFalling();
 
-		if (climbing == true )
+		if (climbing == true && Input.GetKey(KeyCode.W))
         {
 			transform.Translate(Vector3.up * 0.1f);
+			gravityMovement = gravityDirection * currentGravity * 0.001f;
 		}
 	}
 

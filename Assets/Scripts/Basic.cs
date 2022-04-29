@@ -66,7 +66,7 @@ public class Basic : MonoBehaviour
 	private Vector3 gravityMovement;
     #endregion
 
-    #region - Jumping / Falling -
+    #region - Jumping / Falling / Climbing -
     [Header("Jumping / Falling")]
 	public float fallingSpeed;
 	public float fallingThreshold;
@@ -75,7 +75,8 @@ public class Basic : MonoBehaviour
 	public bool jumpingTriggered;
 	public bool fallingTriggered;
 
-	public bool canClimb;
+	public bool canClimb = false;
+	public bool climbing = false;
 
 	#endregion
 
@@ -89,11 +90,8 @@ public class Basic : MonoBehaviour
 		CanSprint();
 		CalculateFalling();
 
-		if (climbing == true && Input.GetKey(KeyCode.W))
-        {
-			transform.Translate(Vector3.up * 0.1f);
-			gravityMovement = gravityDirection * currentGravity * 0.001f;
-		}
+		IsClimbing();
+
 	}
 
 	private void Awake()
@@ -422,34 +420,31 @@ public class Basic : MonoBehaviour
 
 	#region - Climbing Trigger -
 
-	bool climbing = false;
-
     private void OnTriggerEnter()
     {
-		IsClimbing();
+		climbing = true;
 	}
 
     private void OnTriggerExit()
     {
 		climbing = false;
-    }
+		//canClimb = false;
+	}
 
-	public bool IsClimbing()
+	public void IsClimbing()
     {
-		climbing = true;
-		if (climbing == true)
-        {
-			characterAnimator.SetTrigger("CanClimb");
-			canClimb = true;
-			Debug.Log("This is terrible");
-			return true;
-        }
+		if (climbing == true && Input.GetKey(KeyCode.Q))
+		{
+			transform.Translate(Vector3.up * 0.1f);
+			gravityMovement = gravityDirection * currentGravity * 0.001f;
+			characterAnimator.SetBool("IsClimbing", climbing);
+		}
 
-		else
+        else
         {
-			return false;
-        }
-    }
+			characterAnimator.SetBool("IsClimbing", false);
+		}
+	}
 
 
     #endregion

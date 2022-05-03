@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class DialogueTrigger : MonoBehaviour
 {
     [Header("Visual Cue")]
@@ -36,7 +37,7 @@ public class DialogueTrigger : MonoBehaviour
 
     private void OnTriggerEnter(Collider collider) 
     {
-        if (collider.gameObject.tag == "Player")
+        if (collider.gameObject.tag == "Dialogue")
         {
             playerInRange = true;
         }
@@ -44,7 +45,7 @@ public class DialogueTrigger : MonoBehaviour
 
     private void OnTriggerExit(Collider collider) 
     {
-        if (collider.gameObject.tag == "Player")
+        if (collider.gameObject.tag == "Dialogue")
         {
             playerInRange = false;
         }

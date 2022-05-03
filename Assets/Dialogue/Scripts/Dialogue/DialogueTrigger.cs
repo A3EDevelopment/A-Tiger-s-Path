@@ -23,7 +23,7 @@ public class DialogueTrigger : MonoBehaviour
         if (playerInRange && !DialogueManager.GetInstance().dialogueIsPlaying) 
         {
             visualCue.SetActive(true);
-            if (InputManager.GetInstance().GetInteractPressed()) 
+            if (Input.GetKeyDown(KeyCode.E)) 
             {
                 DialogueManager.GetInstance().EnterDialogueMode(inkJSON);
             }
@@ -34,7 +34,7 @@ public class DialogueTrigger : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter2D(Collider2D collider) 
+    private void OnTriggerEnter(Collider collider) 
     {
         if (collider.gameObject.tag == "Player")
         {
@@ -42,7 +42,7 @@ public class DialogueTrigger : MonoBehaviour
         }
     }
 
-    private void OnTriggerExit2D(Collider2D collider) 
+    private void OnTriggerExit(Collider collider) 
     {
         if (collider.gameObject.tag == "Player")
         {

@@ -423,11 +423,13 @@ public class Basic : MonoBehaviour
     private void OnTriggerEnter()
     {
 		climbing = true;
+		gravity = 0f;
 	}
 
     private void OnTriggerExit()
     {
 		climbing = false;
+		gravity = 10;
 		//canClimb = false;
 	}
 

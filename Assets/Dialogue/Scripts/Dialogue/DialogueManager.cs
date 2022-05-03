@@ -35,6 +35,8 @@ public class DialogueManager : MonoBehaviour
     private const string PORTRAIT_TAG = "portrait";
     private const string LAYOUT_TAG = "layout";
 
+    public GameObject Player;
+
     private void Awake() 
     {
         if (instance != null)
@@ -73,13 +75,14 @@ public class DialogueManager : MonoBehaviour
         if (!dialogueIsPlaying) 
         {
             return;
+
         }
 
         // handle continuing to the next line in the dialogue when submit is pressed
         // NOTE: The 'currentStory.currentChoiecs.Count == 0' part was to fix a bug after the Youtube video was made
         if (canContinueToNextLine 
             && currentStory.currentChoices.Count == 0 
-            && InputManager.GetInstance().GetSubmitPressed())
+            && (Input.GetKeyDown(KeyCode.E)))
         {
             ContinueStory();
         }
@@ -106,6 +109,12 @@ public class DialogueManager : MonoBehaviour
         dialogueIsPlaying = false;
         dialoguePanel.SetActive(false);
         dialogueText.text = "";
+
+        Basic moveScript;
+
+        moveScript = Player.GetComponent<Basic>();
+
+        moveScript.enabled = true;
     }
 
     private void ContinueStory() 
@@ -143,7 +152,7 @@ public class DialogueManager : MonoBehaviour
         foreach (char letter in line.ToCharArray())
         {
             // if the submit button is pressed, finish up displaying the line right away
-            if (InputManager.GetInstance().GetSubmitPressed()) 
+            if (Input.GetKeyDown(KeyCode.Return)) 
             {
                 dialogueText.text = line;
                 break;
@@ -258,7 +267,7 @@ public class DialogueManager : MonoBehaviour
         {
             currentStory.ChooseChoiceIndex(choiceIndex);
             // NOTE: The below two lines were added to fix a bug after the Youtube video was made
-            InputManager.GetInstance().RegisterSubmitPressed(); // this is specific to my InputManager script
+             // this is specific to my InputManager script
             ContinueStory();
         }
     }

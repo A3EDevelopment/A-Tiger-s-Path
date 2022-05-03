@@ -13,8 +13,16 @@ public class DialogueTrigger : MonoBehaviour
 
     private bool playerInRange;
 
+    public GameObject Player;
+
+    private void Start()
+    {
+        
+    }
+
     private void Awake() 
     {
+        
         playerInRange = false;
         visualCue.SetActive(false);
     }
@@ -27,7 +35,15 @@ public class DialogueTrigger : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.E)) 
             {
                 DialogueManager.GetInstance().EnterDialogueMode(inkJSON);
+
+                Basic moveScript; 
+
+                moveScript = Player.GetComponent<Basic>();
+
+                moveScript.enabled = false;
             }
+
+            
         }
         else 
         {
@@ -35,15 +51,19 @@ public class DialogueTrigger : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter(Collider collider) 
+    void OnTriggerEnter(Collider collider) 
     {
         if (collider.gameObject.tag == "Dialogue")
         {
             playerInRange = true;
+            
+
+
+            Debug.Log("yoo");
         }
     }
 
-    private void OnTriggerExit(Collider collider) 
+    void OnTriggerExit(Collider collider) 
     {
         if (collider.gameObject.tag == "Dialogue")
         {

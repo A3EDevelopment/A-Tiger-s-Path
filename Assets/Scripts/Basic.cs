@@ -11,7 +11,9 @@ public class Basic : MonoBehaviour
 	BasicPlayerInput obj_BasicPlayerInput;
 	public PlayerSettingsModel settings;
 	[Space]
-	public float flt_JumpingTimer;
+	public bool jumpReady;
+	public float jumpCD = 3f;
+	public float jumpCDCurrent = 0.0f;
 
 	#region - Inputs -
 	[Header("Player Inputs")]
@@ -82,7 +84,7 @@ public class Basic : MonoBehaviour
 
 	private void Update()
 	{
-		JumpingTimer();
+		//JumpingTimer();
 
 		Movement();
 		CalculateGravity();
@@ -91,6 +93,16 @@ public class Basic : MonoBehaviour
 		CalculateFalling();
 
 		IsClimbing();
+
+		if (jumpCDCurrent >= jumpCD)
+		{
+		jumpReady = true;
+		}
+		else
+		{
+		jumpCDCurrent = jumpCDCurrent + Time.deltaTime;
+		jumpReady = false;
+		}
 
 	}
 
@@ -104,8 +116,7 @@ public class Basic : MonoBehaviour
 		obj_BasicPlayerInput.Movement.Movement.performed += x => input_Movement = x.ReadValue<Vector2>();
 		obj_BasicPlayerInput.Movement.View.performed += x => input_View = x.ReadValue<Vector2>();
 
-		obj_BasicPlayerInput.Actions.Jump.performed += x => Jump();
-		//obj_BasicPlayerInput.Actions.SuperJump.performed += x => SuperJump();
+		obj_BasicPlayerInput.Actions.Jump.performed += x => JumpAfterCD();
 
 		obj_BasicPlayerInput.Actions.WalkingToggle.performed += x => ToggleWalking();
 		obj_BasicPlayerInput.Actions.Sprint.performed += x => Sprint();
@@ -118,50 +129,46 @@ public class Basic : MonoBehaviour
 
 	#region - Jumping -
 
-	private void JumpingTimer()
+	private void JumpAfterCD()
 	{
-		/* if (flt_JumpingTimer >= 0)
-		{
-			flt_JumpingTimer -= Time.deltaTime;
-		} */
+		Jump();
 	}
 
 	private void Jump()
 	{
-		if (jumpingTriggered)
-        {
-			return;
-        }
-
-		if (IsMoving() && !isWalking)
-        {
-			characterAnimator.SetTrigger("RunningJump");
-		}
-        else
-        {
-			characterAnimator.SetTrigger("Jump");
-		}
-
-		jumpingTriggered = true;
-		fallingTriggered = true;
-
-		/*if (flt_JumpingTimer <= 0)
+		if (jumpReady)
 		{
-			flt_JumpingTimer = 0.4f;
-			return;
+			if (jumpingTriggered)
+			{
+				return;
+			}
+
+			if (IsMoving() && !isWalking)
+			{
+				characterAnimator.SetTrigger("RunningJump");
+			}
+			else
+			{
+				characterAnimator.SetTrigger("Jump");
+			}
+
+			jumpCDCurrent = 0.0f;
+			jumpingTriggered = true;
+			fallingTriggered = true;
 		}
-		*/
+
+
+		//jumpCDCurrent = 0.0f;
+		//jumpingTriggered = true;
+		//fallingTriggered = true;
+		
 	}
 
 	public void ApplyJumpForce()
     {
-		currentGravity = settings.JumpingForce;
+		currentGravity = settings.JumpingForce; //This will be an event in the animation which allows the jump to begin at the right time.
     }
 
-	/*private void SuperJump()
-	{
-		Debug.Log("I'm Super Jumping");
-	} */
 	#endregion
 
 	#region - Gravity -

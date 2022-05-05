@@ -1,3 +1,3 @@
-This is a test  #speaker:Elder #portrait:guang_guang #layout:left
-Hello Again #portrait:guang #speaker:Guang Jiyi  #layout:right 
+Ah it’s you Guang Jiyi! I see you’ve finally woken up from your slumber. #portrait:guang #layout:left #speaker:Neighbour  
+Hello Again #portrait:guang #speaker:Guang Jiyi #layout:right 
 Test 3

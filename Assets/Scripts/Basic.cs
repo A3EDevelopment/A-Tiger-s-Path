@@ -11,17 +11,19 @@ public class Basic : MonoBehaviour
 	BasicPlayerInput obj_BasicPlayerInput;
 	public PlayerSettingsModel settings;
 	[Space]
-	public float flt_JumpingTimer;
+	public bool jumpReady;
+	public float jumpCD = 3f;
+	public float jumpCDCurrent = 0.0f;
 
 	#region - Inputs -
 	[Header("Player Inputs")]
 	public Vector2 input_Movement;
 	public Vector2 input_View;
 	Vector3 playerMovement;
-    #endregion
+	#endregion
 
-    #region - Modes -
-    [Header("Modes")]
+	#region - Modes -
+	[Header("Modes")]
 	public bool isWalking;
 	public bool isSprinting;
 	public bool isTargetMode;
@@ -48,10 +50,10 @@ public class Basic : MonoBehaviour
 	public Transform cameraTarget;
 	public CameraController cameraController;
 	public float movementSmoothdamp = 0.3f;
-    #endregion
+	#endregion
 
-    #region - Character Stats -
-    [Header("Character Stats")]
+	#region - Character Stats -
+	[Header("Character Stats")]
 	public PlayerStatsModel playerStats;
 	#endregion
 
@@ -64,10 +66,10 @@ public class Basic : MonoBehaviour
 
 	private Vector3 gravityDirection;
 	private Vector3 gravityMovement;
-    #endregion
+	#endregion
 
-    #region - Jumping / Falling -
-    [Header("Jumping / Falling")]
+	#region - Jumping / Falling / Climbing -
+	[Header("Jumping / Falling")]
 	public float fallingSpeed;
 	public float fallingThreshold;
 	public float fallingSpeedPeak;
@@ -75,11 +77,14 @@ public class Basic : MonoBehaviour
 	public bool jumpingTriggered;
 	public bool fallingTriggered;
 
+	public bool canClimb = false;
+	public bool climbing = false;
+
 	#endregion
 
 	private void Update()
 	{
-		JumpingTimer();
+		//JumpingTimer();
 
 		Movement();
 		CalculateGravity();
@@ -87,10 +92,18 @@ public class Basic : MonoBehaviour
 		CanSprint();
 		CalculateFalling();
 
-		if (climbing == true )
-        {
-			transform.Translate(Vector3.up * 0.1f);
+		IsClimbing();
+
+		if (jumpCDCurrent >= jumpCD)
+		{
+			jumpReady = true;
 		}
+		else
+		{
+			jumpCDCurrent = jumpCDCurrent + Time.deltaTime;
+			jumpReady = false;
+		}
+
 	}
 
 	private void Awake()
@@ -103,8 +116,7 @@ public class Basic : MonoBehaviour
 		obj_BasicPlayerInput.Movement.Movement.performed += x => input_Movement = x.ReadValue<Vector2>();
 		obj_BasicPlayerInput.Movement.View.performed += x => input_View = x.ReadValue<Vector2>();
 
-		obj_BasicPlayerInput.Actions.Jump.performed += x => Jump();
-		//obj_BasicPlayerInput.Actions.SuperJump.performed += x => SuperJump();
+		obj_BasicPlayerInput.Actions.Jump.performed += x => JumpAfterCD();
 
 		obj_BasicPlayerInput.Actions.WalkingToggle.performed += x => ToggleWalking();
 		obj_BasicPlayerInput.Actions.Sprint.performed += x => Sprint();
@@ -117,50 +129,46 @@ public class Basic : MonoBehaviour
 
 	#region - Jumping -
 
-	private void JumpingTimer()
+	private void JumpAfterCD()
 	{
-		/* if (flt_JumpingTimer >= 0)
-		{
-			flt_JumpingTimer -= Time.deltaTime;
-		} */
+		Jump();
 	}
 
 	private void Jump()
 	{
-		if (jumpingTriggered)
-        {
-			return;
-        }
-
-		if (IsMoving() && !isWalking)
-        {
-			characterAnimator.SetTrigger("RunningJump");
-		}
-        else
-        {
-			characterAnimator.SetTrigger("Jump");
-		}
-
-		jumpingTriggered = true;
-		fallingTriggered = true;
-
-		/*if (flt_JumpingTimer <= 0)
+		if (jumpReady)
 		{
-			flt_JumpingTimer = 0.4f;
-			return;
+			if (jumpingTriggered)
+			{
+				return;
+			}
+
+			if (IsMoving() && !isWalking)
+			{
+				characterAnimator.SetTrigger("RunningJump");
+			}
+			else
+			{
+				characterAnimator.SetTrigger("Jump");
+			}
+
+			jumpCDCurrent = 0.0f;
+			jumpingTriggered = true;
+			fallingTriggered = true;
 		}
-		*/
+
+
+		//jumpCDCurrent = 0.0f;
+		//jumpingTriggered = true;
+		//fallingTriggered = true;
+
 	}
 
 	public void ApplyJumpForce()
-    {
-		currentGravity = settings.JumpingForce;
-    }
-
-	/*private void SuperJump()
 	{
-		Debug.Log("I'm Super Jumping");
-	} */
+		currentGravity = settings.JumpingForce; //This will be an event in the animation which allows the jump to begin at the right time.
+	}
+
 	#endregion
 
 	#region - Gravity -
@@ -173,9 +181,9 @@ public class Basic : MonoBehaviour
 	private bool IsFalling()
 	{
 		if (fallingSpeed < fallingThreshold)
-        {
+		{
 			return true;
-        }
+		}
 
 		return false;
 	}
@@ -202,48 +210,48 @@ public class Basic : MonoBehaviour
 		fallingSpeed = relativePlayerVelocity.y;
 
 		if (IsFalling() && fallingSpeed < fallingSpeedPeak)
-        {
+		{
 			fallingSpeedPeak = fallingSpeed;
-        }
+		}
 
 		if (IsFalling() && !IsGrounded() && !jumpingTriggered && !fallingTriggered)
-        {
+		{
 			fallingTriggered = true;
 			characterAnimator.SetTrigger("Falling");
-        }
+		}
 
 		if (fallingTriggered && IsGrounded() && fallingSpeed < -0.5f)
-        {
+		{
 			fallingTriggered = false;
 			jumpingTriggered = false;
 
 			if (fallingSpeedPeak < -7)
-            {
+			{
 				characterAnimator.SetTrigger("HardLand");
 			}
-            else
-            {
+			else
+			{
 				characterAnimator.SetTrigger("Land");
-            }
+			}
 			fallingSpeedPeak = 0;
-        }
+		}
 	}
 
 	#endregion
 
 	#region - Character Movement -
 
-	private void ToggleWalking() 
+	private void ToggleWalking()
 	{
 		isWalking = !isWalking;
 	}
 
 	public bool IsMoving()
-    {
+	{
 		if (relativePlayerVelocity.x > 0.01f || relativePlayerVelocity.x < -0.01f)
-        {
+		{
 			return true;
-        }
+		}
 
 		if (relativePlayerVelocity.z > 0.01f || relativePlayerVelocity.z < -0.01f)
 		{
@@ -251,7 +259,7 @@ public class Basic : MonoBehaviour
 		}
 
 		return false;
-    }
+	}
 
 	private void Sprint()
 	{
@@ -408,7 +416,7 @@ public class Basic : MonoBehaviour
 
 	private void OnEnable()
 	{
-		obj_BasicPlayerInput.Enable(); 
+		obj_BasicPlayerInput.Enable();
 	}
 
 	private void OnDisable()
@@ -419,19 +427,35 @@ public class Basic : MonoBehaviour
 
 	#region - Climbing Trigger -
 
-	bool climbing = false;
-
-    private void OnTriggerEnter()
-    {
+	private void OnTriggerEnter()
+	{
 		climbing = true;
-    }
+		gravity = 0f;
+	}
 
-    private void OnTriggerExit()
-    {
+	private void OnTriggerExit()
+	{
 		climbing = false;
-    }
+		gravity = 10;
+		//canClimb = false;
+	}
+
+	public void IsClimbing()
+	{
+		if (climbing == true && Input.GetKey(KeyCode.Q))
+		{
+			transform.Translate(Vector3.up * 0.1f);
+			gravityMovement = gravityDirection * currentGravity * 0.001f;
+			characterAnimator.SetBool("IsClimbing", climbing);
+		}
+
+		else
+		{
+			characterAnimator.SetBool("IsClimbing", false);
+		}
+	}
 
 
-    #endregion
+	#endregion
 
 }

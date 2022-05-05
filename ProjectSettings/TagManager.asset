@@ -6,6 +6,8 @@ TagManager:
   tags:
   - NPC
   - Dialogue
+  - Fire
+  - BoundingBox
   layers:
   - Default
   - TransparentFX

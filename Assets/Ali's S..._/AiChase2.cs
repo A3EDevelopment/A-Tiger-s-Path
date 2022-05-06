@@ -11,37 +11,56 @@ public class AiChase2 : MonoBehaviour
     public int MinDist = 5;
     private object navmeshagent;
 
-    bool shouldIFollow = false;
+    bool inBox = false;
+    int state = 0;
 
     public BoxCollider box;
     Vector3 patrolPoint;
 
+    private void Start()
+    {
+        patrolPoint = PickRandomPoint(box);
+    }
+
     void Update()
     {
-        if (shouldIFollow == true)
-        {
-            transform.LookAt(Player);
-
-            if (Vector3.Distance(transform.position, Player.position) <= MaxDist)//not MinDist
-            {
-                transform.position += transform.forward * MoveSpeed * Time.deltaTime;
-                if (Vector3.Distance(transform.position, Player.position) <= MinDist)//not MaxDist
-                {
-                    //Here Call any function you want, like Shoot or something
-                }
-
-            }
-        } 
-        else
+        //Debug.Log(state);
+        if (state == 0)
         {
             if (Vector3.Distance(transform.position, patrolPoint) > 0.3f)//not MinDist
             {
                 transform.LookAt(patrolPoint);
                 transform.position += transform.forward * MoveSpeed * Time.deltaTime;
-            } else
-            {
-                patrolPoint = PickRandomPoint(box.bounds);
             }
+            else
+            {
+                patrolPoint = PickRandomPoint(box);
+            }
+        } 
+        else if (state == 1)
+        {
+            transform.LookAt(Player);
+
+            transform.position += transform.forward * MoveSpeed * Time.deltaTime;
+        } 
+        else if (state == 2)
+        {
+            //Shoot at player
+        }
+
+        if (Vector3.Distance(transform.position, Player.position) <= MaxDist)//not MinDist
+        {
+            state = 1;
+        }
+
+        if (Vector3.Distance(transform.position, Player.position) <= MinDist)//not MaxDist
+        {
+            state = 2;
+        }
+
+        if (inBox == false)
+        {
+            state = 0;
         }
     }
 
@@ -49,7 +68,7 @@ public class AiChase2 : MonoBehaviour
     {
         if (other.tag == "BoundingBox")
         {
-            shouldIFollow = true;
+            inBox = true;
         }
     }
 
@@ -57,12 +76,12 @@ public class AiChase2 : MonoBehaviour
     {
         if (other.tag == "BoundingBox")
         {
-            shouldIFollow = false;
+            inBox = false;
         }
     }
 
-    private Vector3 PickRandomPoint(Bounds bounds)
+    private Vector3 PickRandomPoint(BoxCollider box)
     {
-        return new Vector3(Random.Range(bounds.min.x, bounds.max.x), 0f, Random.Range(bounds.min.z, bounds.max.z));
+        return new Vector3(Random.Range(box.bounds.min.x, box.bounds.max.x), box.transform.position.y, Random.Range(box.bounds.min.z, box.bounds.max.z));
     }
 }

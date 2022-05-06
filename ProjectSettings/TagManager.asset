@@ -6,6 +6,7 @@ TagManager:
   tags:
   - NPC
   - Dialogue
+  - ClimbWall
   layers:
   - Default
   - TransparentFX

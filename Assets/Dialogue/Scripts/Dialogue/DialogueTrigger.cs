@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Cinemachine;
+
 
 
 public class DialogueTrigger : MonoBehaviour
@@ -12,8 +14,13 @@ public class DialogueTrigger : MonoBehaviour
     [SerializeField] private TextAsset inkJSON;
 
     private bool playerInRange;
+    public bool CameraNPC;
+
+    
 
     public GameObject Player;
+
+    public GameObject NPCCAM;
 
     private void Start()
     {
@@ -41,6 +48,8 @@ public class DialogueTrigger : MonoBehaviour
                 moveScript = Player.GetComponent<Basic>();
 
                 moveScript.enabled = false;
+
+                NPCCAM.SetActive(true);
             }
 
             

@@ -4,6 +4,7 @@ using UnityEngine;
 using TMPro;
 using Ink.Runtime;
 using UnityEngine.EventSystems;
+using Cinemachine;
 
 public class DialogueManager : MonoBehaviour
 {
@@ -28,6 +29,8 @@ public class DialogueManager : MonoBehaviour
     private bool canContinueToNextLine = false;
 
     private Coroutine displayLineCoroutine;
+
+    public GameObject NPCCAM;
 
     private static DialogueManager instance;
 
@@ -90,6 +93,8 @@ public class DialogueManager : MonoBehaviour
 
     public void EnterDialogueMode(TextAsset inkJSON) 
     {
+
+
         currentStory = new Story(inkJSON.text);
         dialogueIsPlaying = true;
         dialoguePanel.SetActive(true);
@@ -115,6 +120,8 @@ public class DialogueManager : MonoBehaviour
         moveScript = Player.GetComponent<Basic>();
 
         moveScript.enabled = true;
+
+        NPCCAM.SetActive(false);
     }
 
     private void ContinueStory() 

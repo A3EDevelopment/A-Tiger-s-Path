@@ -6,7 +6,9 @@ public class AiChase2 : MonoBehaviour
 {
     public int AttackTrigger2;
     public Transform Player;
-    public int MoveSpeed = 4;
+ /*  public Transform enemyTransform;
+    public float speed = 3f;
+ */   public int MoveSpeed = 4;
     public int MaxDist = 10;
     public int MinDist = 5;
     private object navmeshagent;
@@ -39,8 +41,17 @@ public class AiChase2 : MonoBehaviour
         } 
         else if (state == 1)
         {
-            transform.LookAt(Player);
+         /*   Player = GameObject.FindWithTag("Player").transform;
+            Vector3 targetHeading = Player.position - transform.position;
+            Vector3 targetDirection = targetHeading.normalized;
+            transform.rotation = Quaternion.LookRotation(targetDirection); // Converts target direction vector to Quaternion
+            transform.eulerAngles = new Vector3(0, transform.eulerAngles.y, 0);
 
+            //move towards the player
+            enemyTransform.position += enemyTransform.forward * speed * Time.deltaTime;
+
+            transform.LookAt(Player);
+         */
             transform.position += transform.forward * MoveSpeed * Time.deltaTime;
         } 
         else if (state == 2)

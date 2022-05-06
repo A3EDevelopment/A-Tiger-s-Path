@@ -427,17 +427,23 @@ public class Basic : MonoBehaviour
 
 	#region - Climbing Trigger -
 
-	private void OnTriggerEnter()
-	{
-		climbing = true;
-		gravity = 0f;
+	private void OnTriggerEnter(Collider other)
+	{ 
+		if(other.gameObject.tag == "ClimbWall")
+        {
+			climbing = true;
+			gravity = 0f;
+		}
 	}
 
-	private void OnTriggerExit()
+	private void OnTriggerExit(Collider other)
 	{
-		climbing = false;
-		gravity = 10;
-		//canClimb = false;
+		if (other.gameObject.tag == "ClimbWall")
+        {
+			climbing = false;
+			gravity = 10;
+			//canClimb = false;
+		}
 	}
 
 	public void IsClimbing()

@@ -30,7 +30,10 @@ public class DialogueManager : MonoBehaviour
 
     private Coroutine displayLineCoroutine;
 
-    public GameObject NPCCAM;
+    public GameObject NPCCAM1;
+    public GameObject NPCCAM2;
+    public GameObject NPCCAM3;
+    public GameObject TRIGGER;
 
     private static DialogueManager instance;
 
@@ -121,7 +124,24 @@ public class DialogueManager : MonoBehaviour
 
         moveScript.enabled = true;
 
-        NPCCAM.SetActive(false);
+        Animator Anim;
+
+        
+        Anim = Player.GetComponent<Animator>();
+
+        
+        Anim.enabled = true;
+
+        //TRIGGER script;
+
+        //Cam = script.GetComponent<DialogueTrigger>();
+        //ialogueTrigger NPCCAM;
+
+        //NPCCAM = TRIGGER.GetComponent<NPCCAM>();
+        //NPCCAM.enabled = false;
+
+        NPCCAM1.SetActive(false);
+        NPCCAM2.SetActive(false);
     }
 
     private void ContinueStory() 
@@ -159,7 +179,7 @@ public class DialogueManager : MonoBehaviour
         foreach (char letter in line.ToCharArray())
         {
             // if the submit button is pressed, finish up displaying the line right away
-            if (Input.GetKeyDown(KeyCode.Return)) 
+            if (Input.GetKeyDown(KeyCode.Space)) 
             {
                 dialogueText.text = line;
                 break;

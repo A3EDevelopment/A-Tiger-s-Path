@@ -14,7 +14,6 @@ public class DialogueTrigger : MonoBehaviour
     [SerializeField] private TextAsset inkJSON;
 
     private bool playerInRange;
-    public bool CameraNPC;
 
     
 
@@ -44,10 +43,16 @@ public class DialogueTrigger : MonoBehaviour
                 DialogueManager.GetInstance().EnterDialogueMode(inkJSON);
 
                 Basic moveScript; 
-
+                
                 moveScript = Player.GetComponent<Basic>();
 
                 moveScript.enabled = false;
+
+                Animator Anim;
+
+                Anim = Player.GetComponent<Animator>();
+
+                Anim.enabled = false;
 
                 NPCCAM.SetActive(true);
             }

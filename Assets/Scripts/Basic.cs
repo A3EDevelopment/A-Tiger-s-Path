@@ -68,7 +68,7 @@ public class Basic : MonoBehaviour
 	private Vector3 gravityMovement;
     #endregion
 
-    #region - Jumping / Falling / Climbing -
+    #region - Jumping / Falling / Climbing / Rolling -
     [Header("Jumping / Falling")]
 	public float fallingSpeed;
 	public float fallingThreshold;
@@ -79,19 +79,28 @@ public class Basic : MonoBehaviour
 
 	public bool canClimb = false;
 	public bool climbing = false;
+	public bool isDodging;
+	float dodgeTimer;
+
+	[SerializeField] AnimationCurve dodgeCurve;
 
 	#endregion
+
+	void Start()
+	{
+		Keyframe dodge_lastFrame = dodgeCurve[dodgeCurve.length - 1];
+		dodgeTimer = dodge_lastFrame.time;
+	}
 
 	private void Update()
 	{
 		//JumpingTimer();
 
-		Movement();
+		if (!isDodging)Movement();
 		CalculateGravity();
 		CalculateSprint();
 		CanSprint();
 		CalculateFalling();
-
 		IsClimbing();
 
 		if (jumpCDCurrent >= jumpCD)
@@ -104,6 +113,28 @@ public class Basic : MonoBehaviour
 		jumpReady = false;
 		}
 
+		if(Input.GetKeyDown(KeyCode.F))
+		{
+			if(IsMoving()) StartCoroutine(Dodge()); //Dodging is only allowed if the character is moving.
+		}
+
+	}
+
+	IEnumerator Dodge()
+	{
+		characterAnimator.SetTrigger("Dodge");
+		isDodging = true;
+		float timer = 0;
+		if(timer < dodgeTimer)
+		{
+			float speed = dodgeCurve.Evaluate(timer);
+			Vector3 dir = ((transform.forward * speed) + Vector3.up * verticalSpeed); //Direction and Gravity Added;
+			characterController.Move(dir * Time.deltaTime);
+			timer += Time.deltaTime;
+			yield return null;
+		}
+
+		isDodging = false;
 	}
 
 	private void Awake()

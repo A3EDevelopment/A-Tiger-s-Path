@@ -464,29 +464,29 @@ public class Basic : MonoBehaviour
 	}
 
 
-    #endregion
+	#endregion
 
 
-    #region - Gliding-
+	#region - Gliding-
 
 	public void IsGliding()
-    {
+	{
 		isOnGround = Physics.CheckSphere(groundChecker.transform.position, 0.2f, whatIsGround);
 
 
-		if (isOnGround == false && Input.GetKey(KeyCode.F))
+		if (isOnGround == false && Input.GetKey(KeyCode.F) && !jumpingTriggered)
 		{
 			//transform.Translate(Vector3.up * 0.1f);
 			playerTransform.transform.position = Vector3.MoveTowards(playerTransform.position, myEndPoint.position, speed * Time.deltaTime);
 			gravity = 0.5f;
 			//gravityMovement = gravityDirection * currentGravity * 0.005f;
 		}
-        else
-        {
+		else
+		{
 			gravity = 10f;
 		}
 	}
 
-    #endregion
+	#endregion
 
 }

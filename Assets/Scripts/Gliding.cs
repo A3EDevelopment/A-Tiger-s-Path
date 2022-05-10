@@ -33,7 +33,8 @@ public class Gliding : MonoBehaviour
         {
             //Player.transform.Translate(Vector3.up * glidemass, Space.World);
             //Player.transform.position +=  new Vector3(0.0f, glidemass, 0.0f);
-            playerTransform.transform.position = Vector3.MoveTowards(playerTransform.position, myEndPoint.position, speed);
+            //playerTransform.transform.position = Vector3.MoveTowards(playerTransform.position, myEndPoint.position, speed);
+            transform.Translate(Vector3.up * 0.1f);
             Debug.Log("yo");
             //Anim.applyRootMotion = false;
             //playerTransform.position = myEndPoint.position;

@@ -12,8 +12,12 @@ public class Basic : MonoBehaviour
 	public PlayerSettingsModel settings;
 	[Space]
 	public bool jumpReady;
+	public bool isOnGround;
 	public float jumpCD = 3f;
 	public float jumpCDCurrent = 0.0f;
+
+	public LayerMask whatIsGround;
+	public GameObject groundChecker;
 
 	#region - Inputs -
 	[Header("Player Inputs")]
@@ -80,6 +84,10 @@ public class Basic : MonoBehaviour
 	public bool canClimb = false;
 	public bool climbing = false;
 
+	public Transform myEndPoint;
+	public Transform playerTransform;
+	public float speed;
+
 	#endregion
 
 	private void Update()
@@ -91,7 +99,7 @@ public class Basic : MonoBehaviour
 		CalculateSprint();
 		CanSprint();
 		CalculateFalling();
-
+		IsGliding();
 		IsClimbing();
 
 		if (jumpCDCurrent >= jumpCD)
@@ -456,6 +464,29 @@ public class Basic : MonoBehaviour
 	}
 
 
-	#endregion
+    #endregion
+
+
+    #region - Gliding-
+
+	public void IsGliding()
+    {
+		isOnGround = Physics.CheckSphere(groundChecker.transform.position, 0.2f, whatIsGround);
+
+
+		if (isOnGround == false && Input.GetKey(KeyCode.F))
+		{
+			//transform.Translate(Vector3.up * 0.1f);
+			playerTransform.transform.position = Vector3.MoveTowards(playerTransform.position, myEndPoint.position, speed * Time.deltaTime);
+			gravity = 0.5f;
+			//gravityMovement = gravityDirection * currentGravity * 0.005f;
+		}
+        else
+        {
+			gravity = 10f;
+		}
+	}
+
+    #endregion
 
 }

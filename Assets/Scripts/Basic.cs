@@ -494,7 +494,7 @@ public class Basic : MonoBehaviour
 		{
 			//transform.Translate(Vector3.up * 0.1f);
 			playerTransform.transform.forward = Vector3.MoveTowards(playerTransform.forward, myEndPoint.forward, speed * Time.deltaTime);
-			gravity = 1f;
+			gravity = 0.25f;
 			//gravityMovement = gravityDirection * currentGravity * 0.005f;
 		}
 		else

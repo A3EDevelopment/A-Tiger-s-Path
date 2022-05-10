@@ -13,6 +13,7 @@ public class Basic : MonoBehaviour
 	[Space]
 	public bool jumpReady;
 	public bool isOnGround;
+	public bool GlideAfterJump = false;
 	public float jumpCD = 3f;
 	public float jumpCDCurrent = 0.0f;
 
@@ -110,6 +111,15 @@ public class Basic : MonoBehaviour
 		{
 			jumpCDCurrent = jumpCDCurrent + Time.deltaTime;
 			jumpReady = false;
+		}
+
+		if (jumpCDCurrent >= 1f)
+        {
+			GlideAfterJump = true;
+        }
+        else
+        {
+			GlideAfterJump = false;
 		}
 
 	}
@@ -480,11 +490,11 @@ public class Basic : MonoBehaviour
 		isOnGround = Physics.CheckSphere(groundChecker.transform.position, 0.2f, whatIsGround);
 
 
-		if (isOnGround == false && Input.GetKey(KeyCode.F) && !jumpingTriggered)
+		if (isOnGround == false && Input.GetKey(KeyCode.F) && GlideAfterJump == true /*&& Input.GetKey(KeyCode.F)/*!jumpingTriggered*/)
 		{
 			//transform.Translate(Vector3.up * 0.1f);
-			playerTransform.transform.position = Vector3.MoveTowards(playerTransform.position, myEndPoint.position, speed * Time.deltaTime);
-			gravity = 0.5f;
+			playerTransform.transform.forward = Vector3.MoveTowards(playerTransform.forward, myEndPoint.forward, speed * Time.deltaTime);
+			gravity = 1f;
 			//gravityMovement = gravityDirection * currentGravity * 0.005f;
 		}
 		else

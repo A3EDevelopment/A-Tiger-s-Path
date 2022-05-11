@@ -142,6 +142,7 @@ public class DialogueManager : MonoBehaviour
 
         NPCCAM1.SetActive(false);
         NPCCAM2.SetActive(false);
+        NPCCAM3.SetActive(false);
     }
 
     private void ContinueStory() 

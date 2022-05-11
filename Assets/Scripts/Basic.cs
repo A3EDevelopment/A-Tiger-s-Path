@@ -95,6 +95,8 @@ public class Basic : MonoBehaviour
 
 	#endregion
 
+	public bool HardLandTriggered ;
+
 	
 	void Start()
 	{
@@ -114,9 +116,9 @@ public class Basic : MonoBehaviour
 		IsGliding();
 		IsClimbing();
 
-		if (!isDodging || fallingSpeedPeak < 0.7f) Movement();
+		if (HardLandTriggered == false) Movement();
 
-		if(Input.GetKeyDown(KeyCode.C))
+		if (Input.GetKeyDown(KeyCode.C))
 		{
 			if(IsMoving()) StartCoroutine(Dodge()); //Dodging is only allowed if the character is moving.
 		}
@@ -209,12 +211,6 @@ public class Basic : MonoBehaviour
 			jumpingTriggered = true;
 			fallingTriggered = true;
 		}
-
-
-		//jumpCDCurrent = 0.0f;
-		//jumpingTriggered = true;
-		//fallingTriggered = true;
-
 	}
 
 	public void ApplyJumpForce()
@@ -281,7 +277,7 @@ public class Basic : MonoBehaviour
 			if (fallingSpeedPeak < -7)
 			{
 				characterAnimator.SetTrigger("HardLand");
-				//StartCoroutine("DisableMovement");
+				StartCoroutine("DisableMovement");
 			}
 			else
 			{
@@ -291,14 +287,15 @@ public class Basic : MonoBehaviour
 		}
 	}
 
-	/*IEnumerator DisableMovement()
+	IEnumerator DisableMovement()
 	{
-		Movement().enabled = false;
+		HardLandTriggered = true;
+		Debug.Log("YE");
+		yield return new WaitForSeconds(1f);
+		Debug.Log("NO");
 
-		yield return new WaitForSeconds(1.5f);
-
-		Movement().enabled = true;
-	}*/
+		HardLandTriggered = false;
+	}
 
 	#endregion
 

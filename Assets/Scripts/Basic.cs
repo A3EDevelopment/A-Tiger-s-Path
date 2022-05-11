@@ -73,8 +73,8 @@ public class Basic : MonoBehaviour
 	private Vector3 gravityMovement;
 	#endregion
 
-	#region - Jumping / Falling / Climbing -
-	[Header("Jumping / Falling")]
+	#region - Jumping / Falling / Climbing / Rolling-
+	[Header("Jumping / Falling / Rolling")]
 	public float fallingSpeed;
 	public float fallingThreshold;
 	public float fallingSpeedPeak;
@@ -89,19 +89,37 @@ public class Basic : MonoBehaviour
 	public Transform playerTransform;
 	public float speed;
 
+	public bool isDodging;
+	float dodgeTimer;
+	[SerializeField] AnimationCurve dodgeCurve;
+
 	#endregion
+
+	
+	void Start()
+	{
+		Keyframe dodge_lastFrame = dodgeCurve[dodgeCurve.length - 1];
+		dodgeTimer = dodge_lastFrame.time;
+	}
 
 	private void Update()
 	{
 		//JumpingTimer();
 
-		Movement();
+		//Movement();
 		CalculateGravity();
 		CalculateSprint();
 		CanSprint();
 		CalculateFalling();
 		IsGliding();
 		IsClimbing();
+
+		if (!isDodging || fallingSpeedPeak < 0.7f) Movement();
+
+		if(Input.GetKeyDown(KeyCode.C))
+		{
+			if(IsMoving()) StartCoroutine(Dodge()); //Dodging is only allowed if the character is moving.
+		}
 
 		if (jumpCDCurrent >= jumpCD)
 		{
@@ -122,6 +140,23 @@ public class Basic : MonoBehaviour
 			GlideAfterJump = false;
 		}
 
+	}
+
+	IEnumerator Dodge()
+	{
+		characterAnimator.SetTrigger("Dodge");
+		isDodging = true;
+		float timer = 0;
+		if(timer < dodgeTimer)
+		{
+			float speed = dodgeCurve.Evaluate(timer);
+			Vector3 dir = ((transform.forward * speed) + Vector3.up * verticalSpeed); //Direction and Gravity Added;
+			characterController.Move(dir * Time.deltaTime);
+			timer += Time.deltaTime;
+			yield return null;
+		}
+
+		isDodging = false;
 	}
 
 	private void Awake()
@@ -246,6 +281,7 @@ public class Basic : MonoBehaviour
 			if (fallingSpeedPeak < -7)
 			{
 				characterAnimator.SetTrigger("HardLand");
+				//StartCoroutine("DisableMovement");
 			}
 			else
 			{
@@ -254,6 +290,15 @@ public class Basic : MonoBehaviour
 			fallingSpeedPeak = 0;
 		}
 	}
+
+	/*IEnumerator DisableMovement()
+	{
+		Movement().enabled = false;
+
+		yield return new WaitForSeconds(1.5f);
+
+		Movement().enabled = true;
+	}*/
 
 	#endregion
 

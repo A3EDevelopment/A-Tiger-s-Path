@@ -33,7 +33,7 @@ public class DialogueManager : MonoBehaviour
     public GameObject NPCCAM1;
     public GameObject NPCCAM2;
     public GameObject NPCCAM3;
-    public GameObject TRIGGER;
+    //public GameObject TRIGGER;
 
     private static DialogueManager instance;
 

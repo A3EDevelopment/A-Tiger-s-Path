@@ -56,8 +56,6 @@ public class DialogueTrigger : MonoBehaviour
 
                 NPCCAM.SetActive(true);
             }
-
-            
         }
         else 
         {

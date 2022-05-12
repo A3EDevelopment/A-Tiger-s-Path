@@ -38,25 +38,33 @@ public class AiChase2 : MonoBehaviour
             {
                 patrolPoint = PickRandomPoint(box);
             }
-        } 
+        }
         else if (state == 1)
         {
-         /*   Player = GameObject.FindWithTag("Player").transform;
-            Vector3 targetHeading = Player.position - transform.position;
-            Vector3 targetDirection = targetHeading.normalized;
-            transform.rotation = Quaternion.LookRotation(targetDirection); // Converts target direction vector to Quaternion
-            transform.eulerAngles = new Vector3(0, transform.eulerAngles.y, 0);
+            /*   Player = GameObject.FindWithTag("Player").transform;
+               Vector3 targetHeading = Player.position - transform.position;
+               Vector3 targetDirection = targetHeading.normalized;
+               transform.rotation = Quaternion.LookRotation(targetDirection); // Converts target direction vector to Quaternion
+               transform.eulerAngles = new Vector3(0, transform.eulerAngles.y, 0);
 
-            //move towards the player
-            enemyTransform.position += enemyTransform.forward * speed * Time.deltaTime;
+               //move towards the player
+               enemyTransform.position += enemyTransform.forward * speed * Time.deltaTime;
 
-            transform.LookAt(Player);
-         */
+               transform.LookAt(Player);
+            */
             transform.position += transform.forward * MoveSpeed * Time.deltaTime;
-        } 
+        }
         else if (state == 2)
         {
-            //Shoot at player
+            //Look at target
+            transform.LookAt(Player);
+
+            //Get distance between player and enemy
+            float distance = Vector3.Distance(transform.position, Player.position);
+
+            transform.position += transform.forward * MoveSpeed * Time.deltaTime;
+             
+           
         }
 
         if (Vector3.Distance(transform.position, Player.position) <= MaxDist)//not MinDist

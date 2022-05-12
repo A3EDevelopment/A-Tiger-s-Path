@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-public class RestartTrigger : MonoBehaviour
+public class RestartTrigger1 : MonoBehaviour
 {
     private Scene scene;
 

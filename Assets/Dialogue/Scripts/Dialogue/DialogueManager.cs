@@ -39,6 +39,9 @@ public class DialogueManager : MonoBehaviour
     public GameObject NPCCAM1;
     public GameObject NPCCAM2;
     public GameObject NPCCAM3;
+    public GameObject NPCCAM4;
+
+    public GameObject NPC3;
     //public GameObject TRIGGER;
 
     private static DialogueManager instance;
@@ -152,7 +155,7 @@ public class DialogueManager : MonoBehaviour
 
         NPCCAM1.SetActive(false);
         NPCCAM2.SetActive(false);
-
+        
         if (NPCCAM3.activeSelf)
         {
             FadeInandOut Script;
@@ -163,7 +166,11 @@ public class DialogueManager : MonoBehaviour
 
             PlayerTransform.position = TeleportGoal.position;
 
+            NPC3.SetActive(true);
+
         }
+
+        NPCCAM4.SetActive(false);
 
     }
 

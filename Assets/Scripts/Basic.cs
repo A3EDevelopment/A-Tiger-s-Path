@@ -5,6 +5,9 @@ using UnityEngine;
 
 public class Basic : MonoBehaviour
 {
+	public MeshRenderer torch;
+	public GameObject fire;
+	public bool holdingTorch;
 
 	CharacterController characterController;
 	Animator characterAnimator;
@@ -524,6 +527,11 @@ public class Basic : MonoBehaviour
 
 	#endregion
 
+	public void GrabTorch(bool activate)
+    {
+		torch.enabled = activate;
+		fire.SetActive(true);
+    }
 
 	#region - Gliding-
 

@@ -4,39 +4,41 @@ using UnityEngine;
 
 public class PickUp : MonoBehaviour 
 {
-    Rigidbody rb;
-    private bool carrying;
-    
-    void Start()
+    bool playerInRange = false;
+    Basic player;
+
+    private void Start()
     {
-      
+        player = FindObjectOfType<Basic>();
     }
-    // Update is called once per frame
-    void Update()
+
+    private void Update()
     {
-        if (carrying == false)
+        if (playerInRange)
         {
-            if (Input.GetKeyDown(KeyCode.K))
+            if (Input.GetKeyDown(KeyCode.E))
             {
-                pickup();
-                carrying = true;
-            }
-        }
-        else if (carrying == true)
-        {
-            if (Input.GetKeyDown(KeyCode.K))
-            {
-                drop();
-                carrying = false;
+                player.GrabTorch(true);
+                player.holdingTorch = true;
+
+                Destroy(gameObject);
             }
         }
     }
-    void pickup()
+
+    private void OnTriggerEnter(Collider other)
     {
-       
+        if (other.tag == "Player")
+        {
+            playerInRange = true;
+        }
     }
-    void drop()
+
+    private void OnTriggerExit(Collider other)
     {
-       
+        if (other.tag == "Player")
+        {
+            playerInRange = false;
+        }
     }
 }

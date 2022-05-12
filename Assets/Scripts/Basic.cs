@@ -510,8 +510,8 @@ public class Basic : MonoBehaviour
 	{
 		if (climbing == true && Input.GetKey(KeyCode.Q))
 		{
-			transform.Translate(Vector3.up * 0.1f);
-			gravityMovement = gravityDirection * currentGravity * 0.001f;
+			transform.Translate(Vector3.up * 0.01f);
+			gravityMovement = gravityDirection * currentGravity * 0.0001f;
 			characterAnimator.SetBool("IsClimbing", climbing);
 		}
 
@@ -521,9 +521,7 @@ public class Basic : MonoBehaviour
 		}
 	}
 
-
 	#endregion
-
 
 	#region - Gliding-
 

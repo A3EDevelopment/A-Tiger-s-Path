@@ -1,0 +1,3 @@
+Little one, Please dont go past this bridge, a terrible storm is approaching and has destroyed our bridges to the sacred shrine #speaker:Elder #portrait:Elder #layout:left
+Old Man please let me visit my mother, ill do whatever it takes to get there.  #portrait:guang #speaker:Guang Jiyi #layout:right 
+I'll have to get the guards to seize you right this instance! Stop disobeying the rules!#speaker:Elder #portrait:Elder #layout:left

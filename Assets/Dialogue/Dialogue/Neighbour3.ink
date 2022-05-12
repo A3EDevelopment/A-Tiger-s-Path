@@ -1,3 +1,3 @@
-Hey do you need help getting out of this village? #speaker:Neighbour 2 #portrait:Neighbour3 #layout:left
+Hey do you need help getting out of this village? #speaker:Neighbour 3 #portrait:Neighbour3 #layout:left
 Yes but that stupid guard wont let me out... Do you have any ideas?#portrait:guang #speaker:Guang Jiyi #layout:right 
-This lantern next to me looks highly flamable, perhaps you should look for something around the village to light it on fire.#speaker:Neighbour 2 #portrait:Neighbour3 #layout:left
+This lantern next to me looks highly flamable, perhaps you should look for something around the village to light it on fire.#speaker:Neighbour 3 #portrait:Neighbour3 #layout:left

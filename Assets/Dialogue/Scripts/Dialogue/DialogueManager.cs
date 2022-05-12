@@ -19,6 +19,10 @@ public class DialogueManager : MonoBehaviour
     [SerializeField] private Animator portraitAnimator;
     [SerializeField] private Animator layoutAnimator;
 
+    public Transform PlayerTransform;
+
+    public Transform TeleportGoal;
+
     [Header("Choices UI")]
     [SerializeField] private GameObject[] choices;
     private TextMeshProUGUI[] choicesText;
@@ -29,6 +33,8 @@ public class DialogueManager : MonoBehaviour
     private bool canContinueToNextLine = false;
 
     private Coroutine displayLineCoroutine;
+
+    public GameObject Fader;
 
     public GameObject NPCCAM1;
     public GameObject NPCCAM2;
@@ -50,6 +56,8 @@ public class DialogueManager : MonoBehaviour
             Debug.LogWarning("Found more than one Dialogue Manager in the scene");
         }
         instance = this;
+
+        PlayerTransform = Player.transform;
     }
 
     public static DialogueManager GetInstance() 
@@ -92,6 +100,8 @@ public class DialogueManager : MonoBehaviour
         {
             ContinueStory();
         }
+
+        
     }
 
     public void EnterDialogueMode(TextAsset inkJSON) 
@@ -142,7 +152,19 @@ public class DialogueManager : MonoBehaviour
 
         NPCCAM1.SetActive(false);
         NPCCAM2.SetActive(false);
-        NPCCAM3.SetActive(false);
+
+        if (NPCCAM3.activeSelf)
+        {
+            FadeInandOut Script;
+            Script = Fader.GetComponent<FadeInandOut>();
+            Script.FadeOut();
+
+            NPCCAM3.SetActive(false);
+
+            PlayerTransform.position = TeleportGoal.position;
+
+        }
+
     }
 
     private void ContinueStory() 

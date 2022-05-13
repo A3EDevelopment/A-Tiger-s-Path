@@ -158,16 +158,27 @@ public class DialogueManager : MonoBehaviour
         NPCCAM2.SetActive(false);
         
         if (NPCCAM3.activeSelf)
-        {
+        {   
             FadeInandOut Script;
             Script = Fader.GetComponent<FadeInandOut>();
             Script.FadeOut();
+
+
+            moveScript = Player.GetComponent<Basic>();
+
+            moveScript.enabled = false;
+
+            PlayerTransform.position = TeleportGoal.position;
 
             NPCCAM3.SetActive(false);
 
             PlayerTransform.position = TeleportGoal.position;
 
             NPC3.SetActive(true);
+
+            moveScript = Player.GetComponent<Basic>();
+
+            moveScript.enabled = true;
 
         }
 

@@ -19,9 +19,7 @@ public class DialogueManager : MonoBehaviour
     [SerializeField] private Animator portraitAnimator;
     [SerializeField] private Animator layoutAnimator;
 
-    public Transform PlayerTransform;
-
-    public Transform TeleportGoal;
+    
 
     [Header("Choices UI")]
     [SerializeField] private GameObject[] choices;
@@ -61,7 +59,7 @@ public class DialogueManager : MonoBehaviour
         }
         instance = this;
 
-        PlayerTransform = Player.transform;
+        //PlayerTransform = Player.transform;
     }
 
     public static DialogueManager GetInstance() 
@@ -159,6 +157,9 @@ public class DialogueManager : MonoBehaviour
         
         if (NPCCAM3.activeSelf)
         {   
+            //PlayerTransform.position = TeleportGoal.position;
+            NPCCAM3.SetActive(false);
+
             FadeInandOut Script;
             Script = Fader.GetComponent<FadeInandOut>();
             Script.FadeOut();
@@ -168,11 +169,11 @@ public class DialogueManager : MonoBehaviour
 
             moveScript.enabled = false;
 
-            PlayerTransform.position = TeleportGoal.position;
+            //PlayerTransform.position = TeleportGoal.position;
 
-            NPCCAM3.SetActive(false);
+            
 
-            PlayerTransform.position = TeleportGoal.position;
+            
 
             NPC3.SetActive(true);
 
@@ -180,6 +181,8 @@ public class DialogueManager : MonoBehaviour
 
             moveScript.enabled = true;
 
+            
+            Script.FadeIn();
         }
 
         NPCCAM4.SetActive(false);

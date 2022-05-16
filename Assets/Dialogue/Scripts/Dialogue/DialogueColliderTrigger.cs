@@ -12,12 +12,16 @@ public class DialogueColliderTrigger : MonoBehaviour
 
     private bool playerInRange;
 
+    public Transform PlayerTransform;
+
+    public Transform TeleportGoal;
+
     [Header("Ink JSON")]
     [SerializeField] private TextAsset inkJSON;
 
     void Start()
     {
-        
+        PlayerTransform = Player.transform;
     }
 
     // Update is called once per frame
@@ -31,7 +35,9 @@ public class DialogueColliderTrigger : MonoBehaviour
         if (collider.gameObject.tag == "Dialogue" && !DialogueManager.GetInstance().dialogueIsPlaying)
         {
             DialogueManager.GetInstance().EnterDialogueMode(inkJSON);
-
+                
+                NPCCAM.SetActive(true);
+                
                 Basic moveScript; 
                 
                 moveScript = Player.GetComponent<Basic>();
@@ -44,7 +50,9 @@ public class DialogueColliderTrigger : MonoBehaviour
 
                 Anim.enabled = false;
 
-                NPCCAM.SetActive(true);
+                PlayerTransform.position = TeleportGoal.position;
+
+                
         }
     }
 

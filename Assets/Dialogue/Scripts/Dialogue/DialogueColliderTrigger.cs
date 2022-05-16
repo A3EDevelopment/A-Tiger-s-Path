@@ -49,6 +49,7 @@ public class DialogueColliderTrigger : MonoBehaviour
                 Anim = Player.GetComponent<Animator>();
 
                 Anim.enabled = false;
+                StartCoroutine (Wait());
 
                 PlayerTransform.position = TeleportGoal.position;
 
@@ -63,4 +64,12 @@ public class DialogueColliderTrigger : MonoBehaviour
             playerInRange = false;
         }
     }
+
+
+    IEnumerator Wait()
+    {
+        
+        yield return new WaitForSeconds(3);
+    }
+    
 }

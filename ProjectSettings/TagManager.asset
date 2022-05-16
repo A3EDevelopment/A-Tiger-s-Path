@@ -9,6 +9,7 @@ TagManager:
   - Fire
   - BoundingBox
   - ClimbWall
+  - post process
   layers:
   - Default
   - TransparentFX
@@ -19,7 +20,7 @@ TagManager:
   - NPC
   - WhatIsPlayer
   - WhatIsEnemy
-  - 
+  - Post Process
   - 
   - 
   - 

@@ -5,54 +5,71 @@ using Cinemachine;
 
 public class DialogueColliderTrigger : MonoBehaviour
 {
-    
+
     public GameObject Player;
 
     public GameObject NPCCAM;
 
     private bool playerInRange;
 
+    public Transform PlayerTransform;
+
+    public Transform TeleportGoal;
+
     [Header("Ink JSON")]
     [SerializeField] private TextAsset inkJSON;
 
     void Start()
     {
-        
+        PlayerTransform = Player.transform;
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
-    void OnTriggerEnter(Collider collider) 
+    void OnTriggerEnter(Collider collider)
     {
         if (collider.gameObject.tag == "Dialogue" && !DialogueManager.GetInstance().dialogueIsPlaying)
         {
             DialogueManager.GetInstance().EnterDialogueMode(inkJSON);
 
-                Basic moveScript; 
-                
-                moveScript = Player.GetComponent<Basic>();
+            NPCCAM.SetActive(true);
 
-                moveScript.enabled = false;
+            Basic moveScript;
 
-                Animator Anim;
+            moveScript = Player.GetComponent<Basic>();
 
-                Anim = Player.GetComponent<Animator>();
+            moveScript.enabled = false;
 
-                Anim.enabled = false;
+            Animator Anim;
 
-                NPCCAM.SetActive(true);
+            Anim = Player.GetComponent<Animator>();
+
+            Anim.enabled = false;
+            StartCoroutine(Wait());
+
+            PlayerTransform.position = TeleportGoal.position;
+
+
         }
     }
 
-    void OnTriggerExit(Collider collider) 
+    void OnTriggerExit(Collider collider)
     {
         if (collider.gameObject.tag == "Dialogue")
         {
             playerInRange = false;
         }
     }
+
+
+    IEnumerator Wait()
+    {
+
+        yield return new WaitForSeconds(3);
+    }
+
 }

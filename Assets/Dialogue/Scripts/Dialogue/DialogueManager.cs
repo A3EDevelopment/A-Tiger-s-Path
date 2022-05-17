@@ -19,9 +19,7 @@ public class DialogueManager : MonoBehaviour
     [SerializeField] private Animator portraitAnimator;
     [SerializeField] private Animator layoutAnimator;
 
-    public Transform PlayerTransform;
 
-    public Transform TeleportGoal;
 
     [Header("Choices UI")]
     [SerializeField] private GameObject[] choices;
@@ -53,7 +51,7 @@ public class DialogueManager : MonoBehaviour
 
     public GameObject Player;
 
-    private void Awake() 
+    private void Awake()
     {
         if (instance != null)
         {
@@ -61,15 +59,15 @@ public class DialogueManager : MonoBehaviour
         }
         instance = this;
 
-        PlayerTransform = Player.transform;
+        //PlayerTransform = Player.transform;
     }
 
-    public static DialogueManager GetInstance() 
+    public static DialogueManager GetInstance()
     {
         return instance;
     }
 
-    private void Start() 
+    private void Start()
     {
         dialogueIsPlaying = false;
         dialoguePanel.SetActive(false);
@@ -80,17 +78,17 @@ public class DialogueManager : MonoBehaviour
         // get all of the choices text 
         choicesText = new TextMeshProUGUI[choices.Length];
         int index = 0;
-        foreach (GameObject choice in choices) 
+        foreach (GameObject choice in choices)
         {
             choicesText[index] = choice.GetComponentInChildren<TextMeshProUGUI>();
             index++;
         }
     }
 
-    private void Update() 
+    private void Update()
     {
         // return right away if dialogue isn't playing
-        if (!dialogueIsPlaying) 
+        if (!dialogueIsPlaying)
         {
             return;
 
@@ -98,17 +96,17 @@ public class DialogueManager : MonoBehaviour
 
         // handle continuing to the next line in the dialogue when submit is pressed
         // NOTE: The 'currentStory.currentChoiecs.Count == 0' part was to fix a bug after the Youtube video was made
-        if (canContinueToNextLine 
-            && currentStory.currentChoices.Count == 0 
+        if (canContinueToNextLine
+            && currentStory.currentChoices.Count == 0
             && (Input.GetKeyDown(KeyCode.E)))
         {
             ContinueStory();
         }
 
-        
+
     }
 
-    public void EnterDialogueMode(TextAsset inkJSON) 
+    public void EnterDialogueMode(TextAsset inkJSON)
     {
 
 
@@ -124,7 +122,7 @@ public class DialogueManager : MonoBehaviour
         ContinueStory();
     }
 
-    private IEnumerator ExitDialogueMode() 
+    private IEnumerator ExitDialogueMode()
     {
         yield return new WaitForSeconds(0.2f);
 
@@ -140,10 +138,10 @@ public class DialogueManager : MonoBehaviour
 
         Animator Anim;
 
-        
+
         Anim = Player.GetComponent<Animator>();
 
-        
+
         Anim.enabled = true;
 
         //TRIGGER script;
@@ -156,9 +154,12 @@ public class DialogueManager : MonoBehaviour
 
         NPCCAM1.SetActive(false);
         NPCCAM2.SetActive(false);
-        
+
         if (NPCCAM3.activeSelf)
-        {   
+        {
+            //PlayerTransform.position = TeleportGoal.position;
+            NPCCAM3.SetActive(false);
+
             FadeInandOut Script;
             Script = Fader.GetComponent<FadeInandOut>();
             Script.FadeOut();
@@ -168,11 +169,11 @@ public class DialogueManager : MonoBehaviour
 
             moveScript.enabled = false;
 
-            PlayerTransform.position = TeleportGoal.position;
+            //PlayerTransform.position = TeleportGoal.position;
 
-            NPCCAM3.SetActive(false);
 
-            PlayerTransform.position = TeleportGoal.position;
+
+
 
             NPC3.SetActive(true);
 
@@ -180,6 +181,8 @@ public class DialogueManager : MonoBehaviour
 
             moveScript.enabled = true;
 
+
+            Script.FadeIn();
         }
 
         NPCCAM4.SetActive(false);
@@ -187,12 +190,12 @@ public class DialogueManager : MonoBehaviour
 
     }
 
-    private void ContinueStory() 
+    private void ContinueStory()
     {
-        if (currentStory.canContinue) 
+        if (currentStory.canContinue)
         {
             // set text for the current dialogue line
-            if (displayLineCoroutine != null) 
+            if (displayLineCoroutine != null)
             {
                 StopCoroutine(displayLineCoroutine);
             }
@@ -200,13 +203,13 @@ public class DialogueManager : MonoBehaviour
             // handle tags
             HandleTags(currentStory.currentTags);
         }
-        else 
+        else
         {
             StartCoroutine(ExitDialogueMode());
         }
     }
 
-    private IEnumerator DisplayLine(string line) 
+    private IEnumerator DisplayLine(string line)
     {
         // empty the dialogue text
         dialogueText.text = "";
@@ -222,14 +225,14 @@ public class DialogueManager : MonoBehaviour
         foreach (char letter in line.ToCharArray())
         {
             // if the submit button is pressed, finish up displaying the line right away
-            if (Input.GetKeyDown(KeyCode.Space)) 
+            if (Input.GetKeyDown(KeyCode.Space))
             {
                 dialogueText.text = line;
                 break;
             }
 
             // check for rich text tag, if found, add it without waiting
-            if (letter == '<' || isAddingRichTextTag) 
+            if (letter == '<' || isAddingRichTextTag)
             {
                 isAddingRichTextTag = true;
                 dialogueText.text += letter;
@@ -239,7 +242,7 @@ public class DialogueManager : MonoBehaviour
                 }
             }
             // if not rich text, add the next letter and wait a small time
-            else 
+            else
             {
                 dialogueText.text += letter;
                 yield return new WaitForSeconds(typingSpeed);
@@ -253,9 +256,9 @@ public class DialogueManager : MonoBehaviour
         canContinueToNextLine = true;
     }
 
-    private void HideChoices() 
+    private void HideChoices()
     {
-        foreach (GameObject choiceButton in choices) 
+        foreach (GameObject choiceButton in choices)
         {
             choiceButton.SetActive(false);
         }
@@ -264,19 +267,19 @@ public class DialogueManager : MonoBehaviour
     private void HandleTags(List<string> currentTags)
     {
         // loop through each tag and handle it accordingly
-        foreach (string tag in currentTags) 
+        foreach (string tag in currentTags)
         {
             // parse the tag
             string[] splitTag = tag.Split(':');
-            if (splitTag.Length != 2) 
+            if (splitTag.Length != 2)
             {
                 Debug.LogError("Tag could not be appropriately parsed: " + tag);
             }
             string tagKey = splitTag[0].Trim();
             string tagValue = splitTag[1].Trim();
-            
+
             // handle the tag
-            switch (tagKey) 
+            switch (tagKey)
             {
                 case SPEAKER_TAG:
                     displayNameText.text = tagValue;
@@ -294,27 +297,27 @@ public class DialogueManager : MonoBehaviour
         }
     }
 
-    private void DisplayChoices() 
+    private void DisplayChoices()
     {
         List<Choice> currentChoices = currentStory.currentChoices;
 
         // defensive check to make sure our UI can support the number of choices coming in
         if (currentChoices.Count > choices.Length)
         {
-            Debug.LogError("More choices were given than the UI can support. Number of choices given: " 
+            Debug.LogError("More choices were given than the UI can support. Number of choices given: "
                 + currentChoices.Count);
         }
 
         int index = 0;
         // enable and initialize the choices up to the amount of choices for this line of dialogue
-        foreach(Choice choice in currentChoices) 
+        foreach (Choice choice in currentChoices)
         {
             choices[index].gameObject.SetActive(true);
             choicesText[index].text = choice.text;
             index++;
         }
         // go through the remaining choices the UI supports and make sure they're hidden
-        for (int i = index; i < choices.Length; i++) 
+        for (int i = index; i < choices.Length; i++)
         {
             choices[i].gameObject.SetActive(false);
         }
@@ -322,7 +325,7 @@ public class DialogueManager : MonoBehaviour
         StartCoroutine(SelectFirstChoice());
     }
 
-    private IEnumerator SelectFirstChoice() 
+    private IEnumerator SelectFirstChoice()
     {
         // Event System requires we clear it first, then wait
         // for at least one frame before we set the current selected object.
@@ -333,11 +336,11 @@ public class DialogueManager : MonoBehaviour
 
     public void MakeChoice(int choiceIndex)
     {
-        if (canContinueToNextLine) 
+        if (canContinueToNextLine)
         {
             currentStory.ChooseChoiceIndex(choiceIndex);
             // NOTE: The below two lines were added to fix a bug after the Youtube video was made
-             // this is specific to my InputManager script
+            // this is specific to my InputManager script
             ContinueStory();
         }
     }

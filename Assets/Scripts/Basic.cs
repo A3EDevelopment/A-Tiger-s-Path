@@ -100,6 +100,12 @@ public class Basic : MonoBehaviour
 
 	public bool HardLandTriggered ;
 
+	#region - sounds -
+
+	public AudioSource Footsteps;
+
+	#endregion
+
 	
 	void Start()
 	{
@@ -118,6 +124,17 @@ public class Basic : MonoBehaviour
 		CalculateFalling();
 		IsGliding();
 		IsClimbing();
+
+		Debug.Log(IsMoving());
+
+		if (IsMoving() == true)
+		{
+			Footsteps.Play();
+		}
+		else 
+		{
+			Footsteps.Stop();
+		}
 
 		if (HardLandTriggered == false) Movement();
 

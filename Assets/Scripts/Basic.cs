@@ -9,6 +9,8 @@ public class Basic : MonoBehaviour
 	public GameObject fire;
 	public bool holdingTorch;
 
+	public GameObject[] WindParticles;
+
 	CharacterController characterController;
 	Animator characterAnimator;
 	BasicPlayerInput obj_BasicPlayerInput;
@@ -111,11 +113,18 @@ public class Basic : MonoBehaviour
 	{
 		Keyframe dodge_lastFrame = dodgeCurve[dodgeCurve.length - 1];
 		dodgeTimer = dodge_lastFrame.time;
+
+		
+		
 	}
 
 	private void Update()
 	{
 		//JumpingTimer();
+
+		WindParticles[0].SetActive(false);
+		WindParticles[1].SetActive(false);
+		WindParticles[2].SetActive(false);
 
 		//Movement();
 		CalculateGravity();
@@ -556,6 +565,15 @@ public class Basic : MonoBehaviour
 			//transform.Translate(Vector3.up * 0.1f);
 			playerTransform.transform.forward = Vector3.MoveTowards(playerTransform.forward, myEndPoint.forward, speed * Time.deltaTime);
 			gravity = 0.25f;
+
+
+			WindParticles[0].SetActive(true);
+			WindParticles[1].SetActive(true);
+			WindParticles[2].SetActive(true);
+
+			
+			
+
 			//gravityMovement = gravityDirection * currentGravity * 0.005f;
 		}
 		else

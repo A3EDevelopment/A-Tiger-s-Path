@@ -1,10 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class FellLol : MonoBehaviour
 {
     public GameObject PlayerCam1;
+
+    private Scene scene;
 
     public GameObject Fader;
 
@@ -18,6 +21,7 @@ public class FellLol : MonoBehaviour
     void Start()
     {
         PlayerCam1.SetActive(false);
+        
 
         PlayerTransform = Player.transform;
     }
@@ -25,7 +29,10 @@ public class FellLol : MonoBehaviour
     void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.tag == "Player")
-        {
+        {   
+
+            PlayerTransform.position = TeleportGoal.position;    
+
             PlayerCam1.SetActive(true);
 
 
@@ -34,7 +41,7 @@ public class FellLol : MonoBehaviour
             
 
             
-
+            PlayerTransform.position = TeleportGoal.position;
 
             
 
@@ -50,7 +57,13 @@ public class FellLol : MonoBehaviour
 
         Script = Fader.GetComponent<FadeInandOut>();
 
+        PlayerTransform.position = TeleportGoal.position;
+
         Script.FadeOut();
+
+        yield return new WaitForSeconds(1f);
+
+        
 
         Basic moveScript;
 
@@ -63,6 +76,9 @@ public class FellLol : MonoBehaviour
         moveScript = Player.GetComponent<Basic>();
 
         moveScript.enabled = true;
+
+        scene = SceneManager.GetActiveScene();
+        SceneManager.LoadScene("Village1");
 
         Script.FadeIn();
 

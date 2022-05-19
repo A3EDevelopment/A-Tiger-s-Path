@@ -114,7 +114,9 @@ public class Basic : MonoBehaviour
 		Keyframe dodge_lastFrame = dodgeCurve[dodgeCurve.length - 1];
 		dodgeTimer = dodge_lastFrame.time;
 
-		
+		WindParticles[0].SetActive(false);
+		WindParticles[1].SetActive(false);
+		WindParticles[2].SetActive(false);
 		
 	}
 
@@ -122,9 +124,6 @@ public class Basic : MonoBehaviour
 	{
 		//JumpingTimer();
 
-		WindParticles[0].SetActive(false);
-		WindParticles[1].SetActive(false);
-		WindParticles[2].SetActive(false);
 
 		//Movement();
 		CalculateGravity();
@@ -579,6 +578,10 @@ public class Basic : MonoBehaviour
 		else
 		{
 			gravity = 10f;
+
+			WindParticles[0].SetActive(false);
+			WindParticles[1].SetActive(false);
+			WindParticles[2].SetActive(false);
 		}
 	}
 

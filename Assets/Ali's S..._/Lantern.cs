@@ -7,8 +7,10 @@ public class Lantern : MonoBehaviour
     bool playerInRange = false;
     Basic player;
 
-    public GameObject fire;
-    public GameObject fire2;
+    public GameObject lanternFire;
+    public GameObject lanternFireSfx;
+    public GameObject torchFire;
+    public GameObject torchSFX;
 
     private void Start()
     {
@@ -26,9 +28,10 @@ public class Lantern : MonoBehaviour
                     player.GrabTorch(false);
                     player.holdingTorch = false;
 
-                    fire.SetActive(true);
-                    fire2.SetActive(false);
-
+                    lanternFire.SetActive(true);
+                    lanternFireSfx.SetActive(true);
+                    torchFire.SetActive(false);
+                    torchSFX.SetActive(false);
                 }
             }
         }

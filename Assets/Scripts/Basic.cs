@@ -7,6 +7,7 @@ public class Basic : MonoBehaviour
 {
 	public MeshRenderer torch;
 	public GameObject fire;
+	public GameObject fireSFX;
 	public bool holdingTorch;
 
 	CharacterController characterController;
@@ -531,6 +532,7 @@ public class Basic : MonoBehaviour
     {
 		torch.enabled = activate;
 		fire.SetActive(true);
+		fireSFX.SetActive(true);
     }
 
 	#region - Gliding-

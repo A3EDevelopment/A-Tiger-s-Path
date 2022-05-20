@@ -308,7 +308,7 @@ MonoBehaviour:
   m_Name: Tree Data
   m_EditorClassIdentifier: 
   _uniqueID: 135
-  materialHash: 0123b6e5d96415d38d55e67c0b7b8dad-772014080
+  materialHash: 7e7b934b3ecdd71da3c0b97219e69d2f-772014080
   root:
     _uniqueID: 1
     seed: 1234
@@ -3738,7 +3738,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Optimized Leaf Material
-  m_Shader: {fileID: 4800000, guid: 0e9d5a909a1f7e84882a534d0d11e49f, type: 3}
+  m_Shader: {fileID: 10605, guid: 0000000000000000f000000000000000, type: 0}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0

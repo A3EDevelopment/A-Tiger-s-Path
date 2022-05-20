@@ -80,6 +80,8 @@ public class FellLol : MonoBehaviour
         scene = SceneManager.GetActiveScene();
         SceneManager.LoadScene("Village1");
 
+        Debug.Log("ayo");
+
         Script.FadeIn();
 
         yield return new WaitForSeconds(0.5f);

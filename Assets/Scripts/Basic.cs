@@ -133,7 +133,7 @@ public class Basic : MonoBehaviour
 		IsGliding();
 		IsClimbing();
 
-		Debug.Log(IsMoving());
+		//Debug.Log(IsMoving());
 
 		if (IsMoving() == true)
 		{

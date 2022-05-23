@@ -6,7 +6,7 @@ public class PickUp : MonoBehaviour
 {
     bool playerInRange = false;
     Basic player;
-    public GameObject torchSFX;
+    
     public GameObject DuptorchSFX;
 
     private void Start()
@@ -25,7 +25,7 @@ public class PickUp : MonoBehaviour
 
                 Destroy(gameObject);
                 DuptorchSFX.SetActive(true);
-                torchSFX.SetActive(false);
+               
             }
         }
     }

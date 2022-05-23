@@ -40,6 +40,7 @@ public class DialogueManager : MonoBehaviour
     public GameObject NPCCAM4;
     public GameObject NPCCAM5;
     public GameObject NPCCAM6;
+    public GameObject NPCCAM7;
 
     public GameObject NPC3;
     //public GameObject TRIGGER;
@@ -190,6 +191,7 @@ public class DialogueManager : MonoBehaviour
         NPCCAM4.SetActive(false);
         NPCCAM5.SetActive(false);
         NPCCAM6.SetActive(false);
+        NPCCAM7.SetActive(false);
 
     }
 

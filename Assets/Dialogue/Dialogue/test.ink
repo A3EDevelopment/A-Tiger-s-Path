@@ -1,9 +1,10 @@
-Ah it’s you Guang Jiyi! I see you’ve finally woken up from your slumber.#speaker:Neighbour #portrait:Neighbour #layout:left
-Nevermind that, there’s more important things to discuss. #portrait:guang #speaker:Guang Jiyi #layout:right 
-Like what exactly? #speaker:Neighbour#portrait:Neighbour#layout:left
-Like where is the Elder? That’d be a good start. #portrait:guang #speaker:Guang Jiyi #layout:right 
-Woah what’s up with the urgency. Anyway, the last time I saw him, he was walking around the village looking for something #speaker:Neighbour #portrait:Neighbour #layout:left
-Around the village.. Can you be more specific? #portrait:guang #speaker:Guang Jiyi #layout:right 
-I bet my only 2 coins on the fact that he’s at the very bottom of the stairs.#speaker:Neighbour #portrait:Neighbour #layout:left
-I see, I’ll have a look #portrait:guang #speaker:Guang Jiyi #layout:right 
-At his age, I would assume he would avoid walking up. His back is not what it used to be #speaker:Neighbour #portrait:Neighbour #layout:left
+Finally! I almost lost my wits looking for you.#speaker:Neighbour #portrait:Neighbour #layout:left
+What's with the urgency? #portrait:guang #speaker:Guang Jiyi #layout:right 
+The elder tottered about like a rabid beast who was left with nigh a fortnite without a meal. #speaker:Neighbour#portrait:Neighbour#layout:left
+I see, so nothing new I presume. #portrait:guang #speaker:Guang Jiyi #layout:right 
+Here now, I would like to remind you about the occasion tomorrow. When the sunless sea, blessed with the radiance of its paragon, cast the Nian into our blessed lands. #speaker:Neighbour #portrait:Neighbour #layout:left
+The Nian huh, I wonder what it looks like in person. #portrait:guang #speaker:Guang Jiyi #layout:right 
+This is nothing to joke about Guang Jiyi! The Nian was a tumultuous beast which sought nothing other than the complete annihilation of our village. Wherever it went, havoc and chaos followed. #speaker:Neighbour #portrait:Neighbour #layout:left
+I trust your mother showed you the neighbouring lands while she was still alive? There was nary a single day in which the two of you were not together. At one point I was convinced your mother and yourself were completely and utterly inseparable, like the roots that embrace this exact village. #speaker:Neighbour #portrait:Neighbour #layout:left
+But enough dwelling on the past am I right? You should talk to the elder and prepare yourself for the new year. It would be a shame if the Nian returned to devour us all and it caught us unaware due to a lack of preparation! Go forth towards the riverside and send him my regards. #speaker:Neighbour #portrait:Neighbour #layout:left
+Great, now I'm gonna be stuck doing everyone's chores. As long as it's just sending regards, I'll be fine I guess. But I can't let them distract me too much, she's waiting for me. #portrait:guang #speaker:Guang Jiyi #layout:right 

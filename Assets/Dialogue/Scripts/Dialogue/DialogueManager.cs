@@ -10,6 +10,7 @@ public class DialogueManager : MonoBehaviour
 {
     [Header("Params")]
     [SerializeField] private float typingSpeed = 0.04f;
+    
 
     [Header("Dialogue UI")]
     [SerializeField] private GameObject dialoguePanel;
@@ -41,6 +42,11 @@ public class DialogueManager : MonoBehaviour
     public GameObject NPCCAM5;
     public GameObject NPCCAM6;
     public GameObject NPCCAM7;
+    public GameObject NPCCAM8;
+
+    public Transform PlayerTransform;
+
+    public Transform TeleportGoal;
 
     public GameObject NPC3;
     //public GameObject TRIGGER;
@@ -52,6 +58,8 @@ public class DialogueManager : MonoBehaviour
     private const string LAYOUT_TAG = "layout";
 
     public GameObject Player;
+
+    public AudioSource Walking;
 
     private void Awake()
     {
@@ -110,7 +118,7 @@ public class DialogueManager : MonoBehaviour
 
     public void EnterDialogueMode(TextAsset inkJSON)
     {
-
+        Walking.mute = true;
 
         currentStory = new Story(inkJSON.text);
         dialogueIsPlaying = true;
@@ -122,6 +130,10 @@ public class DialogueManager : MonoBehaviour
         layoutAnimator.Play("right");
 
         ContinueStory();
+
+       
+
+
     }
 
     private IEnumerator ExitDialogueMode()
@@ -147,6 +159,8 @@ public class DialogueManager : MonoBehaviour
 
         Anim.enabled = true;
 
+        Walking.mute = false;
+
         //TRIGGER script;
 
         //Cam = script.GetComponent<DialogueTrigger>();
@@ -163,7 +177,26 @@ public class DialogueManager : MonoBehaviour
             //PlayerTransform.position = TeleportGoal.position;
             NPCCAM3.SetActive(false);
 
-            FadeInandOut Script;
+            
+
+
+            //PlayerTransform.position = TeleportGoal.position;
+
+
+            StartCoroutine(justwait());
+
+
+            
+        }
+
+        if (NPCCAM8.activeSelf)
+        {
+            //PlayerTransform.position = TeleportGoal.position;
+            NPCCAM8.SetActive(false);
+
+            StartCoroutine(wait());
+
+            /*FadeInandOut Script;
             Script = Fader.GetComponent<FadeInandOut>();
             Script.FadeOut();
 
@@ -172,26 +205,97 @@ public class DialogueManager : MonoBehaviour
 
             moveScript.enabled = false;
 
-            //PlayerTransform.position = TeleportGoal.position;
+            PlayerTransform.position = TeleportGoal.position;
 
 
 
 
 
-            NPC3.SetActive(true);
+            //NPC3.SetActive(true);
 
             moveScript = Player.GetComponent<Basic>();
 
             moveScript.enabled = true;
 
 
-            Script.FadeIn();
+            Script.FadeIn();*/
         }
 
         NPCCAM4.SetActive(false);
         NPCCAM5.SetActive(false);
         NPCCAM6.SetActive(false);
         NPCCAM7.SetActive(false);
+
+    }
+
+    IEnumerator wait()
+    {
+        yield return new WaitForSeconds(0.5f);
+
+        FadeInandOut Script;
+
+        Script = Fader.GetComponent<FadeInandOut>();
+
+        
+
+        Script.FadeOut();
+
+        yield return new WaitForSeconds(1f);
+
+        PlayerTransform.position = TeleportGoal.position;
+
+
+
+        Basic moveScript;
+
+        moveScript = Player.GetComponent<Basic>();
+
+        moveScript.enabled = false;
+
+        PlayerTransform.position = TeleportGoal.position;
+
+        moveScript = Player.GetComponent<Basic>();
+
+        moveScript.enabled = true;
+
+       
+    }
+    IEnumerator justwait()
+    {
+        
+
+        FadeInandOut Script;
+        Script = Fader.GetComponent<FadeInandOut>();
+        Script.FadeOut();
+
+        Basic moveScript;
+
+        moveScript = Player.GetComponent<Basic>();
+
+        moveScript.enabled = false;
+
+        Animator anims;
+
+        anims = Player.GetComponent<Animator>();
+
+        anims.enabled = false;
+
+        yield return new WaitForSeconds(2.5f);
+
+        NPC3.SetActive(true);
+
+        moveScript = Player.GetComponent<Basic>();
+
+        moveScript.enabled = true;
+
+
+
+        anims = Player.GetComponent<Animator>();
+
+        anims.enabled = true;
+
+
+        Script.FadeIn();
 
     }
 

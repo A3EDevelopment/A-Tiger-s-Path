@@ -105,6 +105,9 @@ public class Basic : MonoBehaviour
 	#region - sounds -
 
 	public AudioSource Footsteps;
+	public AudioClip Feet;
+
+	DialogueManager diathing;
 
 	#endregion
 
@@ -117,10 +120,12 @@ public class Basic : MonoBehaviour
 		WindParticles[0].SetActive(false);
 		WindParticles[1].SetActive(false);
 		WindParticles[2].SetActive(false);
+
+		diathing = GetComponent<DialogueManager>();
 		
 	}
 
-	private void Update()
+	public void Update()
 	{
 		//JumpingTimer();
 
@@ -135,14 +140,20 @@ public class Basic : MonoBehaviour
 
 		//Debug.Log(IsMoving());
 
-		if (IsMoving() == true)
+		/*if (IsMoving() == true)
 		{
 			Footsteps.Play();
 		}
 		else 
 		{
 			Footsteps.Stop();
+		}*/
+
+		if (!Input.GetKey(KeyCode.W) && IsGrounded() == true)
+		{
+			Footsteps.Play();
 		}
+
 
 		if (HardLandTriggered == false) Movement();
 
@@ -540,7 +551,7 @@ public class Basic : MonoBehaviour
 		if (climbing == true && Input.GetKey(KeyCode.Q))
 		{
 			//transform.Translate(Vector3.up * 0.01f);
-			gravityMovement = gravityDirection * currentGravity * 0.00025f;
+			gravityMovement = gravityDirection * currentGravity * 0.001f;
 			characterAnimator.SetBool("IsClimbing", climbing);
 		}
 

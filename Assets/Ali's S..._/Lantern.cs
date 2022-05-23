@@ -12,6 +12,8 @@ public class Lantern : MonoBehaviour
     public GameObject torchFire;
     public GameObject torchSFX;
 
+    public GameObject Guard;
+
     private void Start()
     {
         player = FindObjectOfType<Basic>();
@@ -32,6 +34,8 @@ public class Lantern : MonoBehaviour
                     lanternFireSfx.SetActive(true);
                     torchFire.SetActive(false);
                     torchSFX.SetActive(false);
+
+                    Guard.SetActive(false);
                 }
             }
         }

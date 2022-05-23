@@ -10,6 +10,7 @@ TagManager:
   - BoundingBox
   - ClimbWall
   - post process
+  - MMCAM
   layers:
   - Default
   - TransparentFX
@@ -21,7 +22,7 @@ TagManager:
   - WhatIsPlayer
   - WhatIsEnemy
   - Post Process
-  - 
+  - MMCAM
   - 
   - 
   - 

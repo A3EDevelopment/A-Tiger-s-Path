@@ -69,7 +69,7 @@ public class DialogueManager : MonoBehaviour
         }
         instance = this;
 
-        //PlayerTransform = Player.transform;
+        PlayerTransform = Player.transform;
     }
 
     public static DialogueManager GetInstance()

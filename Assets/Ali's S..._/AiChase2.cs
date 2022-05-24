@@ -10,8 +10,10 @@ public class AiChase2 : MonoBehaviour
  /*  public Transform enemyTransform;
     public float speed = 3f;
  */   public int MoveSpeed = 4;
-    public int MaxDist = 10;
-    public int MinDist = 5;
+    public int MaxDist = 5;
+    public int MinDist = 2;
+
+    public float distance;
     private object navmeshagent;
    // public bool Seen; 
     
@@ -25,10 +27,23 @@ public class AiChase2 : MonoBehaviour
     private void Start()
     {
         patrolPoint = PickRandomPoint(box);
+
+        if (inBox == false)
+        {
+            MinDist = 0;
+            MaxDist = 0;
+        }
+        else if (inBox == true)
+        {
+            MinDist = 5;
+            MaxDist = 9;
+        }
+
     }
 
     void Update()
-    {
+    {   
+
         anim.SetFloat("speed", MoveSpeed);
         {
             if (MoveSpeed > 6)
@@ -40,10 +55,13 @@ public class AiChase2 : MonoBehaviour
         //Debug.Log(state);
         if (state == 0)
         {
+            anim.Play("Jog Forward");
             if (Vector3.Distance(transform.position, patrolPoint) > 0.3f)//not MinDist
             {
                 transform.LookAt(patrolPoint);
                 transform.position += transform.forward * MoveSpeed * Time.deltaTime;
+
+                Debug.Log("S0");
            
             //   Seen = false;
             }
@@ -67,6 +85,7 @@ public class AiChase2 : MonoBehaviour
                transform.LookAt(Player);
             */
             transform.position += transform.forward * MoveSpeed * Time.deltaTime;
+            Debug.Log("S1");
             //   Seen = true;
         }
         else if (state == 2)
@@ -77,9 +96,11 @@ public class AiChase2 : MonoBehaviour
             transform.LookAt(Player);
 
             //Get distance between player and enemy
-            float distance = Vector3.Distance(transform.position, Player.position);
+            distance = Vector3.Distance(transform.position, Player.position);
 
-            transform.position += transform.forward * MoveSpeed * Time.deltaTime;
+           // transform.position += transform.forward * MoveSpeed * Time.deltaTime;
+
+            Debug.Log("S0");
              
            
         }
@@ -92,11 +113,19 @@ public class AiChase2 : MonoBehaviour
         if (Vector3.Distance(transform.position, Player.position) <= MinDist)//not MaxDist
         {
             state = 2;
+
         }
 
         if (inBox == false)
         {
             state = 0;
+            //MinDist = 0;
+            //MaxDist = 0;
+        }
+        else
+        {
+            //MinDist = 9;
+            //MaxDist = 5;
         }
     }
 
@@ -107,6 +136,7 @@ public class AiChase2 : MonoBehaviour
             inBox = true;
         }
     }
+
 
     private void OnTriggerExit(Collider other)
     {

@@ -551,7 +551,7 @@ public class Basic : MonoBehaviour
 		if (climbing == true && Input.GetKey(KeyCode.Q))
 		{
 			//transform.Translate(Vector3.up * 0.01f);
-			gravityMovement = gravityDirection * currentGravity * 0.001f;
+			gravityMovement = gravityDirection * currentGravity * 0.00025f;
 			characterAnimator.SetBool("IsClimbing", climbing);
 		}
 

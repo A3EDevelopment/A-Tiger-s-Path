@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class AiChase2 : MonoBehaviour  
 {
+    public Animator anim; 
     public int AttackTrigger2;
     public Transform Player;
  /*  public Transform enemyTransform;
@@ -12,6 +13,8 @@ public class AiChase2 : MonoBehaviour
     public int MaxDist = 10;
     public int MinDist = 5;
     private object navmeshagent;
+   // public bool Seen; 
+    
 
     bool inBox = false;
     int state = 0;
@@ -26,6 +29,14 @@ public class AiChase2 : MonoBehaviour
 
     void Update()
     {
+        anim.SetFloat("speed", MoveSpeed);
+        {
+            if (MoveSpeed > 6)
+            {
+                anim.SetBool("Running", true);
+            }
+        }
+
         //Debug.Log(state);
         if (state == 0)
         {
@@ -33,10 +44,13 @@ public class AiChase2 : MonoBehaviour
             {
                 transform.LookAt(patrolPoint);
                 transform.position += transform.forward * MoveSpeed * Time.deltaTime;
+           
+            //   Seen = false;
             }
             else
             {
                 patrolPoint = PickRandomPoint(box);
+           //     Seen = false;
             }
         }
         else if (state == 1)
@@ -53,9 +67,12 @@ public class AiChase2 : MonoBehaviour
                transform.LookAt(Player);
             */
             transform.position += transform.forward * MoveSpeed * Time.deltaTime;
+            //   Seen = true;
         }
         else if (state == 2)
         {
+            MoveSpeed = 7;
+
             //Look at target
             transform.LookAt(Player);
 

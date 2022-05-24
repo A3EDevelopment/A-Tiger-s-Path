@@ -115,6 +115,7 @@ public class Basic : MonoBehaviour
 	void Start()
 	{
 		Keyframe dodge_lastFrame = dodgeCurve[dodgeCurve.length - 1];
+		
 		dodgeTimer = dodge_lastFrame.time;
 
 		WindParticles[0].SetActive(false);
@@ -127,6 +128,8 @@ public class Basic : MonoBehaviour
 
 	public void Update()
 	{
+
+
 		//JumpingTimer();
 
 

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine.Audio;
 using UnityEngine.UI;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using TMPro;
 
 public class Mover : MonoBehaviour
@@ -49,7 +50,7 @@ public class Mover : MonoBehaviour
             //StartCoroutine(FadeImage(false));
         }
 
-        if (Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.LeftArrow))
+        if (Input.GetKeyDown(KeyCode.A) && current != 0 || Input.GetKeyDown(KeyCode.LeftArrow) && current != 0 )
         {
             //Vector3 pos = Vector3.MoveTowards(cube.transform.position, Positions[Positions.Count - 1], 200 * Time.fixedDeltaTime);
             current--;
@@ -83,6 +84,11 @@ public class Mover : MonoBehaviour
         else
         {
             transitionRight = false;
+        }
+
+        if (current == 6)
+        {
+            SceneManager.LoadScene("Village");
         }
 
         /*if (Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.DownArrow))

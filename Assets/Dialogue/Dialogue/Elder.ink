@@ -1,3 +1,5 @@
-Little one, Please dont go past this bridge, a terrible storm is approaching and has destroyed our bridges to the sacred shrine #speaker:Elder #portrait:Elder #layout:left
-Old Man please let me visit my mother, ill do whatever it takes to get there.  #portrait:guang #speaker:Guang Jiyi #layout:right 
-I'll have to get the guards to seize you right this instance! Stop disobeying the rules!#speaker:Elder #portrait:Elder #layout:left
+Guang Jiyi… How many times must I trifle speaking on this matter? You know as well as I that the other infants look up to you as though you were their own eldest sister. Whatever you do, they shall follow in their utmost vigour. We all have a duty to fulfil and I can’t do this alone #speaker:Elder #portrait:Elder #layout:left
+My mother.. She once told me, the day prior to that of the paragon’s radiance shall ever serve to signal our reunion. Adhere to these words for I shall always remain beside you. I can’t betray her last wish, regardless of our rules. #portrait:guang #speaker:Guang Jiyi #layout:right 
+...#speaker:Elder #portrait:Elder #layout:left
+Besides, when was the last time the Nian was sighted near the village. You are, possibly, the last person to have witnessed the beast’s fangs. To us, it is nought but a mere legend that is passed on from parent to child #portrait:guang #speaker:Guang Jiyi #layout:right 
+Very well, you may do as you wish. But promise me one thing, your return before sundown. The guards will certainly give chase, and I will spare no more of my time in your cause. Best them and you´ll be free to leave. #speaker:Elder #portrait:Elder #layout:left

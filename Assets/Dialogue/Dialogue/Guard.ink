@@ -1,3 +1,4 @@
-Hey! Past this gate is far too dangerous for someone like you to be strolling around. #speaker: Guard  #portrait:Guard #layout:left
-But I nee- #portrait:guang #speaker:Guang Jiyi #layout:right 
-No excuses, return at once and make your father proud. #speaker: Guard  #portrait:Guard #layout:left
+Hey you, stop right there! The elder instructed not to allow anyone past this gate unless a troublesome accident were to take place which compromised the safety of our people. Until then, I bid you return at once. #speaker: Guard  #portrait:Guard #layout:left
+Ugh mom, how did you deal with these kinds of people on a daily basis? The river is literally next to the village, what could possibly happen! #portrait:guang #speaker:Guang Jiyi #layout:right 
+What are you staring at, did you not hear what I said? Disobeying the orders of the Elder could put many at risk. #speaker: Guard  #portrait:Guard #layout:left
+Fine, a troublesome accident it´ll be. #portrait:guang #speaker:Guang Jiyi #layout:right 

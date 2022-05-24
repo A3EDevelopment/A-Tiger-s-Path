@@ -1,1 +1,2 @@
-﻿
+Look at my muscles! HA HA HA. Only those determined enough could ever possibly surpass this trial. To this day, only the (Q)ings could climb this five thousand metre wall. That’s right, five thousand metres or so I was told! Simply walk forwards and perhaps the will of the (Q)ings will accompany you. #speaker: Climber  #portrait:Climber #layout:left
+Do this on a day to day basis and perhaps you too will get muscles like mine! HA HA HA #speaker: Climber  #portrait:Climber #layout:left

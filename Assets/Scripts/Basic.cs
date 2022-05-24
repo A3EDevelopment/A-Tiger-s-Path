@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using static Models;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Basic : MonoBehaviour
 {
@@ -10,6 +11,7 @@ public class Basic : MonoBehaviour
 	public bool holdingTorch;
 
 	public GameObject[] WindParticles;
+	public GameObject GuardTrigger;
 
 	CharacterController characterController;
 	Animator characterAnimator;
@@ -537,6 +539,17 @@ public class Basic : MonoBehaviour
 			//gravity = 0f;
 			//currentGravity = 0f;
 		}
+
+		if (other.gameObject.tag == "BoundingBox")
+		{
+			GuardTrigger.SetActive(true);
+		}
+
+		if (other.gameObject.tag == "BackToMM")
+        {
+			SceneManager.LoadScene("MainMenu");
+		}
+        
 	}
 
 	private void OnTriggerExit(Collider other)
@@ -546,6 +559,11 @@ public class Basic : MonoBehaviour
 			climbing = false;
 			//gravity = 10;
 			//canClimb = false;
+		}
+
+		if (other.gameObject.tag == "BoundingBox")
+		{
+			GuardTrigger.SetActive(false);
 		}
 	}
 
@@ -606,5 +624,6 @@ public class Basic : MonoBehaviour
 		torch.enabled = activate;
 		fire.SetActive(true);
 	}
+
 
 }

@@ -1,0 +1,6 @@
+Guan Jiyi.. #speaker: ???  #portrait:Mystery #layout:left
+Thinks to herself Who is he? How does he know my name? #portrait:guang #speaker:Guang Jiyi #layout:right 
+Do not be afraid little one, although my appearance may have changed over time, I still remember clearly.#speaker: ???  #portrait:Mystery #layout:left
+The day you visited with your mother. You were even younger then. Knee high to be exact. Oh how very scared you were, poor Guang Lian had no choice but to carry you back home. An arduous task at her fragile state. #speaker: ???  #portrait:Mystery #layout:left
+Despite talking to Guang Jiyi, his pose remained the same. Unable to provide the deserved attention.#speaker: ???  #portrait:Mystery #layout:left
+My eyesight is no longer the way it used to be. It is only through the flow of life, that I am given the rare ability to observe, not with my eyes but with the manifestation of our energy. Plants, monuments, even relics. They all mean something. Don’t you think so?”#speaker: ???  #portrait:Mystery #layout:left

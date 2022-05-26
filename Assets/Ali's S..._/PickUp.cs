@@ -18,6 +18,7 @@ public class PickUp : MonoBehaviour
     {
         if (playerInRange)
         {
+            Debug.Log("YEEEEEEEEEEEEEAAAAAAAAAAAAAAAAAAAAA");
             if (Input.GetKeyDown(KeyCode.E))
             {
                 player.GrabTorch(true);

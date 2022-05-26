@@ -623,6 +623,7 @@ public class Basic : MonoBehaviour
 	{
 		torch.enabled = activate;
 		fire.SetActive(true);
+		Debug.Log("YEEEEEEEEEEEEEAAAAAAAAAAAAAAAAAAAAA");
 	}
 
 

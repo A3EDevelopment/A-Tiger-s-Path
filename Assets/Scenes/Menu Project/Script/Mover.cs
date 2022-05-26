@@ -9,7 +9,8 @@ using TMPro;
 public class Mover : MonoBehaviour
 {
     public List<Vector3> Positions;
-    
+
+    public List<GameObject> VoiceOver;
     public List<GameObject> buttons;
 
     /*public RawImage img;*/
@@ -19,8 +20,6 @@ public class Mover : MonoBehaviour
     public GameObject cube;
     public GameObject camera;
     public GameObject random;
-
-    public AudioClip[] VoiceOver;
 
     public Rigidbody cuberb;
 
@@ -98,6 +97,67 @@ public class Mover : MonoBehaviour
         {
             SceneManager.LoadScene("MainMenu");
         }
+
+        if (current == 0)
+        {
+            VoiceOver[0].SetActive(true);
+            VoiceOver[1].SetActive(false);
+            VoiceOver[2].SetActive(false);
+            VoiceOver[3].SetActive(false);
+            VoiceOver[4].SetActive(false);
+            VoiceOver[5].SetActive(false);
+        }
+
+        if (current == 1)
+        {
+            VoiceOver[0].SetActive(false);
+            VoiceOver[1].SetActive(true);
+            VoiceOver[2].SetActive(false);
+            VoiceOver[3].SetActive(false);
+            VoiceOver[4].SetActive(false);
+            VoiceOver[5].SetActive(false);
+        }
+
+        if (current == 2)
+        {
+            VoiceOver[0].SetActive(false);
+            VoiceOver[1].SetActive(false);
+            VoiceOver[2].SetActive(true);
+            VoiceOver[3].SetActive(false);
+            VoiceOver[4].SetActive(false);
+            VoiceOver[5].SetActive(false);
+        }
+
+        if (current == 3)
+        {
+            VoiceOver[0].SetActive(false);
+            VoiceOver[1].SetActive(false);
+            VoiceOver[2].SetActive(false);
+            VoiceOver[3].SetActive(true);
+            VoiceOver[4].SetActive(false);
+            VoiceOver[5].SetActive(false);
+        }
+
+        if (current == 4)
+        {
+            VoiceOver[0].SetActive(false);
+            VoiceOver[1].SetActive(false);
+            VoiceOver[2].SetActive(false);
+            VoiceOver[3].SetActive(false);
+            VoiceOver[4].SetActive(true);
+            VoiceOver[5].SetActive(false);
+        }
+
+        if (current == 5)
+        {
+            VoiceOver[0].SetActive(false);
+            VoiceOver[1].SetActive(false);
+            VoiceOver[2].SetActive(false);
+            VoiceOver[3].SetActive(false);
+            VoiceOver[4].SetActive(false);
+            VoiceOver[5].SetActive(true);
+        }
+
 
 
 

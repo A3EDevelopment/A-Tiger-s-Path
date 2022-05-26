@@ -18,6 +18,9 @@ public class Mover : MonoBehaviour
 
     public GameObject cube;
     public GameObject camera;
+    public GameObject random;
+
+    public AudioClip[] VoiceOver;
 
     public Rigidbody cuberb;
 
@@ -90,6 +93,15 @@ public class Mover : MonoBehaviour
         {
             SceneManager.LoadScene("Village");
         }
+
+        if (current == 2 && random.activeSelf == true)
+        {
+            SceneManager.LoadScene("MainMenu");
+        }
+
+
+
+
 
         /*if (Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.DownArrow))
         {

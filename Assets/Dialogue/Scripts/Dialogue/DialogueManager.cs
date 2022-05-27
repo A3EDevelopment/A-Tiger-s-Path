@@ -43,6 +43,7 @@ public class DialogueManager : MonoBehaviour
     public GameObject NPCCAM6;
     public GameObject NPCCAM7;
     public GameObject NPCCAM8;
+    public GameObject NPCCAM9;
 
     public Transform PlayerTransform;
 
@@ -225,6 +226,9 @@ public class DialogueManager : MonoBehaviour
         NPCCAM5.SetActive(false);
         NPCCAM6.SetActive(false);
         NPCCAM7.SetActive(false);
+        NPCCAM9.SetActive(false);
+
+
 
     }
 

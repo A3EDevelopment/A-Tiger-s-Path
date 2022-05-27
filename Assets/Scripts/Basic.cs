@@ -547,7 +547,7 @@ public class Basic : MonoBehaviour
 
 		if (other.gameObject.tag == "BackToMM")
         {
-			SceneManager.LoadScene("MainMenu");
+			SceneManager.LoadScene("Cutscne2");
 		}
         
 	}

@@ -135,7 +135,7 @@ Material:
     - _UseRoughnessMap: 0
     - _ZWrite: 0
     m_Colors:
-    - _BaseColor: {r: 0.069669195, g: 0.26415092, b: 0, a: 1}
+    - _BaseColor: {r: 0.54901963, g: 0.4039216, b: 0.42352945, a: 1}
     - _CameraFadeParams: {r: 0, g: Infinity, b: 0, a: 0}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _ColorAddSubDiff: {r: 0, g: 0, b: 0, a: 0}

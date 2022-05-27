@@ -258,7 +258,12 @@ public class DialogueManager : MonoBehaviour
 
         moveScript.enabled = true;
 
-       
+        Script = Fader.GetComponent<FadeInandOut>();
+
+
+
+        Script.FadeIn();
+
     }
     IEnumerator justwait()
     {

@@ -3,12 +3,14 @@ using System.Collections.Generic;
 using UnityEngine.Audio;
 using UnityEngine.UI;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using TMPro;
 
 public class Mover : MonoBehaviour
 {
     public List<Vector3> Positions;
-    
+
+    public List<GameObject> VoiceOver;
     public List<GameObject> buttons;
 
     /*public RawImage img;*/
@@ -17,6 +19,7 @@ public class Mover : MonoBehaviour
 
     public GameObject cube;
     public GameObject camera;
+    public GameObject random;
 
     public Rigidbody cuberb;
 
@@ -49,7 +52,7 @@ public class Mover : MonoBehaviour
             //StartCoroutine(FadeImage(false));
         }
 
-        if (Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.LeftArrow))
+        if (Input.GetKeyDown(KeyCode.A) && current != 0 || Input.GetKeyDown(KeyCode.LeftArrow) && current != 0 )
         {
             //Vector3 pos = Vector3.MoveTowards(cube.transform.position, Positions[Positions.Count - 1], 200 * Time.fixedDeltaTime);
             current--;
@@ -84,6 +87,81 @@ public class Mover : MonoBehaviour
         {
             transitionRight = false;
         }
+
+        if (current == 6)
+        {
+            SceneManager.LoadScene("Village");
+        }
+
+        if (current == 2 && random.activeSelf == true)
+        {
+            SceneManager.LoadScene("MainMenu");
+        }
+
+        if (current == 0)
+        {
+            VoiceOver[0].SetActive(true);
+            VoiceOver[1].SetActive(false);
+            VoiceOver[2].SetActive(false);
+            VoiceOver[3].SetActive(false);
+            VoiceOver[4].SetActive(false);
+            VoiceOver[5].SetActive(false);
+        }
+
+        if (current == 1)
+        {
+            VoiceOver[0].SetActive(false);
+            VoiceOver[1].SetActive(true);
+            VoiceOver[2].SetActive(false);
+            VoiceOver[3].SetActive(false);
+            VoiceOver[4].SetActive(false);
+            VoiceOver[5].SetActive(false);
+        }
+
+        if (current == 2)
+        {
+            VoiceOver[0].SetActive(false);
+            VoiceOver[1].SetActive(false);
+            VoiceOver[2].SetActive(true);
+            VoiceOver[3].SetActive(false);
+            VoiceOver[4].SetActive(false);
+            VoiceOver[5].SetActive(false);
+        }
+
+        if (current == 3)
+        {
+            VoiceOver[0].SetActive(false);
+            VoiceOver[1].SetActive(false);
+            VoiceOver[2].SetActive(false);
+            VoiceOver[3].SetActive(true);
+            VoiceOver[4].SetActive(false);
+            VoiceOver[5].SetActive(false);
+        }
+
+        if (current == 4)
+        {
+            VoiceOver[0].SetActive(false);
+            VoiceOver[1].SetActive(false);
+            VoiceOver[2].SetActive(false);
+            VoiceOver[3].SetActive(false);
+            VoiceOver[4].SetActive(true);
+            VoiceOver[5].SetActive(false);
+        }
+
+        if (current == 5)
+        {
+            VoiceOver[0].SetActive(false);
+            VoiceOver[1].SetActive(false);
+            VoiceOver[2].SetActive(false);
+            VoiceOver[3].SetActive(false);
+            VoiceOver[4].SetActive(false);
+            VoiceOver[5].SetActive(true);
+        }
+
+
+
+
+
 
         /*if (Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.DownArrow))
         {

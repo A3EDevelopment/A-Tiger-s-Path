@@ -221,7 +221,7 @@ public class Basic : MonoBehaviour
 		obj_BasicPlayerInput.Actions.Sprint.performed += x => Sprint();
 		obj_BasicPlayerInput.Actions.Climb.performed += x => IsClimbing();
 		obj_BasicPlayerInput.Actions.Glide.performed += x => IsGliding();
-		obj_BasicPlayerInput.Actions.Grab.performed += x => GrabTorch(true);
+		//obj_BasicPlayerInput.Actions.Grab.performed += x => GrabTorch();
 
 
 		gravityDirection = Vector3.down;
@@ -519,20 +519,6 @@ public class Basic : MonoBehaviour
 
 	#endregion
 
-	#region - Enable/Disable -
-
-
-	private void OnEnable()
-	{
-		obj_BasicPlayerInput.Enable();
-	}
-
-	private void OnDisable()
-	{
-		obj_BasicPlayerInput.Disable();
-	}
-	#endregion
-
 	#region - Climbing Trigger -
 
 	private void OnTriggerEnter(Collider other)
@@ -573,7 +559,7 @@ public class Basic : MonoBehaviour
 
 	public void IsClimbing()
 	{
-		if (climbing == true && Input.GetKey(KeyCode.Q))
+		if (climbing == true /*&& Input.GetKey(KeyCode.Q)*/)
 		{
 			//transform.Translate(Vector3.up * 0.01f);
 			gravityMovement = gravityDirection * currentGravity * 0.0025f;
@@ -595,7 +581,7 @@ public class Basic : MonoBehaviour
 		isOnGround = Physics.CheckSphere(groundChecker.transform.position, 0.2f, whatIsGround);
 
 
-		if (isOnGround == false && Input.GetKey(KeyCode.F) && GlideAfterJump == true /*&& Input.GetKey(KeyCode.F)/*!jumpingTriggered*/)
+		if (isOnGround == false /*&& Input.GetKey(KeyCode.F)*/ && GlideAfterJump == true /*&& Input.GetKey(KeyCode.F)/*!jumpingTriggered*/)
 		{
 			//transform.Translate(Vector3.up * 0.1f);
 			playerTransform.transform.forward = Vector3.MoveTowards(playerTransform.forward, myEndPoint.forward, speed * Time.deltaTime);
@@ -629,5 +615,18 @@ public class Basic : MonoBehaviour
 		fire.SetActive(true);
 	}
 
+	#region - Enable/Disable -
+
+
+	private void OnEnable()
+	{
+		obj_BasicPlayerInput.Enable();
+	}
+
+	private void OnDisable()
+	{
+		obj_BasicPlayerInput.Disable();
+	}
+	#endregion
 
 }

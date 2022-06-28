@@ -25,7 +25,7 @@ public class Lantern : MonoBehaviour
         {
             if (player.holdingTorch == true)
             {
-                if (Input.GetKeyDown(KeyCode.E))
+                if (Input.GetKeyDown(KeyCode.E) || Input.GetKeyDown("joystick button 2"))
                 {
                     player.GrabTorch(false);
                     player.holdingTorch = false;

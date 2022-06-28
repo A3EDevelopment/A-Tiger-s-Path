@@ -109,7 +109,7 @@ public class DialogueManager : MonoBehaviour
         // NOTE: The 'currentStory.currentChoiecs.Count == 0' part was to fix a bug after the Youtube video was made
         if (canContinueToNextLine
             && currentStory.currentChoices.Count == 0
-            && (Input.GetKeyDown(KeyCode.E) || Input.GetKeyDown("joystick button 2")))
+            && (Input.GetKeyDown(KeyCode.E) || Input.GetKeyDown("joystick button 0")))
         {
             ContinueStory();
         }
@@ -343,7 +343,7 @@ public class DialogueManager : MonoBehaviour
         foreach (char letter in line.ToCharArray())
         {
             // if the submit button is pressed, finish up displaying the line right away
-            if (Input.GetKeyDown(KeyCode.Space))
+            if (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown("joystick button 0"))
             {
                 dialogueText.text = line;
                 break;

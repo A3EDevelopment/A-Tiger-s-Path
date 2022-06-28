@@ -167,6 +167,33 @@ public partial class @BasicPlayerInput : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Climb"",
+                    ""type"": ""Button"",
+                    ""id"": ""579f56a8-54ce-497a-8f72-f9c31c6ce565"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Glide"",
+                    ""type"": ""Button"",
+                    ""id"": ""1021addd-9459-4609-b229-37f601290c6b"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Grab"",
+                    ""type"": ""Button"",
+                    ""id"": ""afbba030-02f0-40e3-8835-5d40e840e5e6"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -224,6 +251,39 @@ public partial class @BasicPlayerInput : IInputActionCollection2, IDisposable
                     ""action"": ""Sprint"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""99586188-b561-4143-a17f-f823cb2f748f"",
+                    ""path"": ""<XInputController>/buttonNorth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Climb"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""c2a1bd51-0126-4fd4-8dc4-17fa77c0ea40"",
+                    ""path"": ""<XInputController>/buttonNorth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Glide"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""00341def-a6a1-4fab-bd49-67f46e14d075"",
+                    ""path"": ""<XInputController>/buttonWest"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Grab"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -239,6 +299,9 @@ public partial class @BasicPlayerInput : IInputActionCollection2, IDisposable
         m_Actions_Jump = m_Actions.FindAction("Jump", throwIfNotFound: true);
         m_Actions_WalkingToggle = m_Actions.FindAction("WalkingToggle", throwIfNotFound: true);
         m_Actions_Sprint = m_Actions.FindAction("Sprint", throwIfNotFound: true);
+        m_Actions_Climb = m_Actions.FindAction("Climb", throwIfNotFound: true);
+        m_Actions_Glide = m_Actions.FindAction("Glide", throwIfNotFound: true);
+        m_Actions_Grab = m_Actions.FindAction("Grab", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -342,6 +405,9 @@ public partial class @BasicPlayerInput : IInputActionCollection2, IDisposable
     private readonly InputAction m_Actions_Jump;
     private readonly InputAction m_Actions_WalkingToggle;
     private readonly InputAction m_Actions_Sprint;
+    private readonly InputAction m_Actions_Climb;
+    private readonly InputAction m_Actions_Glide;
+    private readonly InputAction m_Actions_Grab;
     public struct ActionsActions
     {
         private @BasicPlayerInput m_Wrapper;
@@ -349,6 +415,9 @@ public partial class @BasicPlayerInput : IInputActionCollection2, IDisposable
         public InputAction @Jump => m_Wrapper.m_Actions_Jump;
         public InputAction @WalkingToggle => m_Wrapper.m_Actions_WalkingToggle;
         public InputAction @Sprint => m_Wrapper.m_Actions_Sprint;
+        public InputAction @Climb => m_Wrapper.m_Actions_Climb;
+        public InputAction @Glide => m_Wrapper.m_Actions_Glide;
+        public InputAction @Grab => m_Wrapper.m_Actions_Grab;
         public InputActionMap Get() { return m_Wrapper.m_Actions; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -367,6 +436,15 @@ public partial class @BasicPlayerInput : IInputActionCollection2, IDisposable
                 @Sprint.started -= m_Wrapper.m_ActionsActionsCallbackInterface.OnSprint;
                 @Sprint.performed -= m_Wrapper.m_ActionsActionsCallbackInterface.OnSprint;
                 @Sprint.canceled -= m_Wrapper.m_ActionsActionsCallbackInterface.OnSprint;
+                @Climb.started -= m_Wrapper.m_ActionsActionsCallbackInterface.OnClimb;
+                @Climb.performed -= m_Wrapper.m_ActionsActionsCallbackInterface.OnClimb;
+                @Climb.canceled -= m_Wrapper.m_ActionsActionsCallbackInterface.OnClimb;
+                @Glide.started -= m_Wrapper.m_ActionsActionsCallbackInterface.OnGlide;
+                @Glide.performed -= m_Wrapper.m_ActionsActionsCallbackInterface.OnGlide;
+                @Glide.canceled -= m_Wrapper.m_ActionsActionsCallbackInterface.OnGlide;
+                @Grab.started -= m_Wrapper.m_ActionsActionsCallbackInterface.OnGrab;
+                @Grab.performed -= m_Wrapper.m_ActionsActionsCallbackInterface.OnGrab;
+                @Grab.canceled -= m_Wrapper.m_ActionsActionsCallbackInterface.OnGrab;
             }
             m_Wrapper.m_ActionsActionsCallbackInterface = instance;
             if (instance != null)
@@ -380,6 +458,15 @@ public partial class @BasicPlayerInput : IInputActionCollection2, IDisposable
                 @Sprint.started += instance.OnSprint;
                 @Sprint.performed += instance.OnSprint;
                 @Sprint.canceled += instance.OnSprint;
+                @Climb.started += instance.OnClimb;
+                @Climb.performed += instance.OnClimb;
+                @Climb.canceled += instance.OnClimb;
+                @Glide.started += instance.OnGlide;
+                @Glide.performed += instance.OnGlide;
+                @Glide.canceled += instance.OnGlide;
+                @Grab.started += instance.OnGrab;
+                @Grab.performed += instance.OnGrab;
+                @Grab.canceled += instance.OnGrab;
             }
         }
     }
@@ -394,5 +481,8 @@ public partial class @BasicPlayerInput : IInputActionCollection2, IDisposable
         void OnJump(InputAction.CallbackContext context);
         void OnWalkingToggle(InputAction.CallbackContext context);
         void OnSprint(InputAction.CallbackContext context);
+        void OnClimb(InputAction.CallbackContext context);
+        void OnGlide(InputAction.CallbackContext context);
+        void OnGrab(InputAction.CallbackContext context);
     }
 }

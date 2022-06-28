@@ -219,6 +219,10 @@ public class Basic : MonoBehaviour
 
 		obj_BasicPlayerInput.Actions.WalkingToggle.performed += x => ToggleWalking();
 		obj_BasicPlayerInput.Actions.Sprint.performed += x => Sprint();
+		obj_BasicPlayerInput.Actions.Climb.performed += x => IsClimbing();
+		obj_BasicPlayerInput.Actions.Glide.performed += x => IsGliding();
+		obj_BasicPlayerInput.Actions.Grab.performed += x => GrabTorch(true);
+
 
 		gravityDirection = Vector3.down;
 

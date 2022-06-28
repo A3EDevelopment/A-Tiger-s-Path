@@ -559,7 +559,7 @@ public class Basic : MonoBehaviour
 
 	public void IsClimbing()
 	{
-		if (climbing == true && (Input.GetKey(KeyCode.Q) || Input.GetKeyDown("joystick button 1")))
+		if (climbing == true && (Input.GetKey(KeyCode.Q) || Input.GetKey("joystick button 1")))
 		{
 			//transform.Translate(Vector3.up * 0.01f);
 			gravityMovement = gravityDirection * currentGravity * 0.0025f;
@@ -581,7 +581,7 @@ public class Basic : MonoBehaviour
 		isOnGround = Physics.CheckSphere(groundChecker.transform.position, 0.2f, whatIsGround);
 
 
-		if (isOnGround == false && (Input.GetKey(KeyCode.F) || Input.GetKeyDown("joystick button 3")) && GlideAfterJump == true /*&& Input.GetKey(KeyCode.F)/*!jumpingTriggered*/)
+		if (isOnGround == false && (Input.GetKey(KeyCode.F) || Input.GetKey("joystick button 3")) && GlideAfterJump == true /*&& Input.GetKey(KeyCode.F)/*!jumpingTriggered*/)
 		{
 			//transform.Translate(Vector3.up * 0.1f);
 			playerTransform.transform.forward = Vector3.MoveTowards(playerTransform.forward, myEndPoint.forward, speed * Time.deltaTime);

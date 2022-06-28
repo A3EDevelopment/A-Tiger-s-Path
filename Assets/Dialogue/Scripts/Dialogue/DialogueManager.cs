@@ -109,7 +109,7 @@ public class DialogueManager : MonoBehaviour
         // NOTE: The 'currentStory.currentChoiecs.Count == 0' part was to fix a bug after the Youtube video was made
         if (canContinueToNextLine
             && currentStory.currentChoices.Count == 0
-            && (Input.GetKeyDown(KeyCode.E)))
+            && (Input.GetKeyDown(KeyCode.E) || Input.GetKeyDown("joystick button 2")))
         {
             ContinueStory();
         }

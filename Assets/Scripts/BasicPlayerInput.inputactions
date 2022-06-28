@@ -82,8 +82,30 @@
                 },
                 {
                     "name": "",
+                    "id": "e717aac2-8d72-4b3b-999b-cffbc88d75d6",
+                    "path": "<XInputController>/leftStick",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Movement",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "268de964-6abe-402c-bd17-e97dfbf30074",
                     "path": "<Mouse>/delta",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "View",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "c5df3d48-92d8-4404-b175-b184e55d982c",
+                    "path": "<XInputController>/rightStick",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -139,6 +161,17 @@
                 },
                 {
                     "name": "",
+                    "id": "bc94e493-6a5b-4fb2-95ad-a05a3e84fca3",
+                    "path": "<XInputController>/buttonSouth",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Jump",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "5ec03241-5622-43f2-acf8-55e5c254a561",
                     "path": "<Keyboard>/leftCtrl",
                     "interactions": "Press",
@@ -153,6 +186,17 @@
                     "id": "9af41094-0b3f-4ed0-9b63-87f6d7f88eec",
                     "path": "<Keyboard>/leftShift",
                     "interactions": "Press",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Sprint",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "2e128e82-908d-4ad9-832f-e8f51ded7975",
+                    "path": "<XInputController>/leftStickPress",
+                    "interactions": "",
                     "processors": "",
                     "groups": "",
                     "action": "Sprint",

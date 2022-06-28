@@ -19,7 +19,7 @@ public class PickUp : MonoBehaviour
         if (playerInRange)
         {
             Debug.Log("YEEEEEEEEEEEEEAAAAAAAAAAAAAAAAAAAAA");
-            if (Input.GetKeyDown(KeyCode.E) || Input.GetKeyDown("joystick button 0"))
+            if (Input.GetKeyDown(KeyCode.E) || Input.GetKeyDown("joystick button 2"))
             {
                 player.GrabTorch(true);
                 player.holdingTorch = true;

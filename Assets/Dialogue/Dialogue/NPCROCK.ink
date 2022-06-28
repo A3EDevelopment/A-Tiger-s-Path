@@ -11,4 +11,4 @@ Quickly now, the guards might find you anytime soon #speaker:Neighbour 3 #portra
 What about you, aren't you afraid of getting caught? #speaker:Neighbour 3 #portrait:Guang Jiyi #layout:left
 I already got what I came for, so don't worry about me. I´ll see you at the village when you get back.. #speaker:Neighbour 3 #portrait:NPCROCK #layout:left
 Ah, before I forget. Im certainly not light enough to do this but if you jump and and <color=\#FF1E35>f</color>lee towards the horizon, you might be able to reenact what my grandfather once did. There is a risk to this however, get it right or you will surely die. It all depends on you. #speaker:Neighbour 3 #portrait:NPCROCK #layout:left
-Hold F whilst running with Shift and jumping to Glide! #speaker:Neighbour 3 #portrait:NPCROCK #layout:left
+Hold Y whilst running with Shift and jumping to Glide! #speaker:Neighbour 3 #portrait:NPCROCK #layout:left

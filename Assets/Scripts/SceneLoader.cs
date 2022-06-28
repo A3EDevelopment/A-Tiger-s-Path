@@ -18,6 +18,12 @@ public class SceneLoader : MonoBehaviour
         {
             SceneManager.LoadScene("Cutscene");
         }
+
+        if (Input.GetKeyDown("joystick button 0"))
+        {
+            SceneManager.LoadScene("Cutscene");
+            
+        }
     }
 
     public void LoadScene()

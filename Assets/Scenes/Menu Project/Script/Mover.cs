@@ -52,7 +52,7 @@ public class Mover : MonoBehaviour
             //StartCoroutine(FadeImage(false));
         }
 
-        if (Input.GetKeyDown(KeyCode.A) && current != 0 || Input.GetKeyDown(KeyCode.LeftArrow) && current != 0 )
+        if (Input.GetKeyDown(KeyCode.A) && current != 0 || Input.GetKeyDown(KeyCode.LeftArrow) && current != 0 || Input.GetKeyDown("joystick button 1") && current != 0)
         {
             //Vector3 pos = Vector3.MoveTowards(cube.transform.position, Positions[Positions.Count - 1], 200 * Time.fixedDeltaTime);
             current--;
@@ -70,7 +70,7 @@ public class Mover : MonoBehaviour
 
     
 
-        if (Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.RightArrow))
+        if (Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.RightArrow) || Input.GetKeyDown("joystick button 0"))
         {
             /*Vector3 pos = Vector3.MoveTowards(cube.transform.position, Positions[Positions.Count + 1], 200 * Time.fixedDeltaTime);
             cuberb.MovePosition(pos);*/
